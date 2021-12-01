@@ -1,9 +1,14 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import MyHeader from './components/header/header';
+import MyThemeProvider from './theming/theme-provider.jsx';
 
 function App() {
+
   return (
-    <h1>FINAL PROJECT GOES BRRRRRRR</h1>
+    <MyThemeProvider>
+      <MyHeader></MyHeader>
+    </MyThemeProvider >
   );
 }
 
