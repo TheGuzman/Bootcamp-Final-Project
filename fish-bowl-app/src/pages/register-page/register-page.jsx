@@ -13,8 +13,6 @@ export default function RegisterPage() {
     let userPasswordConfirmation = '';
     let userEmail = '';
 
-
-    const [newUser, setNewUser] = useState({})
     const [userValid, setValidUser] = useState(false)
     const [passwordMatch, setMatchPassword] = useState(false)
     const [isuserEmailValid, setValidUserEmail] = useState(false)
@@ -28,49 +26,57 @@ export default function RegisterPage() {
     function handleSubmit(e) {
         e.preventDefault()
         userName = e.target.userName.value
-        if (userName.length >= 4) {
-            setValidUser(false)
-        }
-        else {
-            setValidUser(true)
-        }
-
         userPassword = e.target.userPassword.value;
         userPasswordConfirmation = e.target.userPasswordConfirmation.value;
-
-        console.log(userPassword, userPasswordConfirmation)
-
-        if (userPasswordConfirmation === userPassword) {
-
-            setMatchPassword(false)
-        }
-        else {
-
-            setMatchPassword(true)
-        }
-
         userEmail = e.target.email.value.toLowerCase();
-        if (isEmail(userEmail) !== true) {
-            setValidUserEmail(true)
-        }
-        else {
-            setValidUserEmail(false)
-        }
 
-        if (userValid === true && passwordMatch === true && isuserEmailValid === true) {
+        if (userName.length >= 4 && userPasswordConfirmation === userPassword && isEmail(userEmail)) {
+            setValidUser(false)
+            setMatchPassword(false)
+            setValidUserEmail(false)
+            const options = {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json", // aviso a mi servidor que le envio los datos en formato JSON
+                },
+                body: JSON.stringify({
+                    userName: userName,
+                    userPassword: userPassword,
+                    userEmail: userEmail,
+                    isValid: false,
+                    userFishbowls: [],
+                }),
+            };
+            fetch("http://localhost:3001/auth/register", options)
+                .then((r) => r.json())
+                .then((d) => console.log(d));
             console.log('valid')
         }
-        else {
-            console.log('invalid')
+
+        else if (userName.length < 4) {
+            setValidUser(true)
+            setMatchPassword(false)
+            setValidUserEmail(false)
         }
+        else if (userName.length >= 4 && userPasswordConfirmation !== userPassword) {
+            setValidUser(false)
+            setMatchPassword(true)
+            setValidUserEmail(false)
+        }
+        else if (userName.length >= 4 && userPasswordConfirmation === userPassword && !isEmail(userEmail)) {
+            setValidUser(false)
+            setMatchPassword(false)
+            setValidUserEmail(true)
+        }
+
     }
 
 
     return (
-        <Box sx={{ display: 'flex', justifyContent:'center', flexDirection:'column', alignItems:'center'}} >
-            <Typography sx={{marginTop:'1em'}} variant='h4'>Please register yourself</Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }} >
+            <Typography sx={{ marginTop: '1em' }} variant='h4'>Please register yourself</Typography>
             <form onSubmit={handleSubmit} >
-                <Box sx={{ display: 'flex', flexDirection: 'column', margin: '2em', gap: '2em', width:'20em'}}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', margin: '2em', gap: '2em', width: '20em' }}>
                     <TextField
                         required
                         error={userValid}
