@@ -1,12 +1,11 @@
 import React from "react"
-import { BrowserRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next"
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { Stack } from "@mui/material";
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
 import LangToggleButton from "./switches/language-switch.jsx";
 import ThemeToggleButton from "./switches/theme-switch.jsx";
 
