@@ -50,8 +50,12 @@ export const lightTheme = createTheme({
     typography: {
         fontFamily: ['Roboto','Arial'].join(','),
         h1:{
-            fontFamily: ['"Brainfish"','Roboto'].join(','),
-            fontSize: '8rem'
+          fontFamily: ['"Brainfish"','Roboto'].join(','),
+          '@media (min-width:320px)': {
+            fontSize: '4rem',},
+          '@media (min-width:768px)': {
+              fontSize: '8rem',},
+
         },
         h2:{
             fontFamily: ['Roboto', 'Arial'].join(','),
