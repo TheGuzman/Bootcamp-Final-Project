@@ -98,7 +98,7 @@ export default function RegisterPage() {
                 <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }} >
                     <Typography sx={{ marginTop: '1em' }} variant='h4'>Please register yourself</Typography>
                     <form onSubmit={handleSubmit} >
-                        <Box sx={{ display: 'flex', flexDirection: 'column', margin: '2em', gap: '2em', width: '20em' }}>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2em', width: '20em' }}>
                             <TextField
                                 required
                                 error={userValid}
