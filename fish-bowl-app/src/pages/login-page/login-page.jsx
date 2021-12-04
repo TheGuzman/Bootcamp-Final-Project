@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'
 import { Typography } from "@mui/material";
+import { useTranslation } from "react-i18next"
 
 
 export default function LoginPage() {
@@ -12,6 +13,7 @@ export default function LoginPage() {
     let userEmail = '';
 
     const [isuserEmailValid, setValidUserEmail] = useState(false)
+    const [t] = useTranslation("global")
 
     function isEmail(email) {
         let regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -40,7 +42,7 @@ export default function LoginPage() {
                 .then((d) => console.log(d));
             console.log('valid')
         }
-        else{
+        else {
             setValidUserEmail(true)
         }
 
@@ -49,10 +51,10 @@ export default function LoginPage() {
 
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }} >
-            <Typography sx={{ marginTop: '1em' }} variant='h4'>Log in</Typography>
+            <Typography sx={{ margin: '1em' }} variant='h5'>Log in</Typography>
             <form onSubmit={handleSubmit} >
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2em' }}>
-                <TextField
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2em',alignItems: 'center' }}>
+                    <TextField sx={{ '@media (min-width:760px)': { width: '30em', gap: '1em', }, }}
                         required
                         error={isuserEmailValid}
                         name="email"
@@ -61,15 +63,15 @@ export default function LoginPage() {
                         placeholder="Email"
                         helperText={isuserEmailValid !== false ? "Please provide a valid email" : ''}
                     />
-                    <TextField
+                    <TextField sx={{width:'100%'}}
                         required
                         id="userPassword"
                         label="Password"
                         name="userPassword"
                         type="password"
                         placeholder="Password"
-                    />            
-                    <Button type='submit'>submit</Button>
+                    />
+                    <Button variant='contained' color='secondary' type='submit'>{t("buttons.login")}</Button>
                 </Box>
             </form >
         </Box>

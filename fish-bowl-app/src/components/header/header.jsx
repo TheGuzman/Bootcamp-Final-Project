@@ -12,6 +12,7 @@ import Grid from "@mui/material/Grid";
 import { styled } from '@mui/material/styles';
 
 
+
 export default function MyHeader() {
     const [t] = useTranslation("global")
 
@@ -21,31 +22,21 @@ export default function MyHeader() {
             gap: '1em',
         },
     })
-    const ButtonStack = styled(Box)({
-        
-    })
-
 
 
     return (
         <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-            <Grid container>
-                <Grid item container xs={12}>
-                    <AppBar position="static">
+                    <AppBar position="static" color='primary'>
                         {/* ICON Fishbowl */}
                         <Toolbar sx={{ justifyContent: 'space-between', flexWrap: 'wrap' }}>
                             <HeaderStack direction='column' sx={{ flexWrap: 'wrap' }}>
-                                <Typography variant='h5' >
-                                    <Link to="/">Home</Link>
+                                <Typography color = 'secondary.light' variant='h5' component={Link} style= {{ textDecoration:'none' }} to='/'>Home
                                 </Typography>
-                                <Typography variant='h5'>
-                                    <Link to="/becomafish">Become a Fish</Link>
+                                <Typography color = 'secondary.light' variant='h5' component={Link} style= {{ textDecoration:'none' }} to='/becomeafish'>Become a Fish
                                 </Typography>
-                                <Typography variant='h5'>
-                                    <Link to="/register">Register</Link>
+                                <Typography color = 'secondary.light' variant='h5' component={Link} style= {{ textDecoration:'none' }} to='/register'>Sign up
                                 </Typography>
-                                <Typography variant='h5'>
-                                    <Link to="/login">Login</Link>
+                                <Typography color = 'secondary.light' variant='h5' component={Link} style= {{ textDecoration:'none' }} to='/login'>Login
                                 </Typography>
                             </HeaderStack>
                             <Stack sx={{rowGap:'1em', '@media (min-width:760px)': {flexDirection: 'row',gap: '1em',},}}>
@@ -54,8 +45,6 @@ export default function MyHeader() {
                             </Stack>
                         </Toolbar>
                     </AppBar>
-                </Grid>
-            </Grid>
         </Box>
 
     )

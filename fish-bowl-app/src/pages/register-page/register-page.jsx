@@ -6,8 +6,9 @@ import Button from '@mui/material/Button'
 import { Typography } from "@mui/material";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
-import Grid from '@mui/material/Grid'
 import Stack from '@mui/material/Stack'
+import { useTranslation } from "react-i18next"
+import { styled } from '@mui/material/styles';
 
 
 export default function RegisterPage() {
@@ -16,6 +17,8 @@ export default function RegisterPage() {
     let userPassword = '';
     let userPasswordConfirmation = '';
     let userEmail = '';
+
+    const [t] = useTranslation("global")
 
     const [userValid, setValidUser] = useState(false)
     const [passwordMatch, setMatchPassword] = useState(false)
@@ -95,16 +98,16 @@ export default function RegisterPage() {
     }
 
 
+
     return (
         <React.Fragment>
             {isSumbitted === false ?
                 <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }} >
-                    <Typography sx={{ margin: '1em' }} variant='h5'>Please register yourself</Typography>
+                    <Typography sx={{ margin: '1em' }} variant='h5'>{t("registrationPage.registrationMessage")}</Typography>
 
                     <form onSubmit={handleSubmit} >
                         <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2em', alignItems: 'center' }}>
-                            <Grid item xs={12}>
-                                <TextField sx={{ width: '100%' }}
+                                <TextField sx={{'@media (min-width:760px)': { width: '30em', gap: '1em', },}}
                                     required
                                     error={userValid}
                                     helperText={userValid !== false ? "Username must be greater than 4 characters" : ''}
@@ -113,8 +116,7 @@ export default function RegisterPage() {
                                     label="Username"
                                     placeholder="Username"
                                 />
-                            </Grid>
-                            <Grid item xs={12}>
+                         
                                 <TextField sx={{ width: '100%' }}
                                     required
                                     id="userPassword"
@@ -124,8 +126,7 @@ export default function RegisterPage() {
                                     type="password"
                                     placeholder="Password"
                                 />
-                            </Grid>
-                            <Grid item xs={12}>
+
                                 <TextField sx={{ width: '100%' }}
                                     required
                                     error={passwordMatch}
@@ -136,8 +137,8 @@ export default function RegisterPage() {
                                     type="password"
                                     placeholder="Confirm Password"
                                 />
-                            </Grid>
-                            <Grid item xs={12} >
+                          
+                         
                                 <TextField sx={{ width: '100%' }}
                                     required
                                     error={isuserEmailValid}
@@ -147,32 +148,31 @@ export default function RegisterPage() {
                                     placeholder="Email"
                                     helperText={isuserEmailValid !== false ? "Please provide a valid email" : ''}
                                 />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Button type='submit'>submit</Button>
-                            </Grid>
+                         
+                                <Button variant='contained' color='secondary' type='submit'>{t("buttons.submit")}</Button>
+                       
                         </Box>
                     </form >
                 </Box>
                 :
                 error !== true ?
                     isLoading === true ?
-                        <Typography variant='h4'>Registering...</Typography> :
+                        <Typography variant='h4'>{t("registrationPage.registrationPending")}</Typography> :
                         <Box sx={{ display: 'flex', flexDirection:'column', alignItems:'center' }}>
                             <Stack direction='column' sx={{margin:'1em', alignItems: 'center'}}>
                                 <CheckCircleIcon sx={{ width: '3em', height: '3em', color: 'green' }}></CheckCircleIcon>
-                                <Typography variant='h5'>Registration is complete</Typography>
-                                <Typography variant='h5'>Check your Email</Typography>
+                                <Typography variant='h5'>{t("registrationPage.success.registrationComplete")}</Typography>
+                                <Typography variant='h5'>{t("registrationPage.success.checkYourEmail")}</Typography>
                             </Stack>
-                            <a href='/register' onClick="window.location.reload(true)">go back</a>
+                            <a href='/register' onClick="window.location.reload(true)">{t("registrationPage.goBackLink")}</a>
                         </Box>
                     :
                     <React.Fragment>
                          <Stack direction='column' sx={{margin:'1em', alignItems: 'center'}}>
                          <CancelIcon sx={{ width: '3em', height: '3em', color: 'red' }}></CancelIcon>
-                        <Typography variant='h5'>There was an error</Typography>
-                        <Typography variant='h5'>Please try again</Typography>
-                        <a href='/register' onClick="window.location.reload(true)">go back</a>
+                        <Typography variant='h5'>{t("registrationPage.fail.registrationError")}</Typography>
+                        <Typography variant='h5'>{t("registrationPage.fail.tryAgain")}</Typography>
+                        <a href='/register' onClick="window.location.reload(true)">{t("registrationPage.goBackLink")}</a>
                         </Stack>
                     </React.Fragment>
             }
