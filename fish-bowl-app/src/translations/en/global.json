@@ -2,5 +2,20 @@
     "header":{
         "fishbowl": "Fishbowl",
         "welcomeMsg": "Welcome to the Fishbowl"
+    },
+    "buttons":{
+        "submit":"send",
+        "login":"log in"
+    },
+    "registrationPage":{
+        "registrationMessage":"Please register yourself",
+        "registrationPending": "Registering...",
+        "success":{
+        "registrationComplete": "Registration is complete",
+        "checkYourEmail": "Check your Email"},
+        "fail":{
+            "registrationError": "There was an error",
+            "tryAgain": "Please try again"},
+        "goBackLink":"go back"
     }
 }
