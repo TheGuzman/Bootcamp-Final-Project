@@ -5,7 +5,9 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'
 import { Typography } from "@mui/material";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
 import Grid from '@mui/material/Grid'
+import Stack from '@mui/material/Stack'
 
 
 export default function RegisterPage() {
@@ -156,15 +158,22 @@ export default function RegisterPage() {
                 error !== true ?
                     isLoading === true ?
                         <Typography variant='h4'>Registering...</Typography> :
-                        <Box>
-                            <CheckCircleIcon sx={{ width: '3em', height: '3em', color: 'green' }}></CheckCircleIcon>
-                            <Typography variant='h4'>Check your Email</Typography>
-                            <a href='/register' onclick="window.location.reload(true)">go back</a>
+                        <Box sx={{ display: 'flex', flexDirection:'column', alignItems:'center' }}>
+                            <Stack direction='column' sx={{margin:'1em', alignItems: 'center'}}>
+                                <CheckCircleIcon sx={{ width: '3em', height: '3em', color: 'green' }}></CheckCircleIcon>
+                                <Typography variant='h5'>Registration is complete</Typography>
+                                <Typography variant='h5'>Check your Email</Typography>
+                            </Stack>
+                            <a href='/register' onClick="window.location.reload(true)">go back</a>
                         </Box>
                     :
                     <React.Fragment>
-                        <Typography variant='h4'>There was an error. Please try again</Typography>
-                        <a href='/register' onclick="window.location.reload(true)">go back</a>
+                         <Stack direction='column' sx={{margin:'1em', alignItems: 'center'}}>
+                         <CancelIcon sx={{ width: '3em', height: '3em', color: 'red' }}></CancelIcon>
+                        <Typography variant='h5'>There was an error</Typography>
+                        <Typography variant='h5'>Please try again</Typography>
+                        <a href='/register' onClick="window.location.reload(true)">go back</a>
+                        </Stack>
                     </React.Fragment>
             }
         </React.Fragment>
