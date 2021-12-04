@@ -51,7 +51,7 @@ export default function LoginPage() {
         <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }} >
             <Typography sx={{ marginTop: '1em' }} variant='h4'>Log in</Typography>
             <form onSubmit={handleSubmit} >
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2em', width: '20em' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2em' }}>
                 <TextField
                         required
                         error={isuserEmailValid}
