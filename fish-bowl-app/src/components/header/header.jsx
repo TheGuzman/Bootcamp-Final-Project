@@ -39,7 +39,7 @@ export default function MyHeader() {
                                 <Typography color = 'secondary.light' variant='h5' component={Link} style= {{ textDecoration:'none' }} to='/login'>Login
                                 </Typography>
                             </HeaderStack>
-                            <Stack sx={{rowGap:'1em', '@media (min-width:760px)': {flexDirection: 'row',gap: '1em',},}}>
+                            <Stack sx={{rowGap:'1em',alignItems:'center', '@media (min-width:760px)': {flexDirection: 'row',gap: '1em',},}}>
                                 <LangToggleButton ></LangToggleButton>
                                 <ThemeToggleButton></ThemeToggleButton>
                             </Stack>

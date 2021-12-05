@@ -1,5 +1,4 @@
 import { createTheme } from '@mui/material/styles';
-import { light } from '@mui/material/styles/createPalette';
 import Brainfish from '../assets/fonts/Brainfish.ttf'
 
 export const lightTheme = createTheme({
@@ -9,7 +8,7 @@ export const lightTheme = createTheme({
     white: '#fff'
   },
   palette: {
-    mode:'light',
+
     primary: {
       main: '#5e8ca8',
       light: '#8ebcda',
@@ -77,7 +76,7 @@ export const lightTheme = createTheme({
 },
   
   shape: {
-    borderRadius: '10px',
+    borderRadius: 10,
   },
   typography: {
     fontFamily: ['Roboto', 'Arial'].join(','),
