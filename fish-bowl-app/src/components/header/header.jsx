@@ -40,7 +40,7 @@ export default function MyHeader() {
                                 </Typography>
                             </HeaderStack>
                             <Stack sx={{rowGap:'1em', '@media (min-width:760px)': {flexDirection: 'row',gap: '1em',},}}>
-                                <LangToggleButton></LangToggleButton>
+                                <LangToggleButton ></LangToggleButton>
                                 <ThemeToggleButton></ThemeToggleButton>
                             </Stack>
                         </Toolbar>

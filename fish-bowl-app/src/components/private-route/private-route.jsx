@@ -1,4 +1,4 @@
-import {useAuth} from '../../customHook/useAuth'
+import {useAuth} from '../custom-hooks/useAuth.js'
 import { Route } from 'react-router';
 import { Redirect } from 'react-router';
 
@@ -13,7 +13,7 @@ export default function PrivateRoute({ children, ...rest }) {
             ) : ( //si no estamos logeados, redirigimos a la página del login, pasándole la localización de la que veníamos. Esto puede ser útil para redirigir al usuario a la página a la que iba después de hacer login.
             <Redirect //Este componente se importa de react-router-dom
                 to={{
-                pathname: "/login-page", // a la ruta a la que queremos redirigir 
+                pathname: "/login", // a la ruta a la que queremos redirigir 
                 state: { from: location }
                 }}
             />

@@ -11,8 +11,9 @@ export default function LoginPage() {
 
     let userPassword = '';
     let userEmail = '';
-
+    let invalidLogin = '';
     const [isuserEmailValid, setValidUserEmail] = useState(false)
+    // const [invalidLogin, setInvalidLogin]= useState(false)
     const [t] = useTranslation("global")
 
     function isEmail(email) {
@@ -38,22 +39,32 @@ export default function LoginPage() {
                 }),
             };
             fetch("http://localhost:3001/auth/login", options)
-                .then((r) => r.json())
-                .then((d) => console.log(d));
+                .then((r) => r.json()) 
+                .then((d) => {
+                    console.log(d);
+                    sessionStorage.setItem('sesion', JSON.stringify(d));
+                    setTimeout(() => {
+                        document.location.href = '/becomeafish';
+                    }, 1000);
+                });
             console.log('valid')
         }
+
+
         else {
             setValidUserEmail(true)
         }
 
+
     }
+
 
 
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }} >
             <Typography sx={{ margin: '1em' }} variant='h5'>Log in</Typography>
             <form onSubmit={handleSubmit} >
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2em',alignItems: 'center' }}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2em', alignItems: 'center' }}>
                     <TextField sx={{ '@media (min-width:760px)': { width: '30em', gap: '1em', }, }}
                         required
                         error={isuserEmailValid}
@@ -63,7 +74,7 @@ export default function LoginPage() {
                         placeholder="Email"
                         helperText={isuserEmailValid !== false ? "Please provide a valid email" : ''}
                     />
-                    <TextField sx={{width:'100%'}}
+                    <TextField sx={{ width: '100%' }}
                         required
                         id="userPassword"
                         label="Password"
@@ -74,6 +85,7 @@ export default function LoginPage() {
                     <Button variant='contained' color='secondary' type='submit'>{t("buttons.login")}</Button>
                 </Box>
             </form >
+            <p>{invalidLogin}</p>
         </Box>
     )
 }
