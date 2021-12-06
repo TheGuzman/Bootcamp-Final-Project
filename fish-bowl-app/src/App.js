@@ -10,9 +10,9 @@ import RegisterPage from './pages/register-page/register-page';
 import MailVerificationPage from './pages/mail-verification/mail-verification';
 import PrivateRoute from './components/private-route/private-route';
 import BecomeaFishPage from './pages/become-a-fish-page/become-a-fish.jsx'
-import MyFishbowlsPage from './pages/become-a-fish-page/my-fishbowls-page/my-fishbowls-page';
-import MyAccountPage from './pages/become-a-fish-page/my-account-page/my-account-page';
-import CreateFishbowlPage from './pages/become-a-fish-page/my-fishbowls-page/create-fishbowl/create-fishbowl';
+import MyFishbowlsPage from './pages/my-fishbowls-page/my-fishbowls-page';
+import MyAccountPage from './pages/my-account-page/my-account-page';
+import CreateFishbowlPage from './pages/create-fishbowl/create-fishbowl';
 
 function App() {
 

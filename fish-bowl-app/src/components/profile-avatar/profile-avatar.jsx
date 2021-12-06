@@ -23,6 +23,9 @@ export default function ProfileAvatar() {
         document.location.reload()
     }
 
+    function handleDashboard (){
+        document.location.href = '/becomeafish'
+    }
     function handleMyFishbowls(){
         document.location.href = '/becomeafish/myfishbowls'
     }
@@ -54,6 +57,7 @@ export default function ProfileAvatar() {
                     'aria-labelledby': 'basic-button',
                 }}
             >
+                <MenuItem onClick={handleDashboard}><Icon icon="lucide:layout-dashboard" width="30" height="30" sx={{ margin: '0em 1em' }} /> Dashboard</MenuItem>
                 <MenuItem onClick={handleMyFishbowls}><Icon icon="mdi:fishbowl-outline" width="30" height="30" sx={{ margin: '0em 1em' }} /> My Fishbowls</MenuItem>
                 <MenuItem onClick={handleMyAccount}><Icon icon="ic:sharp-account-circle" width="30" height="30" /> My account</MenuItem>
                 <MenuItem onClick={handleLogOut}><LogoutIcon /> Log out</MenuItem>
