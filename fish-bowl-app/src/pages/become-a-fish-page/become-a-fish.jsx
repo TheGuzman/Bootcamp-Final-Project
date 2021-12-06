@@ -1,9 +1,10 @@
 import Box from '@mui/material/Box';
 import { Stack, Typography } from '@mui/material';
 import ProfileAvatar from '../../components/profile-avatar/profile-avatar.jsx'
-import FishbowlNav from '../../components/breadCrumb-nav/bread-crumb-nav.jsx';
 
 export default function BecomeaFishPage() {
+
+
 
 
     return (

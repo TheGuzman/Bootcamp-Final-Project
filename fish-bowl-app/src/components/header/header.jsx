@@ -8,7 +8,6 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import LangToggleButton from "./switches/language-switch.jsx";
 import ThemeToggleButton from "./switches/theme-switch.jsx";
-import Grid from "@mui/material/Grid";
 import { styled } from '@mui/material/styles';
 
 

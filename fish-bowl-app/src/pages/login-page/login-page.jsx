@@ -42,7 +42,7 @@ export default function LoginPage() {
                 .then((r) => r.json()) 
                 .then((d) => {
                     console.log(d);
-                    sessionStorage.setItem('sesion', JSON.stringify(d.access_token));
+                    sessionStorage.setItem('sesion', 'Bearer ' + d.access_token);
                     setTimeout(() => {
                         document.location.href = '/becomeafish';
                     }, 1000);
