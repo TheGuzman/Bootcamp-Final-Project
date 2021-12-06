@@ -5,7 +5,7 @@ import { Stack } from "@mui/material";
 export function Footer() {
 
     return (
-        <Box sx={{ backgroundColor: 'grey.500', position: 'absolute', left: 0, bottom: 0, right: 0 }}>
+        <Box sx={{ backgroundColor: 'grey.500', position: 'absolute',bottom:0, left: 0, right: 0 }}>
             <Stack direction='row' spacing={1} sx={{ alignItems: 'baseline', justifyContent:'center' }}>
                 <Typography sx={{ fontWeight: 'bold' }} variant='caption'>Fishbowl App 2021</Typography>
                 <Typography variant='caption' >All rights reserved</Typography>

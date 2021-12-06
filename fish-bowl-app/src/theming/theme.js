@@ -2,11 +2,13 @@ import { createTheme } from '@mui/material/styles';
 import Brainfish from '../assets/fonts/Brainfish.ttf'
 
 export const lightTheme = createTheme({
+  
   common: {
     black: '#000',
     white: '#fff'
   },
   palette: {
+
     primary: {
       main: '#5e8ca8',
       light: '#8ebcda',
@@ -15,7 +17,7 @@ export const lightTheme = createTheme({
 
     },
     secondary: {
-      main: '#f19740',
+      main: '#ffc86f',
       light: '#ffc86f',
       dark: '#ba690b',
       contrastText: '#000000',
@@ -74,7 +76,7 @@ export const lightTheme = createTheme({
 },
   
   shape: {
-    borderRadius: '10px',
+    borderRadius: 10,
   },
   typography: {
     fontFamily: ['Roboto', 'Arial'].join(','),
@@ -109,17 +111,16 @@ export const darkTheme = createTheme({
   palette: {
     mode:'dark',
     primary: {
-      main: '#616161',
-      light: '#8d8d8d',
-      dark: '#363636',
-      contrastText: '#ffffff',
-
+      main: '#ff9100',
+      light: '#ffc246',
+      dark: '#c56200',
+      contrastText: '#000000',
     },
     secondary: {
-      main: '#ffcc80',
-      light: '#ffffb0',
-      dark: '#ca9b52',
-      contrastText: '#000000',
+      main: '#1976d2',
+      light: '#63a4ff',
+      dark: '#004ba0',
+      contrastText: '#ffffff',
     },
   },
   typography: {

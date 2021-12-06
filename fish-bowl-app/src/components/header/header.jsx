@@ -8,7 +8,6 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import LangToggleButton from "./switches/language-switch.jsx";
 import ThemeToggleButton from "./switches/theme-switch.jsx";
-import Grid from "@mui/material/Grid";
 import { styled } from '@mui/material/styles';
 
 
@@ -39,8 +38,8 @@ export default function MyHeader() {
                                 <Typography color = 'secondary.light' variant='h5' component={Link} style= {{ textDecoration:'none' }} to='/login'>Login
                                 </Typography>
                             </HeaderStack>
-                            <Stack sx={{rowGap:'1em', '@media (min-width:760px)': {flexDirection: 'row',gap: '1em',},}}>
-                                <LangToggleButton></LangToggleButton>
+                            <Stack sx={{rowGap:'1em',alignItems:'center', '@media (min-width:760px)': {flexDirection: 'row',gap: '1em',},}}>
+                                <LangToggleButton ></LangToggleButton>
                                 <ThemeToggleButton></ThemeToggleButton>
                             </Stack>
                         </Toolbar>
