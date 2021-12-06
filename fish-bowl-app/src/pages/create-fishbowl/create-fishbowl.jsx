@@ -39,6 +39,7 @@ export default function CreateFishbowlPage() {
             method: "POST",
             headers: {
                 "Content-type": "application/json", // aviso a mi servidor que le envio los datos en formato JSON
+                "Authorization": sessionStorage.getItem('sesion')
             },
             body: JSON.stringify({
                 fishbowlName: fishbowlName,

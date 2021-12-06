@@ -17,7 +17,7 @@ export default function MyFishbowlsPage() {
         fetch("http://localhost:3001/user/becomeafish/myfishbowls/getfishbowls", {
             method: 'GET',
             headers: {
-              'Authorization': 'Bearer ' + token,
+                "Authorization": sessionStorage.getItem('sesion')
             }
         })
         .then(r=>r.json())
