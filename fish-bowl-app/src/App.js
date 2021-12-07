@@ -3,7 +3,7 @@ import './App.css';
 import MyHeader from './components/header/header';
 import MyThemeProvider from './theming/theme-provider.jsx';
 import { Footer } from './components/footer/footer';
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Switch, Route} from "react-router-dom";
 import HomePage from './pages/home/home';
 import LoginPage from './pages/login-page/login-page';
 import RegisterPage from './pages/register-page/register-page';

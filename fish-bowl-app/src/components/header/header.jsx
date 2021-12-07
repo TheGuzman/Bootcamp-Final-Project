@@ -1,6 +1,5 @@
 import React from "react"
 import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next"
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { Stack } from "@mui/material";
@@ -13,7 +12,6 @@ import { styled } from '@mui/material/styles';
 
 
 export default function MyHeader() {
-    const [t] = useTranslation("global")
 
     const HeaderStack = styled(Stack)({
         '@media (min-width:760px)': {
