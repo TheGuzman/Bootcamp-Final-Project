@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next"
 
 
 export default function LangToggleButton() {
-    const [t, i18n] = useTranslation("global")
+    const [_t, i18n] = useTranslation("global")
     const [lang, setLang] = useState('en');
 
     const handleChange = (event, newLang) => {
