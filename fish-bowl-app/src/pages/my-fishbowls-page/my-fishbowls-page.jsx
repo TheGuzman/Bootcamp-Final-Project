@@ -9,7 +9,10 @@ import { useState } from "react";
 import FishbowlCard from "../../components/fishbowl-card/fishbowl-card";
 
 export default function MyFishbowlsPage() {
-    const [fishbowls, setFishbowls] = useState([])
+
+    const [allFishbowls, setAllFishbowls] = useState([])
+    const [change, setChange] = useState(false)
+
 
     useEffect(() => {
         fetch("http://localhost:3001/user/becomeafish/myfishbowls/getuserfishbowls", {
@@ -19,8 +22,26 @@ export default function MyFishbowlsPage() {
             }
         })
             .then(r => r.json())
-            .then(d => { setFishbowls(d); console.log(d) })
-    }, []);
+            .then(d => { setAllFishbowls(d); console.log(d) })
+    }, [change]);
+
+
+    const onDeleteFishbowl = fishbowlId =>{ //custom hook for deleting the fishbowl
+
+        fetch(`http://localhost:3001/user/becomeafish/deleteafishbowl/:${fishbowlId}`, {
+            method: 'DELETE',
+            headers: {
+                "Authorization": sessionStorage.getItem('sesion')
+            }
+        })
+            .then(r => r.json())
+            .then(d => {console.log(d);setChange(!change)  })
+
+    }
+
+
+
+
 
     return (
         <React.Fragment>
@@ -36,7 +57,7 @@ export default function MyFishbowlsPage() {
                 </Fab>
             </Stack>
             <Stack direction='row' sx={{display:'flex', flexWrap:'wrap', margin:'0.5em', gap:'0.5em', justifyContent:'center'}}>
-                {fishbowls.map((e, i) => <FishbowlCard fishbowlCreator={false} info={e} key={i}></FishbowlCard>)}
+                {allFishbowls?.map((e, i) => <FishbowlCard onDeleteFishbowl={onDeleteFishbowl} fishbowlCreator={false} deleteButton={true} info={e} key={i}></FishbowlCard>)}
             </Stack>
 
         </React.Fragment>

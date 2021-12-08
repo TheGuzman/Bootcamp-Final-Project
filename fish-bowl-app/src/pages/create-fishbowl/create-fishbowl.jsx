@@ -8,7 +8,11 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
 import { useState } from "react";
-import { Stack } from "@mui/material";
+import { Stack, Paper } from "@mui/material";
+import ProfileAvatar from "../../components/profile-avatar/profile-avatar";
+import { styled } from '@mui/material/styles';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { Link } from "react-router-dom";
 
 
 
@@ -18,7 +22,7 @@ import { Stack } from "@mui/material";
 export default function CreateFishbowlPage() {
 
     const [value, setValue] = useState(new Date());
-    // const [isSumbitted, setSubmited] = useState(false)
+    const [isSumbitted, setSubmited] = useState(false)
     // const [isLoading, setLoading] = useState(true)
     // const [error, setError] = useState(false)
 
@@ -30,7 +34,6 @@ export default function CreateFishbowlPage() {
         let fishbowlTheme = e.target.fishbowlTheme.value;
         let fishbowlDescription = e.target.fishbowlDescription.value;
         let fishbowlDate = value.toLocaleString()
-        let fishbowlCreator = sessionStorage.getItem('sesion')
 
         console.log(fishbowlName, fishbowlTheme, fishbowlDescription, fishbowlDate)
 
@@ -46,26 +49,34 @@ export default function CreateFishbowlPage() {
                 fishbowlTheme: fishbowlTheme,
                 fishbowlDescription: fishbowlDescription,
                 fishbowlDate: fishbowlDate,
-                fishbowlCreator: fishbowlCreator,
             }),
         };
         fetch("http://localhost:3001/user/becomeafish/myfishbowls/createfishbowl", options)
-            .then(r => r.json())
+            .then(r => {
+                r.json();
+                if (r.ok) setSubmited(true)
+                else setSubmited(false)
+            })
             .then(d => console.log(d));
 
-        // setSubmited(true)
-
-        console.log('valid')
 
     }
+
+    const SuccessStack = styled(Stack)(({ theme }) => ({
+        backgroundColor: theme.palette.success.light,
+        padding: 5
+    }));
 
 
     return (
         <React.Fragment>
-            <p>create fishbowl page</p>
+            <Stack direction='row' sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
+                <Typography sx={{ margin: '0em 1em' }} variant='h5'>Create a Fishbowl</Typography>
+                <ProfileAvatar></ProfileAvatar>
+            </Stack>
 
             <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }} >
-                <Typography sx={{ margin: '1em' }} variant='h5'>Create a Fishbowl</Typography>
+                <Typography sx={{ margin: '1em' }} variant='h6'>Add your Fishbowl here</Typography>
                 <form onSubmit={handleSubmit} >
                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2em', alignItems: 'center' }}>
                         <TextField sx={{ '@media (min-width:760px)': { width: '30em', gap: '1em', }, }}
@@ -94,6 +105,7 @@ export default function CreateFishbowlPage() {
                         <Stack sx={{ width: '100%' }}>
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <DateTimePicker
+                                    required
                                     renderInput={(props) => <TextField {...props} />}
                                     label="Fishbowl Date and Time"
                                     value={value}
@@ -108,6 +120,24 @@ export default function CreateFishbowlPage() {
                     </Box>
                 </form >
             </Box>
-        </React.Fragment>
+            {isSumbitted !== false ?
+                <Box sx={{ display: 'flex', justifyContent: 'center', margin: '1em' }}>
+                    <Stack direction='column' sx={{ width: 'fit-content', borderRadius: '10px', alignItems: 'center' }}>
+                        <SuccessStack sx={{ borderRadius: '10px', }} >
+                            <Typography sx={{ margin: '0em 1em', fontWeight: 'bold', textAlign:'center' }} variant='button'>Fishbowl successfully created</Typography>
+                        </SuccessStack>
+                        <Stack direction='row' sx={{margin:'1em', cursor:'pointer', }} >
+                            <ArrowBackIosNewIcon ></ArrowBackIosNewIcon>
+                            <Typography sx={{textDecoration:'none', color:'text.primary'}} component={Link} to='/becomeafish/myfishbowls' >Back to My Fishbowls</Typography>
+                        </Stack>
+                    </Stack>
+
+                </Box>
+
+
+
+                : ''
+            }
+        </React.Fragment >
     )
 }

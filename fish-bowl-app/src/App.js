@@ -46,8 +46,9 @@ function App() {
             <HomePage></HomePage>
           </Route>
         </Switch>
+        <Footer></Footer>
       </BrowserRouter >
-      <Footer></Footer>
+     
     </MyThemeProvider >
 
   );
