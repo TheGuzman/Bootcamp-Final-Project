@@ -92,7 +92,27 @@ export const lightTheme = createTheme({
     },
     h2: {
       fontFamily: ['Roboto', 'Arial'].join(','),
-      fontSize: '2rem'
+      '@media (min-width:320px)': {
+        fontSize: '2rem',
+      },
+      fontSize: '5rem'
+    },
+    h3: {
+      fontFamily: ['Roboto', 'Arial'].join(','),
+      '@media (min-width:320px)': {
+        fontSize: '1.7rem',
+      },
+      '@media (min-width:768px)': {
+        fontSize: '3rem'
+      },
+      
+    },
+    h4: {
+      fontFamily: ['Roboto', 'Arial'].join(','),
+      '@media (min-width:320px)': {
+        fontSize: '1.3rem',
+      },
+      fontSize: '3rem'
     }
   },
   components: {
@@ -127,11 +147,37 @@ export const darkTheme = createTheme({
     fontFamily: ['Roboto', 'Arial'].join(','),
     h1: {
       fontFamily: ['"Brainfish"', 'Roboto'].join(','),
-      fontSize: '8rem'
+      '@media (min-width:320px)': {
+        fontSize: '4rem',
+      },
+      '@media (min-width:768px)': {
+        fontSize: '8rem',
+      },
+
     },
     h2: {
       fontFamily: ['Roboto', 'Arial'].join(','),
-      fontSize: '2rem'
+      '@media (min-width:320px)': {
+        fontSize: '2rem',
+      },
+      fontSize: '5rem'
+    },
+    h3: {
+      fontFamily: ['Roboto', 'Arial'].join(','),
+      '@media (min-width:320px)': {
+        fontSize: '1.7rem',
+      },
+      '@media (min-width:768px)': {
+        fontSize: '3rem'
+      },
+      
+    },
+    h4: {
+      fontFamily: ['Roboto', 'Arial'].join(','),
+      '@media (min-width:320px)': {
+        fontSize: '1.3rem',
+      },
+      fontSize: '3rem'
     }
   },
   components: {

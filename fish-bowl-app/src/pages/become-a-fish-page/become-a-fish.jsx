@@ -31,7 +31,7 @@ export default function BecomeaFishPage() {
             <Box>
                 <Stack direction='column' sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
                     <Typography sx={{ margin: '0em 1em' }} variant='h6'>Explore the most popular Fihsbowls</Typography>
-                    <Box border={2} sx={{ borderColor: 'primary.main', padding: '0.5em', borderRadius: '10px', margin:'1em' }}>
+                    <Box border={2} sx={{ borderColor: 'primary.main', backgroundColor:'primary.dark', padding: '0.5em', borderRadius: '10px', margin:'1em' }}>
                         <Stack direction='row' sx={{display:'flex', flexWrap:'wrap', gap:'2em', margin:'1em', alignItems:'center', justifyContent:'center'}}>
                             {allFishbowls?.map((e, i) => <FishbowlCard fishbowlCreator={true} info={e} key={i}></FishbowlCard>)}
                         </Stack>
