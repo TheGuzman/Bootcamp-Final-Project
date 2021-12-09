@@ -33,9 +33,7 @@ export default function CreateFishbowlPage() {
         let fishbowlName = e.target.fishbowlName.value
         let fishbowlTheme = e.target.fishbowlTheme.value;
         let fishbowlDescription = e.target.fishbowlDescription.value;
-        let fishbowlDate = value.toLocaleString()
-
-        console.log(fishbowlName, fishbowlTheme, fishbowlDescription, fishbowlDate)
+        let fishbowlDate = value.toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'});
 
 
         const options = {
@@ -49,11 +47,12 @@ export default function CreateFishbowlPage() {
                 fishbowlTheme: fishbowlTheme,
                 fishbowlDescription: fishbowlDescription,
                 fishbowlDate: fishbowlDate,
+                
             }),
         };
         fetch("http://localhost:3001/user/becomeafish/myfishbowls/createfishbowl", options)
             .then(r => {
-                r.json();
+                r.json()
                 if (r.ok) setSubmited(true)
                 else setSubmited(false)
             })

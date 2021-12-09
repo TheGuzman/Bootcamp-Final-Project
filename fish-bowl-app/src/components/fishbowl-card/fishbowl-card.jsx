@@ -29,25 +29,25 @@ export default function FishbowlCard(props) {
                 <CardContent sx={{display:'flex', flexDirection:'column'}}>
                     <Stack direction='row' sx={{ alignItems: 'baseline', justifyContent: 'center', margin:'0em 0em 2em 0em' }}>
                         {/* <Typography sx={{ margin: '0em 0.2em 0em 0em', fontSize: '0.9rem', }} component="div">Name: </Typography> */}
-                        <Typography variant="button" component="div">{props.info.fishbowlName}</Typography>
+                        <Typography variant="button" component="div">{props.info.name}</Typography>
                     </Stack>
                     <Stack direction='row' sx={{ alignItems: 'baseline', }}>
                         <Typography sx={{ margin: '0em 0.2em 0em 0em', fontSize: '0.9rem', }} color="text.secondary" gutterBottom>Theme: </Typography>
-                        <Typography variant="subtitle2" >{props.info.fishbowlTheme}</Typography>
+                        <Typography variant="subtitle2" >{props.info.theme}</Typography>
                     </Stack>
                     <Stack sx={{ margin: '0.5em 0em', }}>
                         <Typography variant="subtitle2">Brief description</Typography>
                         <Box border={2} sx={{ borderColor: 'primary.main', padding: '0.5em', borderRadius: '10px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                            <Typography variant="subtitle2">{props.info.fishbowlDescription}</Typography>
+                            <Typography variant="subtitle2">{props.info.description}</Typography>
                         </Box>
                     </Stack>
                     <Stack direction='row' sx={{ alignItems: 'baseline' }}>
                         <Typography sx={{ margin: '0em 0.2em 0em 0em', fontSize: '0.9rem' }} color="text.secondary" gutterBottom>Date: </Typography>
-                        <Typography variant="subtitle2" >{props.info.fishbowlTime}</Typography>
+                        <Typography variant="subtitle2" >{props.info.time}</Typography>
                     </Stack>
                     {props.fishbowlCreator !== false ? <Stack direction='row' sx={{ alignItems: 'baseline' }}>
                         <Typography sx={{ margin: '0em 0.2em 0em 0em', fontSize: '0.9rem' }} color="text.secondary" gutterBottom>Creator: </Typography>
-                        <Typography variant="subtitle2" >{props.info?.fishbowlCreator}</Typography>
+                        <Typography variant="subtitle2" >{props.info?.creator}</Typography>
                     </Stack> : ''}
 
                 </CardContent>

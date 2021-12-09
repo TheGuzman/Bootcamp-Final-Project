@@ -72,10 +72,10 @@ export default function MyHeader() {
                                     'aria-labelledby': 'basic-button',
                                 }}
                             >
-                                <MenuItem onClick={handleClose} component={Link} to='/'><Icon width="25" height="25"  icon="bx:bx-home" sx={{margin:'0em 0.5em'}}/>Home</MenuItem>
-                                <MenuItem onClick={handleClose} component={Link} to='/becomeafish'><Icon width="25" height="25" icon="octicon:comment-discussion-16" /> Become a fish</MenuItem>
-                                <MenuItem onClick={handleClose} component={Link} to='/register'><Icon width="25" height="25" icon="bi:person-plus" />Sign up</MenuItem>
-                                <MenuItem onClick={handleClose} component={Link} to='/login'><LoginIcon/> Login</MenuItem>
+                                <MenuItem onClick={handleClose} component={Link} to='/' sx={{columnGap:'0.5em'}}><Icon width="25" height="25"  icon="bx:bx-home" sx={{margin:'0em 0.5em'}}/>Home</MenuItem>
+                                <MenuItem onClick={handleClose} component={Link} to='/becomeafish' sx={{columnGap:'0.5em'}}><Icon width="25" height="25" icon="octicon:comment-discussion-16" /> Become a fish</MenuItem>
+                                <MenuItem onClick={handleClose} component={Link} to='/register' sx={{columnGap:'0.5em'}}><Icon width="25" height="25" icon="bi:person-plus" />Sign up</MenuItem>
+                                <MenuItem onClick={handleClose} component={Link} to='/login' sx={{columnGap:'0.5em'}}><LoginIcon/> Login</MenuItem>
                             </Menu>
                         </React.Fragment>
 
