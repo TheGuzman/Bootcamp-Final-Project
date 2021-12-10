@@ -1,8 +1,28 @@
 import { createTheme } from '@mui/material/styles';
 import Brainfish from '../assets/fonts/Brainfish.ttf'
 
+const defaultTheme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 320,
+      md: 768,
+      lg: 1024,
+      xl: 1440,
+    },
+  },
+})
+
 export const lightTheme = createTheme({
-  
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 320,
+      md: 768,
+      lg: 1024,
+      xl: 1440,
+    },
+  },
   common: {
     black: '#000',
     white: '#fff'
@@ -72,9 +92,9 @@ export const lightTheme = createTheme({
       A200: "#aaaaaa",
       A400: "#303030",
       A700: "#616161",
-      }
-},
-  
+    }
+  },
+
   shape: {
     borderRadius: 10,
   },
@@ -82,38 +102,29 @@ export const lightTheme = createTheme({
     fontFamily: ['Roboto', 'Arial'].join(','),
     h1: {
       fontFamily: ['"Brainfish"', 'Roboto'].join(','),
-      '@media (min-width:320px)': {
-        fontSize: '4rem',
-      },
-      '@media (min-width:768px)': {
-        fontSize: '8rem',
-      },
-
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.sm}px)`]: { fontSize: '4rem', },
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.md}px)`]: { fontSize: '8rem', },
     },
     h2: {
       fontFamily: ['Roboto', 'Arial'].join(','),
-      '@media (min-width:320px)': {
-        fontSize: '2rem',
-      },
-      fontSize: '5rem'
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.sm}px)`]: { fontSize: '2rem', },
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.md}px)`]: { fontSize: '5rem', },
     },
     h3: {
       fontFamily: ['Roboto', 'Arial'].join(','),
-      '@media (min-width:320px)': {
-        fontSize: '1.7rem',
-      },
-      '@media (min-width:768px)': {
-        fontSize: '3rem'
-      },
-      
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.sm}px)`]: { fontSize: '1.7rem', },
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.md}px)`]: { fontSize: '3rem', },
     },
     h4: {
       fontFamily: ['Roboto', 'Arial'].join(','),
-      '@media (min-width:320px)': {
-        fontSize: '1.3rem',
-      },
-      fontSize: '3rem'
-    }
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.sm}px)`]: { fontSize: '1.3rem', },
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.md}px)`]: { fontSize: '2.3rem', },
+    },
+    h5: {
+      fontFamily: ['Roboto', 'Arial'].join(','),
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.sm}px)`]: { fontSize: '1.1rem', },
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.md}px)`]: { fontSize: '1.5rem', },
+    },
   },
   components: {
     MuiCssBaseline: {
@@ -129,7 +140,7 @@ export const lightTheme = createTheme({
 
 export const darkTheme = createTheme({
   palette: {
-    mode:'dark',
+    mode: 'dark',
     primary: {
       main: '#ff9100',
       light: '#ffc246',
@@ -147,38 +158,29 @@ export const darkTheme = createTheme({
     fontFamily: ['Roboto', 'Arial'].join(','),
     h1: {
       fontFamily: ['"Brainfish"', 'Roboto'].join(','),
-      '@media (min-width:320px)': {
-        fontSize: '4rem',
-      },
-      '@media (min-width:768px)': {
-        fontSize: '8rem',
-      },
-
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.sm}px)`]: { fontSize: '4rem', },
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.md}px)`]: { fontSize: '8rem', },
     },
     h2: {
       fontFamily: ['Roboto', 'Arial'].join(','),
-      '@media (min-width:320px)': {
-        fontSize: '2rem',
-      },
-      fontSize: '5rem'
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.sm}px)`]: { fontSize: '2rem', },
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.md}px)`]: { fontSize: '5rem', },
     },
     h3: {
       fontFamily: ['Roboto', 'Arial'].join(','),
-      '@media (min-width:320px)': {
-        fontSize: '1.7rem',
-      },
-      '@media (min-width:768px)': {
-        fontSize: '3rem'
-      },
-      
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.sm}px)`]: { fontSize: '1.7rem', },
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.md}px)`]: { fontSize: '3rem', },
     },
     h4: {
       fontFamily: ['Roboto', 'Arial'].join(','),
-      '@media (min-width:320px)': {
-        fontSize: '1.3rem',
-      },
-      fontSize: '3rem'
-    }
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.sm}px)`]: { fontSize: '1.3rem', },
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.md}px)`]: { fontSize: '2.3rem', },
+    },
+    h5: {
+      fontFamily: ['Roboto', 'Arial'].join(','),
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.sm}px)`]: { fontSize: '1.1rem', },
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.md}px)`]: { fontSize: '1.5rem', },
+    },
   },
   components: {
     MuiCssBaseline: {
