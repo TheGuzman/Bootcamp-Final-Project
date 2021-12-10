@@ -11,6 +11,7 @@ import FishbowlCard from "../../components/fishbowl-card/fishbowl-card";
 export default function MyFishbowlsPage() {
 
     const [allFishbowls, setAllFishbowls] = useState([])
+    // const [allFishbowls, setAllFishbowls] = useState([])
     const [change, setChange] = useState(false)
 
 
@@ -22,7 +23,11 @@ export default function MyFishbowlsPage() {
             }
         })
             .then(r => r.json())
-            .then(d => { setAllFishbowls(d); console.log(d) })
+            .then(d => { setAllFishbowls(d); console.log(d);
+                
+                
+            
+            })
     }, [change]);
 
 

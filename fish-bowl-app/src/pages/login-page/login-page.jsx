@@ -11,9 +11,9 @@ export default function LoginPage() {
 
     let userPassword = '';
     let userEmail = '';
-    let invalidLogin = '';
+    let invalidLoginMessage = 'invalid username or password';
     const [isuserEmailValid, setValidUserEmail] = useState(false)
-    // const [invalidLogin, setInvalidLogin]= useState(false)
+    const [invalidLogin, setInvalidLogin]= useState(false)
     const [t] = useTranslation("global")
 
     function isEmail(email) {
@@ -39,13 +39,21 @@ export default function LoginPage() {
                 }),
             };
             fetch("http://localhost:3001/auth/login", options)
-                .then((r) => r.json()) 
-                .then((d) => {
+                .then(r =>r.json())                
+                .then(d => {
+                    console.log(d)
+                    if(d.status===404){
+                        setInvalidLogin(true)
+                        console.log('invalid login')
+                    }
+                    else{
+                        sessionStorage.setItem('sesion', 'Bearer ' + d.access_token);
+                        setTimeout(() => {
+                            document.location.href = '/becomeafish';
+                        }, 1000);
+                    }
                     console.log(d);
-                    sessionStorage.setItem('sesion', 'Bearer ' + d.access_token);
-                    setTimeout(() => {
-                        document.location.href = '/becomeafish';
-                    }, 1000);
+                    
                 });
             console.log('valid')
         }
@@ -85,7 +93,7 @@ export default function LoginPage() {
                     <Button variant='contained' color='secondary' type='submit'>{t("buttons.login")}</Button>
                 </Box>
             </form >
-            <p>{invalidLogin}</p>
+            {invalidLogin===true?<Typography variant='h6' color='error'>{invalidLoginMessage}</Typography>:''}
         </Box>
     )
 }

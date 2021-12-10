@@ -8,7 +8,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import Stack from '@mui/material/Stack'
 import { useTranslation } from "react-i18next"
-import { styled } from '@mui/material/styles';
+import { Link } from 'react-router-dom';
 
 
 export default function RegisterPage() {
@@ -164,7 +164,7 @@ export default function RegisterPage() {
                                 <Typography variant='h5'>{t("registrationPage.success.registrationComplete")}</Typography>
                                 <Typography variant='h5'>{t("registrationPage.success.checkYourEmail")}</Typography>
                             </Stack>
-                            <a href='/register' onClick="window.location.reload(true)">{t("registrationPage.goBackLink")}</a>
+                            <a href='/register' component={Link}>{t("registrationPage.goBackLink")}</a>
                         </Box>
                     :
                     <React.Fragment>
@@ -172,7 +172,7 @@ export default function RegisterPage() {
                          <CancelIcon sx={{ width: '3em', height: '3em', color: 'red' }}></CancelIcon>
                         <Typography variant='h5'>{t("registrationPage.fail.registrationError")}</Typography>
                         <Typography variant='h5'>{t("registrationPage.fail.tryAgain")}</Typography>
-                        <a href='/register' onClick="window.location.reload(true)">{t("registrationPage.goBackLink")}</a>
+                        <a href='/register' component={Link}>{t("registrationPage.goBackLink")}</a>
                         </Stack>
                     </React.Fragment>
             }

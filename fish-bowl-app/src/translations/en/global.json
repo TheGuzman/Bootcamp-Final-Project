@@ -1,21 +1,35 @@
 {
-    "header":{
+    "header": {
         "fishbowl": "Fishbowl",
         "welcomeMsg": "Welcome to the Fishbowl"
     },
-    "buttons":{
-        "submit":"send",
-        "login":"log in"
+    "buttons": {
+        "submit": "send",
+        "login": "log in"
     },
-    "registrationPage":{
-        "registrationMessage":"Please register yourself",
+    "registrationPage": {
+        "registrationMessage": "Please register yourself",
         "registrationPending": "Registering...",
-        "success":{
-        "registrationComplete": "Registration is complete",
-        "checkYourEmail": "Check your Email"},
-        "fail":{
+        "success": {
+            "registrationComplete": "Registration is complete",
+            "checkYourEmail": "Check your Email"
+        },
+        "fail": {
             "registrationError": "There was an error",
-            "tryAgain": "Please try again"},
-        "goBackLink":"go back"
+            "tryAgain": "Please try again"
+        },
+        "goBackLink": "go back"
+    },
+    "userAccountUpdatePage": {
+        "updateMessage": "Update your info",
+        "updatePending": "Updatind...",
+        "success": {
+            "updateComplete": "Update is complete"
+        },
+        "fail": {
+            "updateError": "User name requested already exists or is invalid",
+            "tryAgain": "Please try again"
+        },
+        "goBackLink": "go back"
     }
 }
