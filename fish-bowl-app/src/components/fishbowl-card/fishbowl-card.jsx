@@ -6,7 +6,7 @@ import { Stack } from '@mui/material';
 import { Box } from '@mui/system';
 import { Button } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-
+import { Link } from 'react-router-dom';
 
 
 export default function FishbowlCard(props) {
@@ -28,7 +28,7 @@ export default function FishbowlCard(props) {
 
                     <CardContent sx={{ display: 'flex', flexDirection: 'column' }}>
                         <Stack direction='row' sx={{ alignItems: 'baseline', justifyContent: 'center', margin: '0em 0em 2em 0em' }}>
-                            <Typography variant="button" component="a" href={`http://localhost:3002/${props.info.roomId}`}>{props.info.name}</Typography>
+                            <Typography variant="button" component={Link} to={`/becomeafish/joinfishbowl/:${props.info.roomId}`}>{props.info.name}</Typography>
                         </Stack>
                         <Stack direction='row' sx={{ alignItems: 'baseline', }}>
                             <Typography sx={{ margin: '0em 0.2em 0em 0em', fontSize: '0.9rem', }} color="text.secondary" gutterBottom>Theme: </Typography>

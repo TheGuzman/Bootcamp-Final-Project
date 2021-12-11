@@ -15,6 +15,7 @@ import MyAccountPage from './pages/my-account-page/my-account-page';
 import CreateFishbowlPage from './pages/create-fishbowl/create-fishbowl';
 import DeleteUserInfoPage from './pages/delete-user-info/delete-user-info';
 import UpdateUserInfoPage from './pages/update-user-info/update-user-info';
+import JoinFishbowlPage from './pages/join-fishbowl/join-fishbowl';
 
 function App() {
 
@@ -25,6 +26,9 @@ function App() {
         <Switch>
           <PrivateRoute exact path='/becomeafish'>
             <BecomeaFishPage></BecomeaFishPage>
+          </PrivateRoute>
+          <PrivateRoute exact path='/becomeafish/joinfishbowl/:roomId' >
+            <JoinFishbowlPage></JoinFishbowlPage>
           </PrivateRoute>
           <PrivateRoute exact path='/becomeafish/myfishbowls'>
             <MyFishbowlsPage></MyFishbowlsPage>
