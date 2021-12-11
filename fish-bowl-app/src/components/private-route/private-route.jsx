@@ -19,12 +19,12 @@ export default function PrivateRoute({ children, ...rest }) {
 
     const [auth, setAuth] = useState(null)
 
-    useEffect(async () => {
+    useEffect(async() => {
         setAuth(await getAuth())
     }, [])
 
 
-    return ( //devolvemos el componente Route del react-router-dom
+    return (
         auth && (
             <Route
                 {...rest}
