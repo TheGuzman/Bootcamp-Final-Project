@@ -133,21 +133,15 @@ export default function JoinFishbowlPage() {
 
         socketRef.current.emit('join-room', roomId);
 
-        console.log(socketRef.current)
-
         socketRef.current.on("your id", id => {
             setYourID(id);
         })
         // socketRef.current.on('user-disconnected', id => {
         //     if (peers[id]) peers[id].close()
         // })
-        // socketRef.current.on("join-room", roomId => {
-        //     setRoomID(roomId);
-        // })
-
+        
         socketRef.current.on("message", (message) => {
             receivedMessage(message);
-            console.log(message)
         })
     }, []);
 
