@@ -8,7 +8,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
 import { useState } from "react";
-import { Stack, Paper } from "@mui/material";
+import { Stack } from "@mui/material";
 import ProfileAvatar from "../../components/profile-avatar/profile-avatar";
 import { styled } from '@mui/material/styles';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';

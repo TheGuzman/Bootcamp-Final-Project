@@ -4,12 +4,14 @@ import { Box, Stack, Typography, Button } from "@mui/material";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Link } from "react-router-dom";
 import { styled } from "@mui/system"
-
+import { useHistory } from 'react-router'
 
 export default function DeleteUserInfoPage() {
 
     const [message, setMessage] = useState()
     const [response, setResponse] = useState(false)
+    const history = useHistory()
+
 
     function handleDeleteAccount() {
         
@@ -29,7 +31,7 @@ export default function DeleteUserInfoPage() {
                     setResponse(true)
                     setMessage(<Typography variant='subtitle' color='success.main'>Account successfully deleted </Typography>)
                     setTimeout(() => {
-                        document.location.href = '/becomeafish';
+                        history.push('/becomeafish') 
                     }, 2500);
                 }
 

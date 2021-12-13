@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'
 import { Typography } from "@mui/material";
 import { useTranslation } from "react-i18next"
+import { useHistory } from 'react-router'
 
 
 export default function LoginPage() {
@@ -15,6 +16,7 @@ export default function LoginPage() {
     const [isuserEmailValid, setValidUserEmail] = useState(false)
     const [invalidLogin, setInvalidLogin]= useState(false)
     const [t] = useTranslation("global")
+    const history = useHistory()
 
     function isEmail(email) {
         let regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -49,7 +51,7 @@ export default function LoginPage() {
                     else{
                         sessionStorage.setItem('sesion', 'Bearer ' + d.access_token);
                         setTimeout(() => {
-                            document.location.href = '/becomeafish';
+                            history.push('/becomeafish') 
                         }, 1000);
                     }
                     console.log(d);

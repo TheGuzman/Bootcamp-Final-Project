@@ -1,12 +1,12 @@
 import { useParams } from 'react-router'; import React, { useState, useEffect, useRef } from "react";
 import { styled } from '@mui/material/styles';
 import io from "socket.io-client"
-import { Box, palette } from '@mui/system';
+import { Box } from '@mui/system';
+import { Stack } from '@mui/material';
 import { Button } from '@mui/material';
 
 const Page = styled('div')({
     display: 'flex',
-    height: '100vh',
     width: '100%',
     alignItems: 'center',
     backgroundColor: 'paper.main',
@@ -16,8 +16,9 @@ const Page = styled('div')({
 const Container = styled(Box)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
-    height: '500px',
-    maxHeight: '500px',
+    alignItems: 'flex-end',
+    height: '20em',
+    maxHeight: '20em',
     overflow: 'auto',
     width: '80%',
     border: '2px solid',
@@ -30,17 +31,16 @@ const Form = styled('form')({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent:'space-between',
+    justifyContent: 'space-between',
     width: '80%',
 })
 
-const TextArea = styled('textarea')(({ theme }) => ({
+const TextArea = styled('input')(({ theme }) => ({
     width: '80%',
     height: '2em',
     borderRadius: '4em',
-    marginTop:'0.5em',
+    marginTop: '0.5em',
     paddingLeft: '10px',
-    paddingTop: '10px',
     fontSize: '1.3rem',
     backgroundColor: 'transparent',
     border: '2px solid',
@@ -48,14 +48,13 @@ const TextArea = styled('textarea')(({ theme }) => ({
     outline: 'none',
     color: theme.palette.text,
     letterSpacing: '1px',
-    lineHeight: '20px',
 }))
 
 const SendButton = styled(Button)(({ theme }) => ({
     variant: 'contained',
     width: '10%',
     height: '2em',
-    marginTop:'0.5em',
+    marginTop: '0.5em',
     borderRadius: '4em',
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
@@ -108,7 +107,8 @@ export default function JoinFishbowlPage() {
     // const [name, setYourName] = useState(null)
     let [user, setUser] = useState(null)
     const [yourID, setYourID] = useState();
-    const [room, setRoomID] = useState();
+    // const [allIDs, setAllIDs] = useState({});
+    // const [room, setRoomID] = useState();
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
 
@@ -126,9 +126,10 @@ export default function JoinFishbowlPage() {
 
 
     const socketRef = useRef();
+    const peers = {}
 
     useEffect(() => {
-        socketRef.current = io.connect('/');
+        socketRef.current = io.connect('http://localhost:3001/');
 
         socketRef.current.emit('join-room', roomId);
 
@@ -137,9 +138,12 @@ export default function JoinFishbowlPage() {
         socketRef.current.on("your id", id => {
             setYourID(id);
         })
-        socketRef.current.on("join-room", roomId => {
-            setRoomID(roomId);
-        })
+        // socketRef.current.on('user-disconnected', id => {
+        //     if (peers[id]) peers[id].close()
+        // })
+        // socketRef.current.on("join-room", roomId => {
+        //     setRoomID(roomId);
+        // })
 
         socketRef.current.on("message", (message) => {
             receivedMessage(message);
@@ -161,42 +165,52 @@ export default function JoinFishbowlPage() {
         };
         setMessage("");
         socketRef.current.emit("send message", messageObject);
-        console.log(messageObject)
     }
 
     function handleChange(e) {
         setMessage(e.target.value);
     }
+    const handleKeypress = e => {
+      if (e.keyCode === 13) {
+        sendMessage();
+      }
+    };
 
     return (
-        <Page>
-            <Container>
-                {messages.map((message, index) => {
-                    if (message.id === yourID) {
+        <Stack>
+            <Stack>
+                <p>STREAMING</p>
+            </Stack>
+            <Page>
+                <Container>
+                    {messages.map((message, index) => {
+                        if (message.id === yourID) {
+                            return (
+                                <MyRow key={index}>
+                                    <MyMessage>
+                                        {message.body}
+                                    </MyMessage>
+                                </MyRow>
+                            )
+                        }
                         return (
-                            <MyRow key={index}>
-                                <MyMessage>
+                            <PartnerRow key={index}>
+                                <PartnerMessage>
                                     {message.body}
-                                </MyMessage>
-                            </MyRow>
+                                </PartnerMessage>
+                                <SenderName>
+                                    {message.name}
+                                </SenderName>
+                            </PartnerRow>
                         )
-                    }
-                    return (
-                        <PartnerRow key={index}>
-                            <PartnerMessage>
-                                {message.body}
-                            </PartnerMessage>
-                            <SenderName>
-                                {message.name}
-                            </SenderName>
-                        </PartnerRow>
-                    )
-                })}
-            </Container>
+                    })}
+                </Container>
                 <Form onSubmit={sendMessage}>
                     <TextArea value={message} onChange={handleChange} placeholder="Say something..." />
-                    <SendButton type='submit'>Send</SendButton>
+                    <SendButton onKeyPress={handleKeypress} type='submit'>Send</SendButton>
                 </Form>
-        </Page>
+            </Page>
+        </Stack>
+
     );
 };
