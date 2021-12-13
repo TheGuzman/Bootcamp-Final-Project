@@ -33,7 +33,7 @@ export default function FishbowlCard(props) {
     }
     function handleStartStreaming() {
         props.onStartFishbowl(id)
-        history.push(`/becomeafish/joinfishbowl/${id}`)
+        history.push(`/becomeafish/joinfishbowl/${props.info.roomId}`)
 
     }
 
@@ -54,8 +54,8 @@ export default function FishbowlCard(props) {
 
                 <CardContent sx={{ display: 'flex', flexDirection: 'column' }}>
                     <Stack direction='row' sx={{ alignItems: 'baseline', justifyContent: 'center', margin: '0em 0em 2em 0em', position:'relative' }}>
-                        {/* if the state of the fishbowl is active then it is avaible to join to other users */}
-                        {props.info.state === 'active' ? <React.Fragment><Typography variant="button" sx={{fontWeight:'bold'}} >{props.info.name}</Typography>
+                        {/* if the state of the fishbowl is active then it is avaible to join to other users and the creator will not see the join button (that is why the second condition in ternary operator) */}
+                        {props.info.state === 'active' && props.deleteButton !== true ? <React.Fragment><Typography variant="button" sx={{fontWeight:'bold'}} >{props.info.name}</Typography>
                             <Fab size="small" color="secondary" sx={{position:'absolute',bottom:'-5px', right:'-10px'}} component={Link} to={`/becomeafish/joinfishbowl/${props.info.roomId}`} ><Icon icon="pepicons:enter" width="20" height="20" /></Fab>
                         </React.Fragment>
                             :
