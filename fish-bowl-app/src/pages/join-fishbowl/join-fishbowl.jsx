@@ -4,6 +4,9 @@ import io from "socket.io-client"
 import { Box } from '@mui/system';
 import { Stack } from '@mui/material';
 import { Button } from '@mui/material';
+import Peer from 'peerjs';
+import './join-fishbowl.css'
+
 
 const Page = styled('div')({
     display: 'flex',
@@ -111,6 +114,7 @@ export default function JoinFishbowlPage() {
     // const [room, setRoomID] = useState();
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
+    const [streams, updateStream] = useState([]); 
 
 
     useEffect(() => {
@@ -126,23 +130,69 @@ export default function JoinFishbowlPage() {
 
 
     const socketRef = useRef();
-    // const peers = {}
 
-    useEffect(() => {
-        socketRef.current = io.connect('http://localhost:3001/');
+    const peers = {}
 
+   
+    
+   
+    useEffect( () =>{
+        const connectRoom = async () => {
+            const myPeer = new Peer();
+        socketRef.current = io.connect('http://localhost:3001');
+        console.log(socketRef.current)
+        console.log('emitiendo join-room',roomId);
         socketRef.current.emit('join-room', roomId);
 
         socketRef.current.on("your id", id => {
             setYourID(id);
         })
-        // socketRef.current.on('user-disconnected', id => {
-        //     if (peers[id]) peers[id].close()
-        // })
-        
         socketRef.current.on("message", (message) => {
+            console.log('Llega un mensajitooooo',message)
             receivedMessage(message);
         })
+
+        await navigator.mediaDevices.getUserMedia({
+            video: true,
+            audio: true
+        }).then(stream => {
+            addVideoStream(stream)
+            myPeer.on('call', call => {
+                call.answer(stream)
+                call.on('stream', userVideoStream => {
+                    addVideoStream(userVideoStream)
+                })
+            })
+            function connectToNewUser(userId, stream) {
+                const call = myPeer.call(userId, stream);
+                let newUserStream;
+                call.on('stream', userVideoStream => {
+                    newUserStream = userVideoStream;
+                    addVideoStream(userVideoStream)
+                })
+                call.on('close', () => {
+                    // video.remove()
+                    const i = streams.findIndex( s => s === newUserStream);
+                    streams.splice(i,1);
+                    updateStream([...streams]);
+                })
+        
+                peers[userId] = call
+            }
+            socketRef.current.on('user-connected', userId => {
+                connectToNewUser(userId, stream)
+                console.log(userId)
+            })
+        })
+ 
+        socketRef.current.on('user-disconnected', userId => {
+            if (peers[userId]) peers[userId].close()
+        })
+        myPeer.on('open', id => {
+            // socketRef.current.emit('join-room', roomId, id)
+        })
+    }
+    connectRoom();
     }, []);
 
     function receivedMessage(message) {
@@ -165,15 +215,33 @@ export default function JoinFishbowlPage() {
         setMessage(e.target.value);
     }
     const handleKeypress = e => {
-      if (e.keyCode === 13) {
-        sendMessage();
-      }
+        if (e.keyCode === 13) {
+            sendMessage();
+        }
     };
+
+    
+
+function addVideoStream(stream) {
+        // video.srcObject = stream
+        // video.addEventListener('loadedmetadata', () => {
+        //     video.play()
+        // })
+        // const videoGrid = document.getElementById('video-grid')
+        // videoGrid.append(video)
+        streams.push(stream);
+        updateStream([...streams])
+    }
+
+
+
 
     return (
         <Stack>
             <Stack>
-                <p>STREAMING</p>
+                <div id="video-grid">
+                    {streams.map((s,i) => <Video key={i} stream={s} />)}
+                </div>
             </Stack>
             <Page>
                 <Container>
@@ -208,3 +276,13 @@ export default function JoinFishbowlPage() {
 
     );
 };
+
+
+const Video = ({ stream }) => {
+    const localVideo = React.createRef();
+    useEffect(() => {
+      if (localVideo.current) localVideo.current.srcObject = stream;
+    }, [stream, localVideo]);
+  
+    return <video style={{ height: 200, width: 200 }} ref={localVideo} autoPlay />
+  };
