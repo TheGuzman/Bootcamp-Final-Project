@@ -1,4 +1,4 @@
-#video-grid {
+/* #video-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, 200px);
     grid-auto-rows: 200px;
@@ -9,4 +9,4 @@
     height: 100%;
     border-radius: 2em;
     object-fit: cover;
-  }
+  } */
