@@ -6,6 +6,7 @@ import Button from '@mui/material/Button'
 import { Typography } from "@mui/material";
 import { useTranslation } from "react-i18next"
 import { useHistory } from 'react-router'
+import { useEffect } from 'react';
 
 
 export default function LoginPage() {
@@ -23,6 +24,13 @@ export default function LoginPage() {
         return regex.test(email);
     }
 
+    useEffect(()=>{
+
+        if(sessionStorage.getItem('sesion')!==null){
+            history.push('/becomeafish')
+        }
+
+    },[])
 
     function handleSubmit(e) {
         e.preventDefault()

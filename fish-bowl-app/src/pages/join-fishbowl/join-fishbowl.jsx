@@ -4,9 +4,9 @@ import { useParams } from 'react-router';
 
 import { Stack } from '@mui/material';
 
-import { Page, Container, MyRow, MyMessage, PartnerMessage, PartnerRow, SenderName, TextArea, SendButton, Form } from '../../components/styled-chat/styled-chat.jsx'
+import { Page, MainContainer, ChatContainer, MyRow, MyMessage, PartnerMessage, PartnerRow, SenderName, TextArea, SendButton, Form } from '../../components/styled-chat/styled-chat.jsx'
 import { useState, useRef, useEffect } from "react";
-
+import { options } from "../../components/custom-hooks/useFishbowlInfo.js";
 
 export default function JoinFishbowlPage() {
 
@@ -14,30 +14,31 @@ export default function JoinFishbowlPage() {
     const socketRef = useRef();
 
 
+    let [fishbowl, setFishbowl] = useState(null)
     let [user, setUser] = useState(null)
     const [yourID, setYourID] = useState();
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
 
+    
     useEffect(() => {
-        fetch("http://localhost:3001/user", {
-            method: 'GET',
-            headers: {
-                "Authorization": sessionStorage.getItem('sesion')
-            }
-        })
+        fetch("http://localhost:3001/user",options)
             .then(r => r.json())
             .then(d => { setUser(d); console.log(d) })
+
+        fetch(`http://localhost:3001/user/becomeafish/joinfishbowl/getfishbowl/${roomId}`,options)
+            .then(f => f.json())
+            .then(fd => { setFishbowl(fd); console.log(fd) })
     }, [])
+
 
 
     useEffect(() => {
         const connectRoom = async () => {
             socketRef.current = io.connect('http://localhost:3001');
-            socketRef.current.emit('join-room', roomId);
+            socketRef.current.emit('join-room', roomId)
             socketRef.current.on("userId", id => {
                 setYourID(id);
-                console.log(id)
             })
             socketRef.current.on("message", (message) => {
                 receivedMessage(message);
@@ -56,7 +57,7 @@ export default function JoinFishbowlPage() {
         const messageObject = {
             body: message,
             id: yourID,
-            name: user.name,
+            name: user?.name,
         };
         setMessage("");
         socketRef.current.emit("send message", messageObject);
@@ -79,29 +80,39 @@ export default function JoinFishbowlPage() {
     // //             </div> */}
             </Stack>
             <Page>
-                <Container>
-                    {messages.map((message, index) => {
-                        if (message.id === yourID) {
+
+                <div>{fishbowl?.name}
+                    <div>{fishbowl?.description}
+                    </div>
+                    <div>{fishbowl?.creator}
+                    </div>
+                </div>
+
+                <MainContainer>
+                    <ChatContainer>
+                        {messages.map((message, index) => {
+                            if (message.id === yourID) {
+                                return (
+                                    <MyRow key={index}>
+                                        <MyMessage>
+                                            {message.body}
+                                        </MyMessage>
+                                    </MyRow>
+                                )
+                            }
                             return (
-                                <MyRow key={index}>
-                                    <MyMessage>
+                                <PartnerRow key={index}>
+                                    <PartnerMessage>
                                         {message.body}
-                                    </MyMessage>
-                                </MyRow>
+                                    </PartnerMessage>
+                                    <SenderName>
+                                        {message.name}
+                                    </SenderName>
+                                </PartnerRow>
                             )
-                        }
-                        return (
-                            <PartnerRow key={index}>
-                                <PartnerMessage>
-                                    {message.body}
-                                </PartnerMessage>
-                                <SenderName>
-                                    {message.name}
-                                </SenderName>
-                            </PartnerRow>
-                        )
-                    })}
-                </Container>
+                        })}
+                    </ChatContainer>
+                </MainContainer>
                 <Form onSubmit={sendMessage}>
                     <TextArea value={message} onChange={handleChange} placeholder="Say something..." />
                     <SendButton onKeyPress={handleKeypress} type='submit'>Send</SendButton>

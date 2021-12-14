@@ -6,7 +6,7 @@ export function Footer() {
 
     return (
         <footer>
-            <Box sx={{ backgroundColor: 'grey.500' }}>
+            <Box backgroundColor='secondary.light'>
                 <Stack direction='row' spacing={1} sx={{ alignItems: 'baseline', justifyContent: 'center' }}>
                     <Typography sx={{ fontWeight: 'bold' }} variant='caption'>Fishbowl App 2021</Typography>
                     <Typography variant='caption' >All rights reserved</Typography>

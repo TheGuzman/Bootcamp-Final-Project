@@ -10,10 +10,10 @@ export const Page = styled('div')({
     flexDirection: 'column',
 })
 
-export const Container = styled(Box)(({ theme }) => ({
+export const MainContainer = styled(Box)(({ theme }) => ({
     display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-end',
+    flexDirection: 'column-reverse',
+    alignItems: 'flex-start',
     height: '20em',
     maxHeight: '20em',
     overflow: 'auto',
@@ -24,6 +24,14 @@ export const Container = styled(Box)(({ theme }) => ({
     paddingBottom: '10px',
     marginTop: '25px',
 }))
+export const ChatContainer = styled(Box)(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+}))
+
+
+
 export const Form = styled('form')({
     display: 'flex',
     flexDirection: 'row',
