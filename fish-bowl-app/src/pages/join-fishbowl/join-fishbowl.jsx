@@ -6,7 +6,6 @@ import { Stack } from '@mui/material';
 
 import { Page, MainContainer, ChatContainer, MyRow, MyMessage, PartnerMessage, PartnerRow, SenderName, TextArea, SendButton, Form } from '../../components/styled-chat/styled-chat.jsx'
 import { useState, useRef, useEffect } from "react";
-import { options } from "../../components/custom-hooks/useFishbowlInfo.js";
 
 export default function JoinFishbowlPage() {
 
@@ -14,29 +13,46 @@ export default function JoinFishbowlPage() {
     const socketRef = useRef();
 
 
-    let [fishbowl, setFishbowl] = useState(null)
+    let [fishbowl, setFishbowl] = useState('')
     let [user, setUser] = useState(null)
+    let [allUsers, setAllUsers] = useState([])
     const [yourID, setYourID] = useState();
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
 
-    
-    useEffect(() => {
-        fetch("http://localhost:3001/user",options)
-            .then(r => r.json())
-            .then(d => { setUser(d); console.log(d) })
+    const options = {
+        method: 'GET',
+        headers: {
+            "Authorization": sessionStorage.getItem('sesion')
+        }
+    }
 
-        fetch(`http://localhost:3001/user/becomeafish/joinfishbowl/getfishbowl/${roomId}`,options)
+
+
+    useEffect(() => {
+        fetch(`http://localhost:3001/user/becomeafish/joinfishbowl/getfishbowl/${roomId}`, options)
             .then(f => f.json())
-            .then(fd => { setFishbowl(fd); console.log(fd) })
+            .then(fd => {
+                setFishbowl(fd); console.log(fd)
+                fetch("http://localhost:3001/user", options)
+                    .then(r => r.json())
+                    .then(d => { setUser(d); console.log(d) })
+            })
     }, [])
 
 
-
+    let allUsersArray = [];
     useEffect(() => {
-        const connectRoom = async () => {
+        const connectRoom = () => {
             socketRef.current = io.connect('http://localhost:3001');
             socketRef.current.emit('join-room', roomId)
+            socketRef.current.on("new user", users => {
+                users.forEach(u => allUsersArray.push(u))
+                console.log(users)
+                setAllUsers([...allUsersArray])
+                console.log('printing all users')
+                console.log(allUsers)
+            })
             socketRef.current.on("userId", id => {
                 setYourID(id);
             })
@@ -60,7 +76,7 @@ export default function JoinFishbowlPage() {
             name: user?.name,
         };
         setMessage("");
-        socketRef.current.emit("send message", messageObject);
+        socketRef.current.emit("send message", messageObject, roomId);
     }
 
     function handleChange(e) {
@@ -87,7 +103,11 @@ export default function JoinFishbowlPage() {
                     <div>{fishbowl?.creator}
                     </div>
                 </div>
-
+                <div>active users
+                    <div>
+                        
+                    </div>
+                </div>
                 <MainContainer>
                     <ChatContainer>
                         {messages.map((message, index) => {
