@@ -1,82 +1,47 @@
-import React from "react";
-import io from "socket.io-client"
+import React, { useEffect } from "react";
 import { useParams } from 'react-router';
-
 import { Stack } from '@mui/material';
-
 import { Page, MainContainer, ChatContainer, MyRow, MyMessage, PartnerMessage, PartnerRow, SenderName, TextArea, SendButton, Form } from '../../components/styled-chat/styled-chat.jsx'
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
+import useStreamConnection from '../../components/custom-hooks/useStreamConnection.js'
+
+
+
+
+
 
 export default function JoinFishbowlPage() {
 
     const { roomId } = useParams()
-    const socketRef = useRef();
 
+    let [fishbowl, setFishbowl] = useState()
 
-    let [fishbowl, setFishbowl] = useState('')
-    let [user, setUser] = useState(null)
     let [allUsers, setAllUsers] = useState([])
-    const [yourID, setYourID] = useState();
-    const [messages, setMessages] = useState([]);
+
+    const [receivedMessages, setReceivedMessages] = useState([]);
     const [message, setMessage] = useState("");
 
-    const options = {
-        method: 'GET',
-        headers: {
-            "Authorization": sessionStorage.getItem('sesion')
-        }
-    }
 
+    const { messages, fishbowlInfo, fishbowlers, yourID, users, broadcastMessage } = useStreamConnection(roomId)
 
+    console.log(receivedMessages)
+    console.log(users)
 
-    useEffect(() => {
-        fetch(`http://localhost:3001/user/becomeafish/joinfishbowl/getfishbowl/${roomId}`, options)
-            .then(f => f.json())
-            .then(fd => {
-                setFishbowl(fd); console.log(fd)
-                fetch("http://localhost:3001/user", options)
-                    .then(r => r.json())
-                    .then(d => { setUser(d); console.log(d) })
-            })
-    }, [])
+    useEffect(()=>{
+        setReceivedMessages(messages)
+        setAllUsers(users)
+        setFishbowl(fishbowlInfo)
+    },[messages,users,fishbowlInfo])
 
+    
 
-    let allUsersArray = [];
-    useEffect(() => {
-        const connectRoom = () => {
-            socketRef.current = io.connect('http://localhost:3001');
-            socketRef.current.emit('join-room', roomId)
-            socketRef.current.on("new user", users => {
-                users.forEach(u => allUsersArray.push(u))
-                console.log(users)
-                setAllUsers([...allUsersArray])
-                console.log('printing all users')
-                console.log(allUsers)
-            })
-            socketRef.current.on("userId", id => {
-                setYourID(id);
-            })
-            socketRef.current.on("message", (message) => {
-                receivedMessage(message);
-            })
-        }
-        connectRoom();
-    }, []);
-
-
-    function receivedMessage(message) {
-        setMessages(oldMsgs => [...oldMsgs, message]);
-    }
 
     function sendMessage(e) {
         e.preventDefault();
-        const messageObject = {
-            body: message,
-            id: yourID,
-            name: user?.name,
-        };
-        setMessage("");
-        socketRef.current.emit("send message", messageObject, roomId);
+        const messageToSend = message
+        broadcastMessage(messageToSend)
+        setMessage("")
+
     }
 
     function handleChange(e) {
@@ -105,12 +70,12 @@ export default function JoinFishbowlPage() {
                 </div>
                 <div>active users
                     <div>
-                        
+                        {allUsers?.map((e, i) => <p key={i}>{e.id}</p>)}
                     </div>
                 </div>
                 <MainContainer>
                     <ChatContainer>
-                        {messages.map((message, index) => {
+                        {receivedMessages?.map((message, index) => {
                             if (message.id === yourID) {
                                 return (
                                     <MyRow key={index}>
@@ -126,7 +91,7 @@ export default function JoinFishbowlPage() {
                                         {message.body}
                                     </PartnerMessage>
                                     <SenderName>
-                                        {message.name}
+                                        {message.sender}
                                     </SenderName>
                                 </PartnerRow>
                             )
