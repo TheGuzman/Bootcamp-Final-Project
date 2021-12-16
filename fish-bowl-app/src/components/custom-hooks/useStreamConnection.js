@@ -11,15 +11,11 @@ export default function useStreamConnection(roomId) {
     const [fishbowlers, setFishbowlers] = useState([])
     const [users, setUsers] = useState([])
     const [fishbowlInfo, setFishbowl] = useState({})
-    const [yourID, setYourID] = useState();
-
-
-    console.log(messages)
-    console.log(fishbowlInfo)
+    const [yourID, setYourID] = useState('');
 
     //not returned variables
 
-    let [sender, setSender] = useState({})
+    const [sender, setSender] = useState({})
 
     const socketRef = useRef();
 
@@ -31,25 +27,42 @@ export default function useStreamConnection(roomId) {
         }
     }
 
-    useEffect(() => {
-            fetch(`http://localhost:3001/user/becomeafish/joinfishbowl/getfishbowl/${roomId}`, options)
-                .then(f => f.json())
-                .then(fd => {
-                    setFishbowl(fd); console.log(fd)
-                    fetch("http://localhost:3001/user", options)
-                        .then(r => r.json())
-                        .then(d => { setSender(d); console.log(d) })
-                })
-    },[])
+    async function getInfo() {
+        const fishbowls = await fetch(`http://localhost:3001/user/becomeafish/joinfishbowl/getfishbowl/${roomId}`, options)
+        const fishbowldata = await fishbowls.json();
+        setFishbowl(fishbowldata);
+        console.log(fishbowldata)
 
+        const user = await fetch("http://localhost:3001/user", options);
+        const userdata = await user.json();
+        setSender(userdata)
+        console.log(userdata)
+        return fishbowldata, userdata
+    }
+    
+
+    
     useEffect(() => {
-        const connectRoom = async() => {
+        let userID = '';
+        let activeUsersArr =[]
+        const connectRoom = async () => {
+            const userdata = await getInfo();
             socketRef.current = io.connect('http://localhost:3001');
-            socketRef.current.emit('join-room', roomId)
+            socketRef.current.emit('join-room', roomId, userdata.name)
             socketRef.current.on("new user", allUsers => {
-                setUsers([...allUsers])
+                console.log(allUsers)
+                activeUsersArr=[]
+                allUsers.forEach(u=>u.users.forEach(n=>activeUsersArr.push(n.name)))
+                setUsers(activeUsersArr)
+            })
+            socketRef.current.on("user left", allUsers => {
+                activeUsersArr=[]
+                allUsers.forEach(u=>u.users.forEach(n=>activeUsersArr.push(n.name)))
+                setUsers(activeUsersArr)
             })
             socketRef.current.on("userId", id => {
+                userID = id;
+                console.log(id)
                 setYourID(id);
             })
             socketRef.current.on("message", (message) => {
@@ -57,6 +70,11 @@ export default function useStreamConnection(roomId) {
             })
         }
         connectRoom();
+        return () => {
+            console.log('from console.log' + yourID)
+            socketRef.current.emit('user-disconnect', roomId, userID);
+        }
+
     }, []);
 
     function receivedMessage(message) {
