@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useParams } from 'react-router';
 import { Stack } from '@mui/material';
 import { Page, MainContainer, ChatContainer, MyRow, MyMessage, PartnerMessage, PartnerRow, SenderName, TextArea, SendButton, Form } from '../../components/styled-chat/styled-chat.jsx'
-import { useState } from "react";
 import useStreamConnection from '../../components/custom-hooks/useStreamConnection.js'
 
 
@@ -13,7 +12,7 @@ import useStreamConnection from '../../components/custom-hooks/useStreamConnecti
 export default function JoinFishbowlPage() {
 
     const { roomId } = useParams()
-    const { messages, fishbowlInfo, fishbowlers, yourID, users, broadcastMessage } = useStreamConnection(roomId)
+    const { messages, fishbowlInfo, fishbowlers, yourID, users, streams, broadcastMessage } = useStreamConnection(roomId)
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -30,9 +29,9 @@ export default function JoinFishbowlPage() {
     return (
         <Stack>
             <Stack>
-                {/* <div id="video-grid">
-    // //                 {streams.map((s, i) => <Video key={i} stream={s} />)}
-    // //             </div> */}
+                <div id="video-grid">
+                    {streams.map((s, i) => <Video key={i} stream={s} />)}
+                </div>
             </Stack>
             <Page>
 
@@ -81,3 +80,11 @@ export default function JoinFishbowlPage() {
     )
 };
 
+const Video = ({ stream }) => {
+    const localVideo = React.createRef();
+    useEffect(() => {
+        if (localVideo.current) localVideo.current.srcObject = stream;
+    }, [stream, localVideo]);
+
+    return <video style={{ height: 200, width: 200 }} ref={localVideo} autoPlay />
+};
