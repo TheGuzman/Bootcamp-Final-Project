@@ -5,6 +5,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'
 import { Typography } from "@mui/material";
 import { useTranslation } from "react-i18next"
+import { useHistory } from 'react-router'
+import { useEffect } from 'react';
 
 
 export default function LoginPage() {
@@ -15,12 +17,20 @@ export default function LoginPage() {
     const [isuserEmailValid, setValidUserEmail] = useState(false)
     const [invalidLogin, setInvalidLogin]= useState(false)
     const [t] = useTranslation("global")
+    const history = useHistory()
 
     function isEmail(email) {
         let regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         return regex.test(email);
     }
 
+    useEffect(()=>{
+
+        if(sessionStorage.getItem('sesion')!==null){
+            history.push('/becomeafish')
+        }
+
+    },[])
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -49,7 +59,7 @@ export default function LoginPage() {
                     else{
                         sessionStorage.setItem('sesion', 'Bearer ' + d.access_token);
                         setTimeout(() => {
-                            document.location.href = '/becomeafish';
+                            history.push('/becomeafish') 
                         }, 1000);
                     }
                     console.log(d);

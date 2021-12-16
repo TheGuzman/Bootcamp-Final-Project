@@ -24,16 +24,13 @@ export default function MyFishbowlsPage() {
         })
             .then(r => r.json())
             .then(d => { setAllFishbowls(d); console.log(d);
-                
-                
-            
             })
     }, [change]);
 
 
     const onDeleteFishbowl = fishbowlId =>{ //custom hook for deleting the fishbowl
 
-        fetch(`http://localhost:3001/user/becomeafish/deleteafishbowl/:${fishbowlId}`, {
+        fetch(`http://localhost:3001/user/becomeafish/deleteafishbowl/${fishbowlId}`, {
             method: 'DELETE',
             headers: {
                 "Authorization": sessionStorage.getItem('sesion')
@@ -41,10 +38,19 @@ export default function MyFishbowlsPage() {
         })
             .then(r => r.json())
             .then(d => {console.log(d);setChange(!change)  })
-
     }
 
+    const onStartFishbowl = fishbowlId =>{ //custom hook for starting the fishbowl
 
+        fetch(`http://localhost:3001/user/becomeafish/startafishbowl/${fishbowlId}`, {
+            method: 'PATCH',
+            headers: {
+                "Authorization": sessionStorage.getItem('sesion')
+            }
+        })
+            .then(r => r.json())
+            .then(d => {console.log(d)})
+    }
 
 
 
@@ -62,7 +68,7 @@ export default function MyFishbowlsPage() {
                 </Fab>
             </Stack>
             <Stack direction='row' sx={{display:'flex', flexWrap:'wrap', margin:'0.5em', gap:'0.5em', justifyContent:'center'}}>
-                {allFishbowls?.map((e, i) => <FishbowlCard onDeleteFishbowl={onDeleteFishbowl} fishbowlCreator={false} deleteButton={true} info={e} key={i}></FishbowlCard>)}
+                {allFishbowls?.map((e, i) => <FishbowlCard onDeleteFishbowl={onDeleteFishbowl} onStartFishbowl={onStartFishbowl} fishbowlCreator={false} deleteButton={true} info={e} key={i}></FishbowlCard>)}
             </Stack>
 
         </React.Fragment>
