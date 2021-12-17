@@ -68,7 +68,7 @@ export default function useStreamConnection(roomId) {
                 setUsers(activeUsersArr)
             })
 
-            socketRef.current.on("chat-user left", allUsers => {
+            socketRef.current.on("chat-user-left", allUsers => {
                 activeUsersArr = []
                 allUsers.forEach(u => u.users.forEach(n => activeUsersArr.push(n.name)))
                 setUsers(activeUsersArr)
