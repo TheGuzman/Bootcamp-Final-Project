@@ -48,14 +48,16 @@ export default function useStreamConnection(roomId) {
     useEffect(() => {
         let userID = '';
         let activeUsersArr = []
-
+    
         const connectRoom = async () => {
             const userdata = await getInfo();
             const stream = await navigator.mediaDevices.getUserMedia({
                 video: true,
-                audio: true
+                audio: false,
             });
+
             let myPeer;
+
             socketRef.current = io.connect('http://localhost:3001');
 
             socketRef.current.emit('join-room', roomId, userdata.name)
@@ -63,15 +65,19 @@ export default function useStreamConnection(roomId) {
             socketRef.current.on("userId", id => {
                 userID = id;
                 setYourID(id);
-                myPeer = new Peer(userID);
+                myPeer = new Peer(id);
                 myPeer.on('open', id => {
                     socketRef.current.emit('join-streaming-room', id)
                     console.log('my peer open ' + myPeer.id)
                 })
+
                 myPeer.on('call', call => {
+                    console.log('llamando a...')
+                    console.log(id)
+                    console.log(call)
                     call.answer(stream)
-                    call.on('stream', userVideoStream => {
-                        addVideoStream(userVideoStream)
+                    call.on('stream', userVideoStream => {  
+                            addVideoStream(userVideoStream)
                     })
                 })
             })
@@ -101,6 +107,7 @@ export default function useStreamConnection(roomId) {
             //Streaming
                 addVideoStream(stream)
                 socketRef.current.on('user-streaming', userID => {
+                    console.log(stream)
                     console.log('user streaming '+ userID)
                     connectToNewUser(userID, stream);
                     // setTimeout(connectToNewUser, 1000,userID,stream)
