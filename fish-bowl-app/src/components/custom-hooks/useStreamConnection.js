@@ -48,14 +48,15 @@ export default function useStreamConnection(roomId) {
     useEffect(() => {
         let userID = '';
         let activeUsersArr = []
-    
+
         const connectRoom = async () => {
             const userdata = await getInfo();
             const stream = await navigator.mediaDevices.getUserMedia({
                 video: true,
-                audio: false,
+                audio: true,
             });
-
+            console.log('myStream')
+            console.log(stream)
             let myPeer;
 
             socketRef.current = io.connect('http://localhost:3001');
@@ -76,15 +77,17 @@ export default function useStreamConnection(roomId) {
                     console.log(id)
                     console.log(call)
                     call.answer(stream)
-                    call.on('stream', userVideoStream => {  
+                    call.on('stream', userVideoStream => {
+                        if (!streamsArr.includes(userVideoStream.id)) {
                             addVideoStream(userVideoStream)
+                        }
                     })
                 })
             })
 
             // const myPeer = new Peer(userID);
             // console.log('peerId ' + myPeer.id)
-            
+
 
             socketRef.current.on("new-chat-user", allUsers => {
                 activeUsersArr = []
@@ -102,35 +105,37 @@ export default function useStreamConnection(roomId) {
                 receivedMessage(message)
             })
 
-            
+
 
             //Streaming
-                addVideoStream(stream)
-                socketRef.current.on('user-streaming', userID => {
-                    console.log(stream)
-                    console.log('user streaming '+ userID)
-                    connectToNewUser(userID, stream);
-                    // setTimeout(connectToNewUser, 1000,userID,stream)
-                })
-                
-                function connectToNewUser(userID, stream) {
-                    const call = myPeer.call(userID, stream);
-                    console.log('calling' + userID)
-                    let newUserStream;
-                    call.on('stream', userVideoStream => {
-                        newUserStream = userVideoStream;
-                        addVideoStream(newUserStream)
-                    })
-                    call.on('close', () => {
-                        // video.remove()
-                        const i = streams.findIndex(s => s === newUserStream);
-                        streams.splice(i, 1);
-                        updateStream([...streams]);
-                    })
+            addVideoStream(stream)
+            socketRef.current.on('user-streaming', userID => {
+                console.log(stream)
+                console.log('user streaming ' + userID)
+                connectToNewUser(userID, stream);
+                // setTimeout(connectToNewUser, 1000,userID,stream)
+            })
 
-                    peers[userID] = call
-                }
-            
+            function connectToNewUser(userID, stream) {
+                const call = myPeer.call(userID, stream);
+                console.log('calling' + userID)
+                let newUserStream;
+                call.on('stream', userVideoStream => {
+                    newUserStream = userVideoStream;
+                    if (!streamsArr.includes(newUserStream.id)) {
+                        addVideoStream(newUserStream)
+                    }
+                })
+                call.on('close', () => {
+                    const i = streams.findIndex(s => s === newUserStream);
+                    console.log(i)
+                    streams.splice(i, 1);
+                    updateStream([...streams]);
+                })
+
+                peers[userID] = call
+            }
+
         }
         connectRoom();
         return () => {
@@ -151,14 +156,13 @@ export default function useStreamConnection(roomId) {
         }
         socketRef.current.emit("send message", message, roomId);
     }
+    let streamsArr = []
 
     function addVideoStream(stream) {
-        // video.srcObject = stream
-        // video.addEventListener('loadedmetadata', () => {
-        //     video.play()
-        // })
-        // const videoGrid = document.getElementById('video-grid')
-        // videoGrid.append(video)
+        console.log('adding stream')
+        console.log(stream)
+
+        streamsArr.push(stream.id);
         streams.push(stream);
         updateStream([...streams])
         console.log('printing streams')
