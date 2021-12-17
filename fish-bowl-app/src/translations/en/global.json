@@ -1,7 +1,11 @@
 {
     "header": {
-        "fishbowl": "Fishbowl",
-        "welcomeMsg": "Welcome to the Fishbowl"
+        "greeting":{
+            "welcome": "WELCOME",
+            "preposition": "to the",
+            "fishbowl": "FISHBOWL"
+        }
+        
     },
     "buttons": {
         "submit": "send",

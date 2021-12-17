@@ -53,7 +53,7 @@ export default function useStreamConnection(roomId) {
             const userdata = await getInfo();
             const stream = await navigator.mediaDevices.getUserMedia({
                 video: true,
-                audio: true,
+                audio: false,
             });
             console.log('myStream')
             console.log(stream)
@@ -85,10 +85,6 @@ export default function useStreamConnection(roomId) {
                 })
             })
 
-            // const myPeer = new Peer(userID);
-            // console.log('peerId ' + myPeer.id)
-
-
             socketRef.current.on("new-chat-user", allUsers => {
                 activeUsersArr = []
                 allUsers.forEach(u => u.users.forEach(n => activeUsersArr.push(n.name)))
@@ -113,7 +109,6 @@ export default function useStreamConnection(roomId) {
                 console.log(stream)
                 console.log('user streaming ' + userID)
                 connectToNewUser(userID, stream);
-                // setTimeout(connectToNewUser, 1000,userID,stream)
             })
 
             function connectToNewUser(userID, stream) {
@@ -126,12 +121,16 @@ export default function useStreamConnection(roomId) {
                         addVideoStream(newUserStream)
                     }
                 })
-                call.on('close', () => {
+
+                socketRef.current.on('close',newUserStream =>{
+                // call.on('close', () => {
                     const i = streams.findIndex(s => s === newUserStream);
+                    console.log('call on close')
                     console.log(i)
                     streams.splice(i, 1);
                     updateStream([...streams]);
                 })
+                // })
 
                 peers[userID] = call
             }

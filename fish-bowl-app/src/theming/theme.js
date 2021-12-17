@@ -103,7 +103,8 @@ export const lightTheme = createTheme({
     h1: {
       fontFamily: ['"Brainfish"', 'Roboto'].join(','),
       [`@media screen and (min-width: ${defaultTheme.breakpoints.values.sm}px)`]: { fontSize: '4rem', },
-      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.md}px)`]: { fontSize: '8rem', },
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.md}px)`]: { fontSize: '5rem', },
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.xl}px)`]: { fontSize: '8rem', },
     },
     h2: {
       fontFamily: ['Roboto', 'Arial'].join(','),

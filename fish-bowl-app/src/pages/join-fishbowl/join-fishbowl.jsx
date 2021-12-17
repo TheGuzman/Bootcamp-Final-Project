@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useParams } from 'react-router';
-import { Stack } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import { Page, MainContainer, ChatContainer, MyRow, MyMessage, PartnerMessage, PartnerRow, SenderName, TextArea, SendButton, Form } from '../../components/styled-chat/styled-chat.jsx'
 import useStreamConnection from '../../components/custom-hooks/useStreamConnection.js'
-
+import { Box } from "@mui/system";
+import Chip from '@mui/material/Chip';
+import { Icon } from '@iconify/react';
 
 
 
@@ -28,24 +30,27 @@ export default function JoinFishbowlPage() {
 
     return (
         <Stack>
-            <Stack>
-                <div id="video-grid">
-                    {streams.map((s, i) => <Video key={i} stream={s} />)}
-                </div>
-            </Stack>
             <Page>
-
-                <div>{fishbowlInfo?.name}
-                    <div>{fishbowlInfo?.description}
-                    </div>
-                    <div>{fishbowlInfo?.creator}
-                    </div>
-                </div>
-                <div>active users
-                    <div>
-                        {users.map((e, i) => <p key={i}>{e}</p>)}
-                    </div>
-                </div>
+                <Box>
+                    <Stack>
+                        {fishbowlInfo?.name}
+                        <div>{fishbowlInfo?.description}
+                        </div>
+                        <div>{fishbowlInfo?.creator}
+                        </div>
+                    </Stack>
+                </Box>
+                <Stack>
+                    <Typography variant='h3' sx={{ fontFamily: 'BrainFish' }}>active fishes</Typography>
+                    <Stack>
+                        {users.map((e, i) => <Chip key={i} color='info' label={e} icon={<Icon icon="ion:fish-sharp" width="20" height="20" />} />)}
+                    </Stack>
+                </Stack>
+                <Stack>
+                    <Stack id="video-grid">
+                        {streams.map((s, i) => <Video key={i} stream={s} />)}
+                    </Stack>
+                </Stack>
                 <MainContainer>
                     <ChatContainer>
                         {messages?.map((message, index) => {
@@ -81,10 +86,10 @@ export default function JoinFishbowlPage() {
 };
 
 const Video = ({ stream }) => {
-    const localVideo = React.createRef();
+    const localVideo = useRef();
     useEffect(() => {
         if (localVideo.current) localVideo.current.srcObject = stream;
     }, [stream, localVideo]);
 
-    return <video style={{ height: 200, width: 200 }} ref={localVideo} autoPlay />
+    return <video style={{ height: 200, width: 200, borderRadius: '10em' }} ref={localVideo} autoPlay />
 };

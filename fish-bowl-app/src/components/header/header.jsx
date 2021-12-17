@@ -21,7 +21,7 @@ export default function MyHeader() {
     const HeaderStack = styled(Stack)({
         '@media (min-width:760px)': {
             flexDirection: 'row',
-            gap: '1em',
+            gap: '4em',
         },
 
     })
@@ -61,7 +61,7 @@ export default function MyHeader() {
                                 onClick={handleClick}
                                 variant='outlined'
                             >
-                                <MenuIcon sx={{fontSize:'1.5em'}}></MenuIcon>
+                                <MenuIcon sx={{ fontSize: '1.5em' }}></MenuIcon>
                             </IconButton>
                             <Menu
                                 id="basic-menu"
@@ -72,23 +72,25 @@ export default function MyHeader() {
                                     'aria-labelledby': 'basic-button',
                                 }}
                             >
-                                <MenuItem onClick={handleClose} component={Link} to='/' sx={{columnGap:'0.5em'}}><Icon width="25" height="25"  icon="bx:bx-home" sx={{margin:'0em 0.5em'}}/>Home</MenuItem>
-                                <MenuItem onClick={handleClose} component={Link} to='/becomeafish' sx={{columnGap:'0.5em'}}><Icon width="25" height="25" icon="octicon:comment-discussion-16" /> Become a fish</MenuItem>
-                                <MenuItem onClick={handleClose} component={Link} to='/register' sx={{columnGap:'0.5em'}}><Icon width="25" height="25" icon="bi:person-plus" />Sign up</MenuItem>
-                                <MenuItem onClick={handleClose} component={Link} to='/login' sx={{columnGap:'0.5em'}}><LoginIcon/> Login</MenuItem>
+                                <MenuItem onClick={handleClose} component={Link} to='/' sx={{ columnGap: '0.5em' }}><Icon width="25" height="25" icon="bx:bx-home" sx={{ margin: '0em 0.5em' }} />Home</MenuItem>
+                                <MenuItem onClick={handleClose} component={Link} to='/becomeafish' sx={{ columnGap: '0.5em' }}><Icon width="25" height="25" icon="octicon:comment-discussion-16" /> Become a fish</MenuItem>
+                                <MenuItem onClick={handleClose} component={Link} to='/register' sx={{ columnGap: '0.5em' }}><Icon width="25" height="25" icon="bi:person-plus" />Sign up</MenuItem>
+                                <MenuItem onClick={handleClose} component={Link} to='/login' sx={{ columnGap: '0.5em' }}><LoginIcon /> Login</MenuItem>
                             </Menu>
                         </React.Fragment>
 
-                        : <HeaderStack direction='column' sx={{ flexWrap: 'wrap' }}>
-                            <Typography color='secondary.light' variant='h5' component={Link} style={{ textDecoration: 'none' }} to='/'>Home
-                            </Typography>
-                            <Typography color='secondary.light' variant='h5' component={Link} style={{ textDecoration: 'none' }} to='/becomeafish'>Become a Fish
-                            </Typography>
-                            <Typography color='secondary.light' variant='h5' component={Link} style={{ textDecoration: 'none' }} to='/register'>Sign up
-                            </Typography>
-                            <Typography color='secondary.light' variant='h5' component={Link} style={{ textDecoration: 'none' }} to='/login'>Login
-                            </Typography>
-                        </HeaderStack>}
+                        : <Stack direction='row' sx={{justifyContent:'space-between', alignItems:'baseline', width:'60%'}}>
+                                <Typography color='secondary.light' variant='h4' component={Link} style={{ textDecoration: 'none', fontFamily: 'BrainFish', color: 'black' }} to='/'>Fishbowl
+                                </Typography>
+                                <HeaderStack direction='row'>
+                                    <Typography color='secondary.light' variant='h5' component={Link} style={{ textDecoration: 'none' }} to='/becomeafish'>Become a Fish
+                                    </Typography>
+                                    <Typography color='secondary.light' variant='h5' component={Link} style={{ textDecoration: 'none' }} to='/register'>Sign up
+                                    </Typography>
+                                    <Typography color='secondary.light' variant='h5' component={Link} style={{ textDecoration: 'none' }} to='/login'>Login
+                                    </Typography>
+                                </HeaderStack>
+                        </Stack>}
 
                     <Stack direction='row' sx={{ gap: '1em', alignItems: 'center' }}>
                         <LangToggleButton ></LangToggleButton>

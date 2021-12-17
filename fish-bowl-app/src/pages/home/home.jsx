@@ -11,11 +11,12 @@ export default function HomePage() {
 
     return (
         <React.Fragment>
-            <Stack direction='column' sx={{ '@media (min-width:768px)': { flexDirection: 'row', gap: '1em' }, }}>
-                <Stack direction="column" sx={{ margin: '0em 1em', alignItems: 'baseline' }}>
-                    <Typography variant="h1">{t("header.fishbowl")}</Typography>
-                    <Typography variant="h5">{t("header.welcomeMsg")}</Typography>
-                    <img style={{width:200, height:200}} src='https://thumbs.dreamstime.com/b/fish-fishbowl-vector-illustration-6109710.jpg'></img>
+            {/* <Stack direction='column' sx={{ '@media (min-width:768px)': { flexDirection: 'row', gap: '1em' }, }}> */}
+               <Stack>
+                <Stack direction="column" sx={{ '@media (min-width:768px)': { flexDirection: 'row', gap:4}, margin: '2em', alignItems: 'center', justifyContent:'center' }}>
+                    <Typography variant="h1">{t("header.greeting.welcome")}</Typography>
+                    <Typography variant="h1">{t("header.greeting.preposition")}</Typography>
+                    <Typography variant="h1">{t("header.greeting.fishbowl")}</Typography>
                 </Stack>
                 <Stack sx={{flexDirection:'column', '@media (min-width:1024px)': { flexDirection: 'row', justifyContent:'space-around' }}}>
                     <Stack direction="column" sx={{ margin: '1em 1em', alignItems: 'center', '@media (min-width:768px)': { witdh: '40%' }, '@media (min-width:1024px)': { width: '40%' } }}>

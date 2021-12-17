@@ -30,7 +30,7 @@ function handleChange(e){
         sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', '@media (max-width:320px)':{width:'90%'} }}
   >
             <IconButton sx={{ p: '10px' }} aria-label="menu">
-                <Icon icon="vs:fish" />
+                <Icon icon="vs:fish"  />
             </IconButton>
             <InputBase
                 sx={{ ml: 1, flex: 1 }}
