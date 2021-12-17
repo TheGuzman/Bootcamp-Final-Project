@@ -51,6 +51,11 @@ export default function useStreamConnection(roomId) {
 
         const connectRoom = async () => {
             const userdata = await getInfo();
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: true,
+                audio: true
+            });
+            let myPeer;
             socketRef.current = io.connect('http://localhost:3001');
 
             socketRef.current.emit('join-room', roomId, userdata.name)
@@ -58,9 +63,22 @@ export default function useStreamConnection(roomId) {
             socketRef.current.on("userId", id => {
                 userID = id;
                 setYourID(id);
+                myPeer = new Peer(userID);
+                myPeer.on('open', id => {
+                    socketRef.current.emit('join-streaming-room', id)
+                    console.log('my peer open ' + myPeer.id)
+                })
+                myPeer.on('call', call => {
+                    call.answer(stream)
+                    call.on('stream', userVideoStream => {
+                        addVideoStream(userVideoStream)
+                    })
+                })
             })
 
-            const myPeer = new Peer(`${userID}`, { key: 'myapikey' });
+            // const myPeer = new Peer(userID);
+            // console.log('peerId ' + myPeer.id)
+            
 
             socketRef.current.on("new-chat-user", allUsers => {
                 activeUsersArr = []
@@ -78,24 +96,19 @@ export default function useStreamConnection(roomId) {
                 receivedMessage(message)
             })
 
+            
+
             //Streaming
-            navigator.mediaDevices.getUserMedia({
-                video: true,
-                audio: true
-            }).then(stream => {
                 addVideoStream(stream)
-                myPeer.on('call', call => {
-                    call.answer(stream)
-                    call.on('stream', userVideoStream => {
-                        addVideoStream(userVideoStream)
-                    })
-                    socketRef.current.on('user-streaming', userId => {
-                        connectToNewUser(userId, stream);
-                    })
+                socketRef.current.on('user-streaming', userID => {
+                    console.log('user streaming '+ userID)
+                    connectToNewUser(userID, stream);
+                    // setTimeout(connectToNewUser, 1000,userID,stream)
                 })
-                function connectToNewUser(userId, stream) {
-                    const call = myPeer.call(userId, stream);
-                    console.log('calling' + userId)
+                
+                function connectToNewUser(userID, stream) {
+                    const call = myPeer.call(userID, stream);
+                    console.log('calling' + userID)
                     let newUserStream;
                     call.on('stream', userVideoStream => {
                         newUserStream = userVideoStream;
@@ -108,14 +121,9 @@ export default function useStreamConnection(roomId) {
                         updateStream([...streams]);
                     })
 
-                    peers[userId] = call
+                    peers[userID] = call
                 }
-                
-                myPeer.on('open', id => {
-                    socketRef.current.emit('join-room', roomId, id)
-                })
-             
-            })
+            
         }
         connectRoom();
         return () => {
