@@ -1,5 +1,8 @@
 import { createTheme } from '@mui/material/styles';
 import Brainfish from '../assets/fonts/Brainfish.ttf'
+import Nunito from '../assets/fonts/Nunito.ttf'
+import RobotoMono from '../assets/fonts/RobotoMono.ttf'
+import Baloo from '../assets/fonts/Baloo.ttf'
 
 const defaultTheme = createTheme({
   breakpoints: {
@@ -39,7 +42,7 @@ export const lightTheme = createTheme({
     secondary: {
       main: '#ffc86f',
       light: '#ffc86f',
-      dark: '#ba690b',
+      dark: '#ffab23',
       contrastText: '#000000',
     },
     text: {
@@ -99,7 +102,7 @@ export const lightTheme = createTheme({
     borderRadius: 10,
   },
   typography: {
-    fontFamily: ['Roboto', 'Arial'].join(','),
+    fontFamily: ['Baloo', 'Arial'].join(','),
     h1: {
       fontFamily: ['"Brainfish"', 'Roboto'].join(','),
       [`@media screen and (min-width: ${defaultTheme.breakpoints.values.sm}px)`]: { fontSize: '4rem', },
@@ -107,22 +110,22 @@ export const lightTheme = createTheme({
       [`@media screen and (min-width: ${defaultTheme.breakpoints.values.xl}px)`]: { fontSize: '8rem', },
     },
     h2: {
-      fontFamily: ['Roboto', 'Arial'].join(','),
+      fontFamily: ['Nunito', 'Roboto'].join(','),
       [`@media screen and (min-width: ${defaultTheme.breakpoints.values.sm}px)`]: { fontSize: '2rem', },
       [`@media screen and (min-width: ${defaultTheme.breakpoints.values.md}px)`]: { fontSize: '5rem', },
     },
     h3: {
-      fontFamily: ['Roboto', 'Arial'].join(','),
+      fontFamily: ['Nunito', 'Roboto'].join(','),
       [`@media screen and (min-width: ${defaultTheme.breakpoints.values.sm}px)`]: { fontSize: '1.7rem', },
       [`@media screen and (min-width: ${defaultTheme.breakpoints.values.md}px)`]: { fontSize: '3rem', },
     },
     h4: {
-      fontFamily: ['Roboto', 'Arial'].join(','),
+      fontFamily: ['Nunito', 'Roboto'].join(','),
       [`@media screen and (min-width: ${defaultTheme.breakpoints.values.sm}px)`]: { fontSize: '1.3rem', },
       [`@media screen and (min-width: ${defaultTheme.breakpoints.values.md}px)`]: { fontSize: '2.3rem', },
     },
     h5: {
-      fontFamily: ['Roboto', 'Arial'].join(','),
+      fontFamily: ['Nunito', 'Roboto'].join(','),
       [`@media screen and (min-width: ${defaultTheme.breakpoints.values.sm}px)`]: { fontSize: '1.1rem', },
       [`@media screen and (min-width: ${defaultTheme.breakpoints.values.md}px)`]: { fontSize: '1.5rem', },
     },
@@ -133,6 +136,18 @@ export const lightTheme = createTheme({
             @font-face {
               font-family: 'BrainFish';
               src: local('Brainfish'), url(${Brainfish}) format('truetype');
+            }
+            @font-face {
+              font-family: 'Nunito';
+              src: local('Nunito'), url(${Nunito}) format('truetype');
+            }
+            @font-face {
+              font-family: 'RobotoMono';
+              src: local('RobotoMono'), url(${RobotoMono}) format('truetype');
+            }
+            @font-face {
+              font-family: 'Baloo';
+              src: local('Baloo'), url(${Baloo}) format('truetype');
             }
           `,
     },

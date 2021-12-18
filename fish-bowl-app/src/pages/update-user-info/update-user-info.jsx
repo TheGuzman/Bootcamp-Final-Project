@@ -3,6 +3,7 @@ import { Button, Box, Typography, TextField, Stack } from "@mui/material"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
+import FishbowlNavAccountUpdateInfo from "../../components/breadCrumb-nav/bread-crumb-myaccount-updateInfo"
 
 export default function UpdateUserInfoPage() {
 
@@ -16,7 +17,7 @@ export default function UpdateUserInfoPage() {
     const [t] = useTranslation("global")
 
 
-    useEffect(()=>{
+    useEffect(() => {
         fetch("http://localhost:3001/user", {
             method: 'GET',
             headers: {
@@ -24,8 +25,8 @@ export default function UpdateUserInfoPage() {
             }
         })
             .then(r => r.json())
-            .then(d=>{setUser(d); console.log(d)})
-    },[])
+            .then(d => { setUser(d); console.log(d) })
+    }, [])
 
 
     function handleUsernameChange(e) {
@@ -67,7 +68,7 @@ export default function UpdateUserInfoPage() {
         let userPassword = e.target.userPassword.value;
         let userPasswordConfirmation = e.target.userPasswordConfirmation.value;
 
-        if (userPassword!==userPasswordConfirmation) { setMatchPassword(true) }
+        if (userPassword !== userPasswordConfirmation) { setMatchPassword(true) }
         else {
             const options = {
                 method: "PATCH",
@@ -99,58 +100,61 @@ export default function UpdateUserInfoPage() {
     return (
         <Box>
             {isSumbitted === false ?
-                <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }} >
-                    <Typography sx={{ margin: '1em' }} variant='h4'>Update your info</Typography>
-
-                    <form onSubmit={handleUsernameChange} >
-                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'center' }}>
-
-                            <Typography variant='h5' sx={{ margin: '1em' }} > Change your username</Typography>
-                            <Stack direction='row'>
-                                <Typography variant='subtitle' > Current username:</Typography>
-                                <Typography variant='subtitle' sx={{ marginLeft:'0.3em', fontWeight:'bold'}}>{user.name}</Typography>
+                <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', }} >
+                    <Typography sx={{ margin: '1em' }} variant='h5'>Update your info</Typography>
+                    <Stack margin={'1em 0em'}>
+                        <FishbowlNavAccountUpdateInfo ></FishbowlNavAccountUpdateInfo>
+                    </Stack>
+                    <Stack direction='column' gap={8} alignItems={'flex-end'} sx={{ '@media (min-width:1024px)': { flexDirection: 'row', gap: 16 }, }} >
+                        <form onSubmit={handleUsernameChange} >
+                            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'center', backgroundColor: 'primary.light', padding: '10px', borderRadius: '10px' }}>
+                                <Typography variant='h6' sx={{ margin: '1.5em 1em 1em 1em' }} > Change your username</Typography>
+                                <Stack direction='row'>
+                                    <Typography variant='subtitle' > Current username:</Typography>
+                                    <Typography variant='subtitle' sx={{ marginLeft: '0.3em', fontWeight: 'bold' }}>{user.name}</Typography>
                                 </Stack>
-                            <TextField sx={{ '@media (min-width:760px)': { width: '30em', gap: '1em', }, }}
-                                required
-                                error={userinValid}
-                                helperText={userinValid !== false ? "Username must be greater than 4 characters" : ''}
-                                id="userName"
-                                name='userName'
-                                label="New username"
-                                placeholder="Username"
-                            />
-                            <Button variant='contained' color='secondary' type='submit'>update username</Button>
-                        </Box>
-                    </form>
+                                <TextField sx={{ '@media (min-width:760px)': { width: '20em', gap: '1em', }, }}
+                                    required
+                                    error={userinValid}
+                                    helperText={userinValid !== false ? "Username must be greater than 4 characters" : ''}
+                                    id="userName"
+                                    name='userName'
+                                    label="New username"
+                                    placeholder="Username"
+                                />
+                                <Button variant='contained' color='secondary' type='submit' sx={{ '@media (min-width:1024px)': { marginTop: '2.2em' }, }}>update username</Button>
+                            </Box>
+                        </form>
 
-                    <form onSubmit={handlePasswordChange} >
-                        <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', gap: '1em' }} >
-                            <Typography sx={{ margin: '1.5em 1em 1em 1em' }} variant='h5'> Change your password</Typography>
-                            <TextField sx={{ '@media (min-width:760px)': { width: '30em', gap: '1em', }, }}
-                                required
-                                id="userPassword"
-                                error={passwordMatch}
-                                label="Password"
-                                name="userPassword"
-                                type="password"
-                                placeholder="Password"
-                            />
+                        <form onSubmit={handlePasswordChange} >
+                            <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', gap: '1em', backgroundColor: 'primary.light', padding: '10px', borderRadius: '10px' }} >
+                                <Typography sx={{ margin: '1.5em 1em 1em 1em' }} variant='h6'> Change your password</Typography>
+                                <TextField sx={{ '@media (min-width:760px)': { width: '20em', gap: '1em', }, }}
+                                    required
+                                    id="userPassword"
+                                    error={passwordMatch}
+                                    label="Password"
+                                    name="userPassword"
+                                    type="password"
+                                    placeholder="Password"
+                                />
 
-                            <TextField sx={{ '@media (min-width:760px)': { width: '30em', gap: '1em', }, }}
-                                required
-                                error={passwordMatch}
-                                helperText={passwordMatch !== false ? "Passwords do not match" : ''}
-                                name="userPasswordConfirmation"
-                                id="userPasswordConfirmation"
-                                label="Confirm Password"
-                                type="password"
-                                placeholder="Confirm Password"
-                            />
+                                <TextField sx={{ '@media (min-width:760px)': { width: '20em', gap: '1em', }, }}
+                                    required
+                                    error={passwordMatch}
+                                    helperText={passwordMatch !== false ? "Passwords do not match" : ''}
+                                    name="userPasswordConfirmation"
+                                    id="userPasswordConfirmation"
+                                    label="Confirm Password"
+                                    type="password"
+                                    placeholder="Confirm Password"
+                                />
 
-                            <Button variant='contained' color='secondary' type='submit'>update password</Button>
+                                <Button variant='contained' color='secondary' type='submit'>update password</Button>
 
-                        </Box>
-                    </form >
+                            </Box>
+                        </form >
+                    </Stack>
                 </Box > :
                 error !== true ?
                     isLoading === true ?
@@ -172,6 +176,6 @@ export default function UpdateUserInfoPage() {
                             <a href='/becomeafish/myaccount/updateuserinfo' component={Link}>{t("userAccountUpdatePage.goBackLink")}</a>
                         </Stack>
                     </React.Fragment>}
-        </Box> 
+        </Box>
     )
 }

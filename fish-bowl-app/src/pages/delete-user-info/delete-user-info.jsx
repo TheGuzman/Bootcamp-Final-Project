@@ -48,8 +48,8 @@ export default function DeleteUserInfoPage() {
 
     const DeleteButton = styled(Button)(({ theme }) => ({
         justifyContent: 'center', 
-        width: '60%',
-        [theme.breakpoints.up('sm')]:{width:'30%'}
+        [theme.breakpoints.up('sm')]:{width:'40%'},
+        [theme.breakpoints.up('md')]:{width:'20%'},
 
     }))
 
@@ -58,8 +58,8 @@ export default function DeleteUserInfoPage() {
 
     return (
         <Box>
-            <Stack sx={{alignItems:'center', margin:'1em 0em'}}>
-                <Typography  variant='h6' sx={{fontWeight:'bold'}}>Are you sure you want do delete your account?</Typography>
+            <Stack sx={{alignItems:'center', margin:'1em 1em'}}>
+                <Typography  variant='h6' sx={{fontWeight:'bold', textAlign:'center'}}>Are you sure you want do delete your account?</Typography>
             </Stack>
             <Stack alignItems='center' sx={{ margin: '2em 0em' }}>
                 <DeleteButton variant='contained' color='error' onClick={handleDeleteAccount}>delete my account</DeleteButton>

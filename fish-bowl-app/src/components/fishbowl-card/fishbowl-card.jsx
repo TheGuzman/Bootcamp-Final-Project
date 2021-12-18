@@ -78,9 +78,10 @@ export default function FishbowlCard(props) {
                         </Stack>
                         <Stack direction='row' sx={{ alignItems: 'baseline' }}>
                             <Typography sx={{ margin: '0em 0.2em 0em 0em', fontSize: '0.9rem' }} color="text.secondary" gutterBottom>Status: </Typography>
-                            <Stack direction='row' alignItems='flex-start' gap={1}>
+                            <Stack direction='row' alignItems='flex-end' gap={1}>
                                 <Typography variant="subtitle2" >{props.info.state}</Typography>
-                                <Icon icon="gg:radio-checked" width="20" height="20" color={fishbowlStateColor} />
+                                {/* <Icon icon="gg:radio-checked" width="20" height="20" color={fishbowlStateColor} /> */}
+                                <Icon icon="vs:fish" width="30" height="30" color={fishbowlStateColor} />
                             </Stack>
                         </Stack>
 

@@ -2,25 +2,28 @@ import { Route } from 'react-router';
 import { Redirect } from 'react-router';
 import { useEffect } from 'react';
 import { useState } from 'react'
-
+import { useHistory } from 'react-router-dom';
+import getAuth from '../custom-hooks/useAuth.js'
 
 
 export default function PrivateRoute({ children, ...rest }) {
 
-    async function getAuth() {
-        const r = await fetch('http://localhost:3001/user/', {
-            headers: {
-                "Authorization": sessionStorage.getItem('sesion')
-            }
-        })
-        return r.status
-    }
-    
+
 
     const [auth, setAuth] = useState(null)
+    const history = useHistory()
 
-    useEffect(async() => {
-        setAuth(await getAuth())
+    useEffect(() => {
+
+        const checkAuth = async () => {
+            if (sessionStorage.getItem('sesion') !== null) {
+                setAuth(await getAuth())
+            }
+            else{
+                history.push('/login')
+            }
+        }
+        checkAuth()
     }, [])
 
 

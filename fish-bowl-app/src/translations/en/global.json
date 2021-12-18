@@ -1,11 +1,16 @@
 {
-    "header": {
+    "homePage":{
         "greeting":{
             "welcome": "WELCOME",
             "preposition": "to the",
             "fishbowl": "FISHBOWL"
+        },
+        "questions":{
+            "whatFishbowl":"What is a Fishbowl?",
+            "answerWhatFishbowl":"A safe non-discriminatory space for open discussions and for constructing ideas together",
+            "whyCare": "Why should I care?",
+            "answerWhyCare":"You will die eventually, your ideas might not"
         }
-        
     },
     "buttons": {
         "submit": "send",

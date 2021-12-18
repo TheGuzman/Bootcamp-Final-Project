@@ -28,9 +28,11 @@ export default function MyHeader() {
 
     const [width, setWidth] = useState(window.innerWidth)
 
+
     const updateWidth = () => {
         setWidth(window.innerWidth);
     }
+
     useEffect(() => {
         window.addEventListener("resize", updateWidth);
         return () => window.removeEventListener("resize", updateWidth);
@@ -76,20 +78,23 @@ export default function MyHeader() {
                                 <MenuItem onClick={handleClose} component={Link} to='/becomeafish' sx={{ columnGap: '0.5em' }}><Icon width="25" height="25" icon="octicon:comment-discussion-16" /> Become a fish</MenuItem>
                                 <MenuItem onClick={handleClose} component={Link} to='/register' sx={{ columnGap: '0.5em' }}><Icon width="25" height="25" icon="bi:person-plus" />Sign up</MenuItem>
                                 <MenuItem onClick={handleClose} component={Link} to='/login' sx={{ columnGap: '0.5em' }}><LoginIcon /> Login</MenuItem>
+
                             </Menu>
                         </React.Fragment>
 
-                        : <Stack direction='row' sx={{justifyContent:'space-between', alignItems:'baseline', width:'60%'}}>
+                        : <Stack direction='row' sx={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
+                            <Stack sx={{ margin: '0em 4em 0em 0em' }} >
                                 <Typography color='secondary.light' variant='h4' component={Link} style={{ textDecoration: 'none', fontFamily: 'BrainFish', color: 'black' }} to='/'>Fishbowl
                                 </Typography>
-                                <HeaderStack direction='row'>
-                                    <Typography color='secondary.light' variant='h5' component={Link} style={{ textDecoration: 'none' }} to='/becomeafish'>Become a Fish
-                                    </Typography>
-                                    <Typography color='secondary.light' variant='h5' component={Link} style={{ textDecoration: 'none' }} to='/register'>Sign up
-                                    </Typography>
-                                    <Typography color='secondary.light' variant='h5' component={Link} style={{ textDecoration: 'none' }} to='/login'>Login
-                                    </Typography>
-                                </HeaderStack>
+                            </Stack>
+                            <HeaderStack direction='row'>
+                                <Typography color='secondary.light' variant='h5' component={Link} style={{ textDecoration: 'none' }} to='/becomeafish'>Become a Fish
+                                </Typography>
+                                <Typography color='secondary.light' variant='h5' component={Link} style={{ textDecoration: 'none' }} to='/register'>Sign up
+                                </Typography>
+                                <Typography color='secondary.light' variant='h5' component={Link} style={{ textDecoration: 'none' }} to='/login'>Login
+                                </Typography>
+                            </HeaderStack>
                         </Stack>}
 
                     <Stack direction='row' sx={{ gap: '1em', alignItems: 'center' }}>

@@ -13,6 +13,7 @@ import ProfileAvatar from "../../components/profile-avatar/profile-avatar";
 import { styled } from '@mui/material/styles';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Link } from "react-router-dom";
+import FishbowlNavCreateFishbowl from "../../components/breadCrumb-nav/bread-crumb-myfishbowls-createfishbowl";
 
 
 
@@ -74,6 +75,9 @@ export default function CreateFishbowlPage() {
                 <ProfileAvatar></ProfileAvatar>
             </Stack>
 
+            <Stack alignItems={'center'}>
+                <FishbowlNavCreateFishbowl></FishbowlNavCreateFishbowl>
+            </Stack>
             <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }} >
                 <Typography sx={{ margin: '1em' }} variant='h6'>Add your Fishbowl here</Typography>
                 <form onSubmit={handleSubmit} >

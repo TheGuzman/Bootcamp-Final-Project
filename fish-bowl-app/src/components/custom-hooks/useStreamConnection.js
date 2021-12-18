@@ -53,7 +53,7 @@ export default function useStreamConnection(roomId) {
             const userdata = await getInfo();
             const stream = await navigator.mediaDevices.getUserMedia({
                 video: true,
-                audio: false,
+                audio: true,
             });
             console.log('myStream')
             console.log(stream)
