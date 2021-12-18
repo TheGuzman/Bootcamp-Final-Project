@@ -17,6 +17,8 @@ import CreateFishbowlPage from './pages/create-fishbowl/create-fishbowl';
 import DeleteUserInfoPage from './pages/delete-user-info/delete-user-info';
 import UpdateUserInfoPage from './pages/update-user-info/update-user-info';
 import JoinFishbowlPage from './pages/join-fishbowl/join-fishbowl';
+import PrivacyPolicy from './pages/privacy-policy/privacy-policy';
+import CookiePolicy from './pages/cookie-policy/cookie-policy'
 
 function App() {
 
@@ -48,6 +50,12 @@ function App() {
             <PrivateRoute exact path='/becomeafish/myaccount/updateuserinfo'>
               <UpdateUserInfoPage></UpdateUserInfoPage>
             </PrivateRoute>
+            <Route exact path="/cookie-policy">
+              <CookiePolicy></CookiePolicy>
+            </Route>
+            <Route exact path="/privacy-policy">
+              <PrivacyPolicy></PrivacyPolicy>
+            </Route>
             <Route exact path="/validate-mail">
               <MailVerificationPage></MailVerificationPage>
             </Route>

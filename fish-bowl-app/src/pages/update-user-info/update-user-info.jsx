@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import FishbowlNavAccountUpdateInfo from "../../components/breadCrumb-nav/bread-crumb-myaccount-updateInfo"
+import { useHistory } from "react-router-dom"
 
 export default function UpdateUserInfoPage() {
 
@@ -15,6 +16,7 @@ export default function UpdateUserInfoPage() {
     let [user, setUser] = useState('')
 
     const [t] = useTranslation("global")
+    const history = useHistory()
 
 
     useEffect(() => {
@@ -165,7 +167,7 @@ export default function UpdateUserInfoPage() {
                             <Stack direction='column' sx={{ margin: '1em', alignItems: 'center' }}>
                                 <Typography color='success.main' variant='h5'>{t("userAccountUpdatePage.success.updateComplete")}</Typography>
                             </Stack>
-                            <a href='/becomeafish/myaccount/updateuserinfo' component={Link}>{t("userAccountUpdatePage.goBackLink")}</a>
+                            <Typography component={Link} to='/becomeafish/myaccount'>{t("userAccountUpdatePage.goBackLink")}</Typography>
                         </Box>
                     :
                     //UPDATE FAILED
@@ -173,7 +175,8 @@ export default function UpdateUserInfoPage() {
                         <Stack direction='column' sx={{ margin: '1em', alignItems: 'center' }}>
                             <Typography color='error.main' variant='h5'>{t("userAccountUpdatePage.fail.updateError")}</Typography>
                             <Typography color='error.main' variant='h5'>{t("userAccountUpdatePage.fail.tryAgain")}</Typography>
-                            <a href='/becomeafish/myaccount/updateuserinfo' component={Link}>{t("userAccountUpdatePage.goBackLink")}</a>
+                            <Typography component={Link} to='/becomeafish/myaccount'>{t("userAccountUpdatePage.goBackLink")}</Typography>
+                           
                         </Stack>
                     </React.Fragment>}
         </Box>

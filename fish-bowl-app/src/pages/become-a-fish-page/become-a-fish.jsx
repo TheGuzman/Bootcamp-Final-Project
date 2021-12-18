@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import FishbowlCard from '../../components/fishbowl-card/fishbowl-card.jsx'
 import Filter from '../../components/filter/filter.jsx';
 import CircularColor from '../../components/circular-progress/circular-progress.jsx'
+import background from '../../assets/imgs/fishbg.png'
 
 export default function BecomeaFishPage() {
 
@@ -14,24 +15,26 @@ export default function BecomeaFishPage() {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-            fetch("http://localhost:3001/user", {
-                method: 'GET',
-                headers: {
-                    "Authorization": sessionStorage.getItem('sesion')
-                }
-            })
-                .then(r => r.json())
-                .then(d => {
-                    console.log(d.name); setUserName(d.name)
-                    fetch("http://localhost:3001/user/becomeafish/getallfishbowls", {
-                        method: 'GET',
-                        headers: {
-                            "Authorization": sessionStorage.getItem('sesion')
-                        }
-                    })
-                        .then(r => r.json())
-                        .then(d => { setFishbowlsFromDDBB(d); setAllFishbowls(d); setLoading(false); console.log(d) })
+        fetch("http://localhost:3001/user", {
+            method: 'GET',
+            headers: {
+                "Authorization": sessionStorage.getItem('sesion')
+            }
+        })
+            .then(r => r.json())
+            .then(d => {
+                console.log(d.name); setUserName(d.name)
+                fetch("http://localhost:3001/user/becomeafish/getallfishbowls", {
+                    method: 'GET',
+                    headers: {
+                        "Authorization": sessionStorage.getItem('sesion')
+                    }
                 })
+                    .then(r => r.json())
+                    .then(d => { setFishbowlsFromDDBB(d); setAllFishbowls(d); setLoading(false); console.log(d) })
+            })
+
+        
     }, []);
 
 
@@ -55,7 +58,8 @@ export default function BecomeaFishPage() {
                 <Stack direction='column' sx={{ alignItems: 'center', justifyContent: 'space-between', }}>
                     <Typography sx={{ margin: '0em 1em' }} variant='h6'>Explore the most popular Fihsbowls</Typography>
                     <Filter onFilter={onFilter}></Filter>
-                    <Box border={2} sx={{ borderColor: 'primary.main', backgroundColor: 'primary.dark', padding: '0.5em', borderRadius: '10px', alignItems: 'center', margin: '1em', width: '90%', minHeight: 370 }}>
+
+                    <Box border={2} sx={{ borderColor: 'primary.main', backgroundImage: `url(${background})`, backgroundSize: 'cover', padding: '0.5em', borderRadius: '10px', alignItems: 'center', margin: '1em', width: '90%', minHeight: 370 }}>
                         <Stack direction='row' sx={{ display: 'flex', flexWrap: 'wrap', gap: '2em', margin: '1em', alignItems: 'center', justifyContent: 'center' }}>
                             {loading !== false ?
                                 <CircularColor></CircularColor>
@@ -64,6 +68,7 @@ export default function BecomeaFishPage() {
                             }
                         </Stack>
                     </Box>
+
                 </Stack>
             </Box>
         </Box>

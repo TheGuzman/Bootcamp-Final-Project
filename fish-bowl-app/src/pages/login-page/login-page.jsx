@@ -30,7 +30,7 @@ export default function LoginPage() {
             history.push('/becomeafish')
         }
 
-    },[])
+    },[history])
 
     function handleSubmit(e) {
         e.preventDefault()

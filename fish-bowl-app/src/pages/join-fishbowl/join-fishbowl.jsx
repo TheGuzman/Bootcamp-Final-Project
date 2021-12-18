@@ -14,7 +14,7 @@ import { Icon } from '@iconify/react';
 export default function JoinFishbowlPage() {
 
     const { roomId } = useParams()
-    const { messages, fishbowlInfo, fishbowlers, yourID, users, streams, broadcastMessage } = useStreamConnection(roomId)
+    const { messages, fishbowlInfo, fishbowlers, yourID, users, streams, broadcastMessage, turnCameraOff } = useStreamConnection(roomId)
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -27,6 +27,10 @@ export default function JoinFishbowlPage() {
             e.target.value = '';
         }
     };
+
+    const turnOffCamera = ()=>{
+        turnCameraOff()
+    }
 
     return (
         <Stack>
@@ -50,6 +54,7 @@ export default function JoinFishbowlPage() {
                     <Stack id="video-grid">
                         {streams.map((s, i) => <Video key={i} stream={s} />)}
                     </Stack>
+                    <button onClick={turnOffCamera}>turn off camera</button>
                 </Stack>
                 <MainContainer>
                     <ChatContainer>

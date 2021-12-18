@@ -28,7 +28,9 @@ export const lightTheme = createTheme({
   },
   common: {
     black: '#000',
-    white: '#fff'
+    white: '#fff',
+    special:'	#303030',
+    fish:'5e8ca8',
   },
   palette: {
 
@@ -155,11 +157,26 @@ export const lightTheme = createTheme({
 })
 
 export const darkTheme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 320,
+      md: 768,
+      lg: 1024,
+      xl: 1440,
+    },
+  },
+  common: {
+    black: '#000',
+    white: '#fff',
+    special:'#D3D3D3',
+    fish:'F0BB62',
+  },
   palette: {
     mode: 'dark',
     primary: {
-      main: '#ff9100',
-      light: '#ffc246',
+      main: '#F4E881',
+      light: '#699DD2',
       dark: '#c56200',
       contrastText: '#000000',
     },
@@ -167,33 +184,34 @@ export const darkTheme = createTheme({
       main: '#1976d2',
       light: '#63a4ff',
       dark: '#004ba0',
-      contrastText: '#ffffff',
+      contrastText: '#000000',
     },
   },
   typography: {
-    fontFamily: ['Roboto', 'Arial'].join(','),
+    fontFamily: ['Baloo', 'Arial'].join(','),
     h1: {
       fontFamily: ['"Brainfish"', 'Roboto'].join(','),
       [`@media screen and (min-width: ${defaultTheme.breakpoints.values.sm}px)`]: { fontSize: '4rem', },
-      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.md}px)`]: { fontSize: '8rem', },
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.md}px)`]: { fontSize: '5rem', },
+      [`@media screen and (min-width: ${defaultTheme.breakpoints.values.xl}px)`]: { fontSize: '8rem', },
     },
     h2: {
-      fontFamily: ['Roboto', 'Arial'].join(','),
+      fontFamily: ['Nunito', 'Roboto'].join(','),
       [`@media screen and (min-width: ${defaultTheme.breakpoints.values.sm}px)`]: { fontSize: '2rem', },
       [`@media screen and (min-width: ${defaultTheme.breakpoints.values.md}px)`]: { fontSize: '5rem', },
     },
     h3: {
-      fontFamily: ['Roboto', 'Arial'].join(','),
+      fontFamily: ['Nunito', 'Roboto'].join(','),
       [`@media screen and (min-width: ${defaultTheme.breakpoints.values.sm}px)`]: { fontSize: '1.7rem', },
       [`@media screen and (min-width: ${defaultTheme.breakpoints.values.md}px)`]: { fontSize: '3rem', },
     },
     h4: {
-      fontFamily: ['Roboto', 'Arial'].join(','),
+      fontFamily: ['Nunito', 'Roboto'].join(','),
       [`@media screen and (min-width: ${defaultTheme.breakpoints.values.sm}px)`]: { fontSize: '1.3rem', },
       [`@media screen and (min-width: ${defaultTheme.breakpoints.values.md}px)`]: { fontSize: '2.3rem', },
     },
     h5: {
-      fontFamily: ['Roboto', 'Arial'].join(','),
+      fontFamily: ['Nunito', 'Roboto'].join(','),
       [`@media screen and (min-width: ${defaultTheme.breakpoints.values.sm}px)`]: { fontSize: '1.1rem', },
       [`@media screen and (min-width: ${defaultTheme.breakpoints.values.md}px)`]: { fontSize: '1.5rem', },
     },
@@ -205,8 +223,19 @@ export const darkTheme = createTheme({
               font-family: 'BrainFish';
               src: local('Brainfish'), url(${Brainfish}) format('truetype');
             }
+            @font-face {
+              font-family: 'Nunito';
+              src: local('Nunito'), url(${Nunito}) format('truetype');
+            }
+            @font-face {
+              font-family: 'RobotoMono';
+              src: local('RobotoMono'), url(${RobotoMono}) format('truetype');
+            }
+            @font-face {
+              font-family: 'Baloo';
+              src: local('Baloo'), url(${Baloo}) format('truetype');
+            }
           `,
     },
   },
-
 })

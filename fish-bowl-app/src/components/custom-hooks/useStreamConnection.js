@@ -39,7 +39,7 @@ export default function useStreamConnection(roomId) {
         const userdata = await user.json();
         setSender(userdata)
         console.log(userdata)
-        return fishbowldata, userdata
+        return userdata
     }
 
 
@@ -122,8 +122,8 @@ export default function useStreamConnection(roomId) {
                     }
                 })
 
-                socketRef.current.on('close',newUserStream =>{
-                // call.on('close', () => {
+                socketRef.current.on('close', newUserStream => {
+                    // call.on('close', () => {
                     const i = streams.findIndex(s => s === newUserStream);
                     console.log('call on close')
                     console.log(i)
@@ -167,8 +167,12 @@ export default function useStreamConnection(roomId) {
         console.log('printing streams')
         console.log(streams)
     }
+    async function turnCameraOff() {
+        
+    }
 
 
-    return { messages, fishbowlInfo, fishbowlers, yourID, users, streams, broadcastMessage }
+
+    return { messages, fishbowlInfo, fishbowlers, yourID, users, streams, turnCameraOff, broadcastMessage }
 }
 

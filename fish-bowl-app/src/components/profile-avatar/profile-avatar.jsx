@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { Icon } from '@iconify/react';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useState } from 'react';
+import { ThemeContext } from '../../theming/theme-context';
+import { useContext } from 'react';
 
 
 export default function ProfileAvatar() {
@@ -23,7 +25,8 @@ export default function ProfileAvatar() {
         sessionStorage.removeItem('sesion');
     }
 
-
+    const currentTheme = useContext(ThemeContext)
+    const avatarBgColor = currentTheme[0]!==true?'#C0C0C0':'#696969'
 
     return (
         <Box>
@@ -33,11 +36,10 @@ export default function ProfileAvatar() {
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
-                color='primary'
                 variant='outlined'
                 sx={{ fontSize: '0.7em' }}
             >
-                <Avatar sx={{ width: 40, height: 40, margin:'0em 1em'}}><Icon icon="vs:fish" color='5e8ca8' /></Avatar>
+                <Avatar sx={{ width: 40, height: 40, margin:'0em 1em', backgroundColor:`${avatarBgColor}`}} ><Icon icon="vs:fish" color={currentTheme[0]!==true?'#5e8ca8':'#F0BB62'} /></Avatar>
             </IconButton>
             <Menu
                 id="basic-menu"

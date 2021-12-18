@@ -9,6 +9,8 @@ import { useState } from "react";
 import FishbowlCard from "../../components/fishbowl-card/fishbowl-card";
 import CircularColor from "../../components/circular-progress/circular-progress";
 import FishbowlNav from "../../components/breadCrumb-nav/bread-crumb-myfishbowls";
+import { Box } from "@mui/material";
+import background from '../../assets/imgs/fishes.jpeg'
 
 export default function MyFishbowlsPage() {
 
@@ -77,9 +79,12 @@ export default function MyFishbowlsPage() {
                             <AddIcon />
                         </Fab>
                     </Stack>
-                    <Stack direction='row' sx={{ flexWrap: 'wrap', margin: '0.5em', gap: '0.5em', justifyContent: 'center' }}>
-                        {allFishbowls?.map((e, i) => <FishbowlCard onDeleteFishbowl={onDeleteFishbowl} onStartFishbowl={onStartFishbowl} fishbowlCreator={false} deleteButton={true} info={e} key={i}></FishbowlCard>)}
-                    </Stack>
+
+                    <Box sx={{backgroundImage:`url(${background})`, backgroundSize:'cover', minHeight:370}}>
+                        <Stack direction='row' sx={{ flexWrap: 'wrap', margin: '0.5em', gap: '0.5em', justifyContent: 'center' }}>
+                            {allFishbowls?.map((e, i) => <FishbowlCard onDeleteFishbowl={onDeleteFishbowl} onStartFishbowl={onStartFishbowl} fishbowlCreator={false} deleteButton={true} info={e} key={i}></FishbowlCard>)}
+                        </Stack>
+                    </Box>
                 </Stack>
                 :
                 <Stack alignItems={'center'}>

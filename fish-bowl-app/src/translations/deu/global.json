@@ -1,11 +1,15 @@
 {
-    "header": {
+    "homePage":{
         "greeting":{
             "welcome": "WILKOMMEN",
             "preposition": "im",
             "fishbowl": "FISHBOWL"
+        },
+        "questions":{
+            "whatFishbowl":"Was ist ein Fishbowl?",
+            "answerWhatFishbowl":"Ein sicherer, diskriminierungsfreier Raum für offene Diskussionen und die gemeinsame Entwicklung von Ideen",
+            "whyCare": "Warum sollte mich das interessieren?",
+            "answerWhyCare":"Du wirst irgendwann sterben, deine Ideen vielleicht nicht"
         }
-        
     }
-
 }

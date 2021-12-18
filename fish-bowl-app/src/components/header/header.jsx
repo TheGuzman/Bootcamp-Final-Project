@@ -21,10 +21,18 @@ export default function MyHeader() {
     const HeaderStack = styled(Stack)({
         '@media (min-width:760px)': {
             flexDirection: 'row',
-            gap: '4em',
+            gap: '2em',
         },
+        margin:'0em 2em 0em 0em'
 
     })
+    const Logo = styled(Typography)(({ theme }) => ({
+        color: theme.common.special,
+        textDecoration: 'none',
+        fontFamily: 'BrainFish',
+        padding:0,
+    }))
+
 
     const [width, setWidth] = useState(window.innerWidth)
 
@@ -33,10 +41,12 @@ export default function MyHeader() {
         setWidth(window.innerWidth);
     }
 
+
+
     useEffect(() => {
         window.addEventListener("resize", updateWidth);
         return () => window.removeEventListener("resize", updateWidth);
-    });
+    }, []);
 
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -82,10 +92,9 @@ export default function MyHeader() {
                             </Menu>
                         </React.Fragment>
 
-                        : <Stack direction='row' sx={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
-                            <Stack sx={{ margin: '0em 4em 0em 0em' }} >
-                                <Typography color='secondary.light' variant='h4' component={Link} style={{ textDecoration: 'none', fontFamily: 'BrainFish', color: 'black' }} to='/'>Fishbowl
-                                </Typography>
+                        : <Stack direction='row' sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
+                            <Stack sx={{ margin: '0em 4em 0em 0em' }}  direction='row'>
+                                <Logo variant='h2' component={Link} to='/'>Fishbowl</Logo>
                             </Stack>
                             <HeaderStack direction='row'>
                                 <Typography color='secondary.light' variant='h5' component={Link} style={{ textDecoration: 'none' }} to='/becomeafish'>Become a Fish

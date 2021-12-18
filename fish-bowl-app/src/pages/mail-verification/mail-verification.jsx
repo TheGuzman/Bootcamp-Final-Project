@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom"; // importo el hook de location para obtener los query params
+import { useLocation } from "react-router-dom"; 
 import LoginPage from '../login-page/login-page.jsx'
+import { Typography } from "@mui/material";
+import CircularColor from '../../components/circular-progress/circular-progress.jsx'
+import { Stack } from "@mui/material";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
 
-// A custom hook that builds on useLocation to parse
-// the query string for you.
+
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
@@ -34,16 +38,25 @@ function MailVerificationPage() {
   return (
     <React.Fragment>
       {isLoading ? (
-        <h1>Cargando...</h1>
+        <Stack alignItems={'center'}>
+          <Typography variant='h4'>validating your Email</Typography>
+          <CircularColor />
+        </Stack>
       ) : isEmailValid ? (
-        <React.Fragment>
-          <h1>Email validado con éxito</h1>
+        <Stack alignItems={'center'}>
+          <Typography variant='h4'>Email successfully validated</Typography>
+          <CheckCircleIcon sx={{ width: '3em', height: '3em', color: 'green' }}></CheckCircleIcon>
           <LoginPage></LoginPage>
-        </React.Fragment>
+        </Stack>
       ) : (
-        <h1>Email no es válido</h1>
-      )}
-    </React.Fragment>
+        <Stack alignItems={'center'}>
+          <Typography variant='h4'>Email coult not be validated</Typography>
+          <CancelIcon sx={{ width: '3em', height: '3em', color: 'red' }}></CancelIcon>
+          <LoginPage></LoginPage>
+        </Stack>
+      )
+      }
+    </React.Fragment >
   );
 }
 
