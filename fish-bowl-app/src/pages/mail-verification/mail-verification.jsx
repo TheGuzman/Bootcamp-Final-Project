@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom"; // importo el hook de location para obtener los query params
+import { useLocation } from "react-router-dom"; 
 import LoginPage from '../login-page/login-page.jsx'
+import { Typography } from "@mui/material";
+import CircularColor from '../../components/circular-progress/circular-progress.jsx'
+import { Stack } from "@mui/material";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
+import { useTranslation } from "react-i18next"
 
-// A custom hook that builds on useLocation to parse
-// the query string for you.
+
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
@@ -12,6 +17,8 @@ function MailVerificationPage() {
   const query = useQuery(); // obtengo los query params
   const [isLoading, setLoading] = useState(true); // state variable para controlar si estoy llamando al API o no
   const [isEmailValid, setEmailValidity] = useState(false); // use state para controlar si el email es válido o no
+  const [t] = useTranslation("global")
+
 
   useEffect(() => {
     // solo la primera vez llamo a la validación del token, recogiendo el valor por parámetro
@@ -21,7 +28,7 @@ function MailVerificationPage() {
       fetch(`http://localhost:3001/auth/validate?token=${token}`) // validamos tipo GET pasando el token por query param
         .then((r) => {
           setLoading(false); // dejamos de cargar
-          if (!r.ok) throw new Error("No se ha validado correctamente"); // si no okey lanzamos error que captura el catch
+          if (!r.ok) throw new Error("Email was not validated"); // si no okey lanzamos error que captura el catch
           setEmailValidity(true); // si estamos aqui es que el API nos ha dicho que OK al token
         })
         .catch((err) => setEmailValidity(false)); // si capturamos el error ponemos a false el validity
@@ -34,16 +41,25 @@ function MailVerificationPage() {
   return (
     <React.Fragment>
       {isLoading ? (
-        <h1>Cargando...</h1>
+        <Stack alignItems={'center'}>
+          <Typography variant='h4'>{t("emailVerificationPage.validatingMsg")}</Typography>
+          <CircularColor />
+        </Stack>
       ) : isEmailValid ? (
-        <React.Fragment>
-          <h1>Email validado con éxito</h1>
+        <Stack alignItems={'center'}>
+          <Typography variant='h4'>{t("emailVerificationPage.success.emailValidatedMsg")}</Typography>
+          <CheckCircleIcon sx={{ width: '3em', height: '3em', color: 'green' }}></CheckCircleIcon>
           <LoginPage></LoginPage>
-        </React.Fragment>
+        </Stack>
       ) : (
-        <h1>Email no es válido</h1>
-      )}
-    </React.Fragment>
+        <Stack alignItems={'center'}>
+          <Typography variant='h4'>{t("emailVerificationPage.fail.emailNotValidatedMsg")}</Typography>
+          <CancelIcon sx={{ width: '3em', height: '3em', color: 'red' }}></CancelIcon>
+          <LoginPage></LoginPage>
+        </Stack>
+      )
+      }
+    </React.Fragment >
   );
 }
 

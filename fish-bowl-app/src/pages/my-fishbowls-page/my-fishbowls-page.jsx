@@ -7,13 +7,19 @@ import { Link } from "react-router-dom";
 import { useEffect } from 'react'
 import { useState } from "react";
 import FishbowlCard from "../../components/fishbowl-card/fishbowl-card";
+import CircularColor from "../../components/circular-progress/circular-progress";
+import FishbowlNav from "../../components/breadCrumb-nav/bread-crumb-myfishbowls";
+import { Box } from "@mui/material";
+import background from '../../assets/imgs/fishes.jpeg'
+import { useTranslation } from "react-i18next"
 
 export default function MyFishbowlsPage() {
 
     const [allFishbowls, setAllFishbowls] = useState([])
-    // const [allFishbowls, setAllFishbowls] = useState([])
     const [change, setChange] = useState(false)
+    const [loading, setLoading] = useState(true)
 
+    const [t] = useTranslation("global")
 
     useEffect(() => {
         fetch("http://localhost:3001/user/becomeafish/myfishbowls/getuserfishbowls", {
@@ -23,12 +29,15 @@ export default function MyFishbowlsPage() {
             }
         })
             .then(r => r.json())
-            .then(d => { setAllFishbowls(d); console.log(d);
+            .then(d => {
+                setAllFishbowls(d); setLoading(false); console.log(d);
             })
     }, [change]);
 
 
-    const onDeleteFishbowl = fishbowlId =>{ //custom hook for deleting the fishbowl
+    const onDeleteFishbowl = fishbowlId => { //custom hook for deleting the fishbowl
+
+        setLoading(true)
 
         fetch(`http://localhost:3001/user/becomeafish/deleteafishbowl/${fishbowlId}`, {
             method: 'DELETE',
@@ -37,10 +46,10 @@ export default function MyFishbowlsPage() {
             }
         })
             .then(r => r.json())
-            .then(d => {console.log(d);setChange(!change)  })
+            .then(d => { console.log(d); setChange(!change) })
     }
 
-    const onStartFishbowl = fishbowlId =>{ //custom hook for starting the fishbowl
+    const onStartFishbowl = fishbowlId => { //custom hook for starting the fishbowl
 
         fetch(`http://localhost:3001/user/becomeafish/startafishbowl/${fishbowlId}`, {
             method: 'PATCH',
@@ -49,28 +58,42 @@ export default function MyFishbowlsPage() {
             }
         })
             .then(r => r.json())
-            .then(d => {console.log(d)})
+            .then(d => { console.log(d) })
     }
 
 
 
     return (
-        <React.Fragment>
+        <Stack>
             <Stack direction='row' sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
-                <Typography sx={{ margin: '0em 1em' }} variant='h5'>My fishbowls</Typography>
+                <Typography sx={{ margin: '0em 1em' }} variant='h5'>{t("myFishbowlsPage.tittle")}</Typography>
                 <ProfileAvatar></ProfileAvatar>
             </Stack>
-
-            <Stack direction='row' sx={{ alignItems: 'center' }} >
-                <Typography sx={{ margin: '0em 1em' }} variant='h6'>Add a fishbowl</Typography>
-                <Fab color="secondary" size="small" aria-label="add" component={Link} to='/becomeafish/myfishbowls/createfishbowl'>
-                    <AddIcon />
-                </Fab>
-            </Stack>
-            <Stack direction='row' sx={{display:'flex', flexWrap:'wrap', margin:'0.5em', gap:'0.5em', justifyContent:'center'}}>
-                {allFishbowls?.map((e, i) => <FishbowlCard onDeleteFishbowl={onDeleteFishbowl} onStartFishbowl={onStartFishbowl} fishbowlCreator={false} deleteButton={true} info={e} key={i}></FishbowlCard>)}
+            <Stack alignItems={'center'} margin={'0.5em 0em'}>
+                <FishbowlNav></FishbowlNav>
             </Stack>
 
-        </React.Fragment>
+            {loading !== true ?
+                <Stack>
+                    <Stack direction='row' alignItems={'center'} justifyContent={'center'} sx={{ margin: '1em 0em' }} >
+                        <Typography sx={{ margin: '0em 1em' }} variant='h6'>{t("myFishbowlsPage.addAfishbowl")}</Typography>
+                        <Fab color="secondary" size="small" aria-label="add" component={Link} to='/becomeafish/myfishbowls/createfishbowl'>
+                            <AddIcon />
+                        </Fab>
+                    </Stack>
+
+                    <Box sx={{backgroundImage:`url(${background})`, backgroundSize:'cover', minHeight:370}}>
+                        <Stack direction='row' sx={{ flexWrap: 'wrap', margin: '0.5em', gap: '0.5em', justifyContent: 'center' }}>
+                            {allFishbowls?.map((e, i) => <FishbowlCard onDeleteFishbowl={onDeleteFishbowl} onStartFishbowl={onStartFishbowl} fishbowlCreator={false} deleteButton={true} info={e} key={i}></FishbowlCard>)}
+                        </Stack>
+                    </Box>
+                </Stack>
+                :
+                <Stack alignItems={'center'}>
+                    <Typography sx={{ margin: '0em 1em' }} variant='h6'>{t("myFishbowlsPage.loadingMsg")}</Typography>
+                    <CircularColor></CircularColor>
+                </Stack>
+            }
+        </Stack>
     )
 }

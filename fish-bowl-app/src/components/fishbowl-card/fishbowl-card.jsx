@@ -12,7 +12,6 @@ import { Fab } from '@mui/material';
 import { useHistory } from 'react-router';
 import React from 'react';
 
-
 export default function FishbowlCard(props) {
 
     const history = useHistory()
@@ -37,10 +36,9 @@ export default function FishbowlCard(props) {
 
     }
 
-
     return (
-        <Box border={2} sx={{ borderColor: 'primary.main', borderRadius: '10px' }}>
-            <Card border={2} sx={{ maxWidth: 230, minWidth: 230, minHeight: 292, height: '100%' }} >
+        <Box border={2} sx={{ borderColor: 'common.black', borderRadius: '10px',position:'relative',boxShadow: 4 }}>
+            <Card border={2} sx={{ maxWidth: 230, minWidth: 230, minHeight: 292, height: '100%', }}>
                 {/* If the user prop exists then it means that the user can start and delete fishbowls */}
                 {props.deleteButton === true ?
                     <Stack direction='row' sx={{ alignItems: 'center', justifyContent: 'space-between', position: 'relative' }} >
@@ -52,11 +50,11 @@ export default function FishbowlCard(props) {
                         </Button>
                     </Stack> : ''}
 
-                <CardContent sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <Stack direction='row' sx={{ alignItems: 'baseline', justifyContent: 'center', margin: '0em 0em 2em 0em', position:'relative' }}>
+                <CardContent sx={{ display: 'flex', flexDirection: 'column'}} >
+                    <Stack direction='row' sx={{ alignItems: 'baseline', justifyContent: 'center', margin: '0em 0em 2em 0em'}}>
                         {/* if the state of the fishbowl is active then it is avaible to join to other users and the creator will not see the join button (that is why the second condition in ternary operator) */}
                         {props.info.state === 'active' && props.deleteButton !== true ? <React.Fragment><Typography variant="button" sx={{fontWeight:'bold'}} >{props.info.name}</Typography>
-                            <Fab size="small" color="secondary" sx={{position:'absolute',bottom:'-5px', right:'-10px'}} component={Link} to={`/becomeafish/joinfishbowl/${props.info.roomId}`} ><Icon icon="bi:person-plus" width="20" height="20" /></Fab>
+                            <Fab size="small" color="secondary" sx={{position:'absolute', bottom:'90%', right:'-10px'}} component={Link} to={`/becomeafish/joinfishbowl/${props.info.roomId}`} ><Icon icon="bi:person-plus" width="20" height="20" /></Fab>
                         </React.Fragment>
                             :
                             <Typography variant="button" sx={{fontWeight:'bold'}}>{props.info.name}</Typography>
@@ -80,9 +78,10 @@ export default function FishbowlCard(props) {
                         </Stack>
                         <Stack direction='row' sx={{ alignItems: 'baseline' }}>
                             <Typography sx={{ margin: '0em 0.2em 0em 0em', fontSize: '0.9rem' }} color="text.secondary" gutterBottom>Status: </Typography>
-                            <Stack direction='row' alignItems='flex-start' gap={1}>
+                            <Stack direction='row' alignItems='flex-end' gap={1}>
                                 <Typography variant="subtitle2" >{props.info.state}</Typography>
-                                <Icon icon="gg:radio-checked" width="20" height="20" color={fishbowlStateColor} />
+                                {/* <Icon icon="gg:radio-checked" width="20" height="20" color={fishbowlStateColor} /> */}
+                                <Icon icon="vs:fish" width="30" height="30" color={fishbowlStateColor} />
                             </Stack>
                         </Stack>
 

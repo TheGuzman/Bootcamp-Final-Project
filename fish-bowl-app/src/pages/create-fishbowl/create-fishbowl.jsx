@@ -13,6 +13,7 @@ import ProfileAvatar from "../../components/profile-avatar/profile-avatar";
 import { styled } from '@mui/material/styles';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Link } from "react-router-dom";
+import FishbowlNavCreateFishbowl from "../../components/breadCrumb-nav/bread-crumb-myfishbowls-createfishbowl";
 
 
 
@@ -23,9 +24,6 @@ export default function CreateFishbowlPage() {
 
     const [value, setValue] = useState(new Date());
     const [isSumbitted, setSubmited] = useState(false)
-    // const [isLoading, setLoading] = useState(true)
-    // const [error, setError] = useState(false)
-
     const [t] = useTranslation("global")
 
     function handleSubmit(e) {
@@ -70,12 +68,15 @@ export default function CreateFishbowlPage() {
     return (
         <React.Fragment>
             <Stack direction='row' sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
-                <Typography sx={{ margin: '0em 1em' }} variant='h5'>Create a Fishbowl</Typography>
+                <Typography sx={{ margin: '0em 1em' }} variant='h5'>{t("createFishbowlPage.createAFishbowl")}</Typography>
                 <ProfileAvatar></ProfileAvatar>
             </Stack>
 
+            <Stack alignItems={'center'}>
+                <FishbowlNavCreateFishbowl></FishbowlNavCreateFishbowl>
+            </Stack>
             <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }} >
-                <Typography sx={{ margin: '1em' }} variant='h6'>Add your Fishbowl here</Typography>
+                <Typography sx={{ margin: '1em' }} variant='h6'>{t("createFishbowlPage.addFishbowl")}</Typography>
                 <form onSubmit={handleSubmit} >
                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2em', alignItems: 'center' }}>
                         <TextField sx={{ '@media (min-width:760px)': { width: '30em', gap: '1em', }, }}
@@ -115,7 +116,7 @@ export default function CreateFishbowlPage() {
                                 />
                             </LocalizationProvider>
                         </Stack>
-                        <Button variant='contained' color='secondary' type='submit'>{t("buttons.send")}</Button>
+                        <Button variant='contained' color='secondary' type='submit'>{t("buttons.submit")}</Button>
                     </Box>
                 </form >
             </Box>
@@ -123,11 +124,11 @@ export default function CreateFishbowlPage() {
                 <Box sx={{ display: 'flex', justifyContent: 'center', margin: '1em' }}>
                     <Stack direction='column' sx={{ width: 'fit-content', borderRadius: '10px', alignItems: 'center' }}>
                         <SuccessStack sx={{ borderRadius: '10px', }} >
-                            <Typography sx={{ margin: '0em 1em', fontWeight: 'bold', textAlign:'center' }} variant='button'>Fishbowl successfully created</Typography>
+                            <Typography sx={{ margin: '0em 1em', fontWeight: 'bold', textAlign:'center' }} variant='button'>{t("createFishbowlPage.fishbowlCreated")}</Typography>
                         </SuccessStack>
                         <Stack direction='row' sx={{margin:'1em', cursor:'pointer', }} >
                             <ArrowBackIosNewIcon ></ArrowBackIosNewIcon>
-                            <Typography sx={{textDecoration:'none', color:'text.primary'}} component={Link} to='/becomeafish/myfishbowls' >Back to My Fishbowls</Typography>
+                            <Typography sx={{textDecoration:'none', color:'text.primary'}} component={Link} to='/becomeafish/myfishbowls' >{t("createFishbowlPage.backToFishbowlMsg")}</Typography>
                         </Stack>
                     </Stack>
 

@@ -1,12 +1,28 @@
 {
-    "header": {
-        "fishbowl": "Fishbowl",
-        "welcomeMsg": "Welcome to the Fishbowl"
+    "homePage":{
+        "greeting":{
+            "welcome": "WELCOME",
+            "preposition": "to the",
+            "fishbowl": "FISHBOWL"
+        },
+        "questions":{
+            "whatFishbowl":"What is a Fishbowl?",
+            "answerWhatFishbowl":"A safe non-discriminatory space for open discussions and for constructing ideas together",
+            "whyCare": "Why should I care?",
+            "answerWhyCare":"You will die eventually, your ideas might not"
+        }
     },
-    "buttons": {
-        "submit": "send",
-        "login": "log in"
+    "becomeaFishPage":{
+        "welcome": "Welcome",
+        "info":"Explore the most popular Fihsbowls"
     },
+    "createFishbowlPage":{
+        "createAFishbowl": "Create a Fishbowl",
+        "addFishbowl":"Add your Fishbowl here",
+        "fishbowlCreated":"Fishbowl successfully created",
+        "backToFishbowlsMsg":"Back to My Fishbowls"
+    },
+
     "registrationPage": {
         "registrationMessage": "Please register yourself",
         "registrationPending": "Registering...",
@@ -20,9 +36,52 @@
         },
         "goBackLink": "go back"
     },
-    "userAccountUpdatePage": {
+    "deleteUserInfoPage": {
+        "areYouSuredeleteYourAccount":"Are you sure you want do delete your account?",
+        "success": {
+            "accountDeletedSuccessMsg": "Account successfully deleted"
+        },
+        "fail": {
+            "accountDeletedErrorMsg": "There was an error "
+        },
+        "goBackLink": "Back to My Account"
+    },
+    "joinFishbowlPage": {
+        "activeFishes":"Active Fishes"
+    },
+    "loginPage": {
+        "login":"log in",
+        "invalidLogin":"invalid username or password"
+    },
+    "emailVerificationPage": {
+        "validatingMsg":"validating your Email...",
+        "success": {
+            "emailValidatedMsg": "Email successfully validated"
+        },
+        "fail": {
+            "emailNotValidatedMsg": "Email coult not be validated "
+        }
+    },
+    "myAccountPage": {
+        "tittle":"My account",
+        "updateMyInfo":"Update my info",
+        "deleteMyAccount":"Delete my account"
+    },
+    "myFishbowlsPage": {
+        "tittle":"My fishbowls",
+        "addAfishbowl":"Add a fishbowl",
+        "loadingMsg":"Retrieving your fishbowls"
+    },
+    "updateUserInfoPage": {
+        "tittle":"Update your info",
+        "changeUsername":"Change your username",
+        "currentUsername":"Current username:",
+        "loadingMsg":"Retrieving your fishbowls",
+        "updateUsernameButton":"update username",
+        "changePassword":"Change your password",
+        "updatePasswordButton":"update password",
         "updateMessage": "Update your info",
-        "updatePending": "Updatind...",
+        "updatePending": "Applying changes...",
         "success": {
             "updateComplete": "Update is complete"
         },
@@ -31,5 +90,35 @@
             "tryAgain": "Please try again"
         },
         "goBackLink": "go back"
+    },
+    "buttons": {
+        "submit": "send",
+        "login": "log in",
+        "deleteAccount": "delete my account"
+    },
+    "header":{
+        "becomeAfish":"Become a fish",
+        "signUp":"Sign up",
+        "login": "Log in"
+    },
+    "footer":{
+        "allRights":"All rights reserved",
+        "cookies":"Cookies Policy",
+        "legal":"Legal",
+        "privacyPolicy": "Privacy Policy"
+    },
+    "profileAvatar":{
+        "dashboard":"Dashboard",
+        "myFishbowls":"My Fishbowls",
+        "myAccount":"My account",
+        "logOut": "Log out"
+    },
+    "breadCrumb":{
+        "dashboard":"Dashboard",
+        "myFishbowls":"My Fishbowls",
+        "myAccount":"My account",
+        "updateInfo": "Update my Info",
+        "createAfishbowl": "Update my Info"
     }
+
 }

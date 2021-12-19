@@ -24,7 +24,7 @@ export default function ThemeToggleButton() {
     const LanguageToggleButton = styled(ToggleButton)({
         border: '2px solid black',
         borderRadius: '8px',
-        padding:'3px',
+        padding:'5px',
         marginTop: 0,
     })
 

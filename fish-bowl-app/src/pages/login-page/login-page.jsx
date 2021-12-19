@@ -9,13 +9,14 @@ import { useHistory } from 'react-router'
 import { useEffect } from 'react';
 
 
+
 export default function LoginPage() {
 
     let userPassword = '';
     let userEmail = '';
-    let invalidLoginMessage = 'invalid username or password';
     const [isuserEmailValid, setValidUserEmail] = useState(false)
     const [invalidLogin, setInvalidLogin]= useState(false)
+    
     const [t] = useTranslation("global")
     const history = useHistory()
 
@@ -30,7 +31,7 @@ export default function LoginPage() {
             history.push('/becomeafish')
         }
 
-    },[])
+    },[history])
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -80,7 +81,7 @@ export default function LoginPage() {
 
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }} >
-            <Typography sx={{ margin: '1em' }} variant='h5'>Log in</Typography>
+            <Typography sx={{ margin: '1em' }} variant='h5'>{t("loginPage.login")}</Typography>
             <form onSubmit={handleSubmit} >
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2em', alignItems: 'center' }}>
                     <TextField sx={{ '@media (min-width:760px)': { width: '30em', gap: '1em', }, }}
@@ -103,7 +104,7 @@ export default function LoginPage() {
                     <Button variant='contained' color='secondary' type='submit'>{t("buttons.login")}</Button>
                 </Box>
             </form >
-            {invalidLogin===true?<Typography variant='h6' color='error'>{invalidLoginMessage}</Typography>:''}
+            {invalidLogin===true?<Typography variant='h6' color='error'>{t("loginPage.invalidLogin")}</Typography>:''}
         </Box>
     )
 }

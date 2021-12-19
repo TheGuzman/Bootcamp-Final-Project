@@ -61,7 +61,7 @@ export const SendButton = styled(Button)(({ theme }) => ({
     height: '2em',
     marginTop: '0.5em',
     borderRadius: '4em',
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.primary.light,
     color: theme.palette.primary.contrastText,
     fontSize: '1rem',
 }))
@@ -77,10 +77,11 @@ export const MyRow = styled('div')({
 export const MyMessage = styled('div')(({ theme }) => ({
     width: 'fit-content',
     backgroundColor: theme.palette.primary.light,
-    padding: '10px',
+    padding: '5px 15px',
     marginRight: '5px',
     textAlign: 'center',
-    borderRadius: '10px',
+    borderRadius: '4em',
+    fontFamily:'RobotoMono'
 }))
 
 export const SenderName = styled('p')(({ theme }) => ({
@@ -88,6 +89,7 @@ export const SenderName = styled('p')(({ theme }) => ({
     margin: '0 0.2em',
     textAlign: 'center',
     fontSize: '0.7em',
+    
 }))
 
 export const PartnerRow = styled(MyRow)({
@@ -100,8 +102,9 @@ export const PartnerMessage = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.secondary.light,
     color: theme.palette.text,
     border: '1px solid lightgray',
-    padding: '10px',
+    padding: '5px 15px',
     marginLeft: '5px',
     textAlign: 'center',
-    borderRadius: '10px',
+    borderRadius: '4em',
+    fontFamily:'RobotoMono'
 }))
