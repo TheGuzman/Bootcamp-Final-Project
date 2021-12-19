@@ -128,7 +128,7 @@ export default function CreateFishbowlPage() {
                         </SuccessStack>
                         <Stack direction='row' sx={{margin:'1em', cursor:'pointer', }} >
                             <ArrowBackIosNewIcon ></ArrowBackIosNewIcon>
-                            <Typography sx={{textDecoration:'none', color:'text.primary'}} component={Link} to='/becomeafish/myfishbowls' >{t("createFishbowlPage.backToFishbowlMsg")}</Typography>
+                            <Typography sx={{textDecoration:'none', color:'text.primary'}} component={Link} to='/becomeafish/myfishbowls' >{t("createFishbowlPage.backToFishbowlsMsg")}</Typography>
                         </Stack>
                     </Stack>
 

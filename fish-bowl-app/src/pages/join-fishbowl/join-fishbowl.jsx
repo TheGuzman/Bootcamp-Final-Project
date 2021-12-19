@@ -34,23 +34,28 @@ export default function JoinFishbowlPage() {
     return (
         <Stack>
             <Page>
-                <Box>
+                <Stack sx={{width:'100%', margin:'2em'}} direction='row' flexWrap={'wrap'} justifyContent={'space-around'} rowGap={4}>
                     <Stack>
-                        {fishbowlInfo?.name}
-                        <div>{fishbowlInfo?.description}
-                        </div>
-                        <div>{fishbowlInfo?.creator}
-                        </div>
+                        <Typography variant='h5' textAlign={'center'} sx={{ fontFamily: 'BrainFish' }}>{t("joinFishbowlPage.fishbowllName")}</Typography>
+                        <Typography variant='h6' textAlign={'center'}>{fishbowlInfo?.name}</Typography>
                     </Stack>
-                </Box>
-                <Stack>
-                    <Typography variant='h3' sx={{ fontFamily: 'BrainFish' }}>{t("joinFishbowlPage.activeFishes")}</Typography>
+                    <Stack >
+                        <Typography variant='h5' textAlign={'center'} sx={{ fontFamily: 'BrainFish' }}>{t("joinFishbowlPage.fishbowlDescription")}</Typography>
+                        <Typography variant='h6' textAlign={'center'}>{fishbowlInfo?.description}</Typography>
+                    </Stack>
                     <Stack>
+                        <Typography variant='h5' textAlign={'center'} sx={{ fontFamily: 'BrainFish' }}>{t("joinFishbowlPage.fishbowlCreator")}</Typography>
+                        <Typography variant='h6' textAlign={'center'}>{fishbowlInfo?.creator}</Typography>
+                    </Stack>
+                </Stack>
+                <Stack>
+                    <Typography variant='h3' textAlign={'center'} sx={{ fontFamily: 'BrainFish' }}>{t("joinFishbowlPage.activeFishes")}</Typography>
+                    <Stack direction='row' justifyContent={'center'} flexWrap={'wrap'} columnGap={4}>
                         {users.map((e, i) => <Chip key={i} color='info' label={e} icon={<Icon icon="ion:fish-sharp" width="20" height="20" />} />)}
                     </Stack>
                 </Stack>
                 <Stack>
-                    <Stack id="video-grid">
+                    <Stack id="video-grid" direction='row' alignItems={'center'} columnGap={4} justifyContent={'center'} flexWrap={'wrap'}>
                         {streams.map((s, i) => <Video key={i} stream={s} />)}
                     </Stack>
                 </Stack>
@@ -81,10 +86,10 @@ export default function JoinFishbowlPage() {
                 </MainContainer>
                 <Form onSubmit={handleSubmit}>
                     <TextArea name="msg" placeholder="Say something..." />
-                    <SendButton onKeyPress={handleKeypress} type='submit'>{t("buttons.send")}</SendButton>
+                    <SendButton onKeyPress={handleKeypress} type='submit'>{t("buttons.submit")}</SendButton>
                 </Form>
             </Page>
-        </Stack>
+        </Stack >
     )
 };
 

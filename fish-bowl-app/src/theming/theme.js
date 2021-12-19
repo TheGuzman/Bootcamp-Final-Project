@@ -56,7 +56,8 @@ export const lightTheme = createTheme({
     divider: "rgba(0, 0, 0, 0.12)",
     background: {
       paper: "#DCDCDC",
-      default: "#DCDCDC"
+      default: "#DCDCDC",
+      special: "rgba(220, 220, 220, 0.80)"
     },
     // error: {
     //     main: '',
@@ -178,7 +179,7 @@ export const darkTheme = createTheme({
       main: '#F4E881',
       light: '#699DD2',
       dark: '#c56200',
-      contrastText: '#000000',
+      contrastText: '#ffffff',
     },
     secondary: {
       main: '#1976d2',

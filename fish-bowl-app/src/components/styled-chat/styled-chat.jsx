@@ -51,7 +51,7 @@ export const TextArea = styled('input')(({ theme }) => ({
     border: '2px solid',
     borderColor: theme.palette.primary.main,
     outline: 'none',
-    color: theme.palette.text,
+    color: theme.palette.primary.contrastText,
     letterSpacing: '1px',
 }))
 

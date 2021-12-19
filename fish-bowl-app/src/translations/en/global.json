@@ -9,7 +9,9 @@
             "whatFishbowl":"What is a Fishbowl?",
             "answerWhatFishbowl":"A safe non-discriminatory space for open discussions and for constructing ideas together",
             "whyCare": "Why should I care?",
-            "answerWhyCare":"You will die eventually, your ideas might not"
+            "answerWhyCare":"You will die eventually, your ideas might not",
+            "howWorks":"What do I have to do?",
+            "answerHowWorks":"You can join a room and use the chat to communicate with the attendees, while you listen to the ongoin discussion. If you wish to actively participate then you have to swap seats with someone who is currently discussing"
         }
     },
     "becomeaFishPage":{
@@ -47,7 +49,10 @@
         "goBackLink": "Back to My Account"
     },
     "joinFishbowlPage": {
-        "activeFishes":"Active Fishes"
+        "activeFishes":"Active Fishes",
+        "fishbowllName":"Today's topic",
+        "fishbowlDescription":"Fishbowl description",
+        "fishbowlCreator":"The mastermind behind this debate is "
     },
     "loginPage": {
         "login":"log in",

@@ -17,7 +17,7 @@ function handleChange(e){
 
     return (
         <Paper component="form"
-        sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', '@media (max-width:320px)':{width:'90%'},width:'50%' }}
+        sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', border:2, borderColor:'primary.main', '@media (max-width:320px)':{width:'90%'},width:'50%' }}
   >
             <IconButton sx={{ p: '10px' }} aria-label="menu">
                 <Icon icon="vs:fish"  />
