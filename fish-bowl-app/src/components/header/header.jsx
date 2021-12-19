@@ -14,9 +14,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from '@mui/material/IconButton';
 import LoginIcon from '@mui/icons-material/Login';
 import { Icon } from '@iconify/react';
+import { useTranslation } from "react-i18next"
 
 
 export default function MyHeader() {
+
+    const [t] = useTranslation("global")
 
     const HeaderStack = styled(Stack)({
         '@media (min-width:760px)': {
@@ -85,9 +88,9 @@ export default function MyHeader() {
                                 }}
                             >
                                 <MenuItem onClick={handleClose} component={Link} to='/' sx={{ columnGap: '0.5em' }}><Icon width="25" height="25" icon="bx:bx-home" sx={{ margin: '0em 0.5em' }} />Home</MenuItem>
-                                <MenuItem onClick={handleClose} component={Link} to='/becomeafish' sx={{ columnGap: '0.5em' }}><Icon width="25" height="25" icon="octicon:comment-discussion-16" /> Become a fish</MenuItem>
-                                <MenuItem onClick={handleClose} component={Link} to='/register' sx={{ columnGap: '0.5em' }}><Icon width="25" height="25" icon="bi:person-plus" />Sign up</MenuItem>
-                                <MenuItem onClick={handleClose} component={Link} to='/login' sx={{ columnGap: '0.5em' }}><LoginIcon /> Login</MenuItem>
+                                <MenuItem onClick={handleClose} component={Link} to='/becomeafish' sx={{ columnGap: '0.5em' }}><Icon width="25" height="25" icon="octicon:comment-discussion-16" /> {t("header.becomeAfish")}</MenuItem>
+                                <MenuItem onClick={handleClose} component={Link} to='/register' sx={{ columnGap: '0.5em' }}><Icon width="25" height="25" icon="bi:person-plus" />{t("header.signUp")}</MenuItem>
+                                <MenuItem onClick={handleClose} component={Link} to='/login' sx={{ columnGap: '0.5em' }}><LoginIcon />{t("header.login")}</MenuItem>
 
                             </Menu>
                         </React.Fragment>
@@ -97,11 +100,11 @@ export default function MyHeader() {
                                 <Logo variant='h2' component={Link} to='/'>Fishbowl</Logo>
                             </Stack>
                             <HeaderStack direction='row'>
-                                <Typography color='secondary.light' variant='h5' component={Link} style={{ textDecoration: 'none' }} to='/becomeafish'>Become a Fish
+                                <Typography color='secondary.light' variant='h5' component={Link} style={{ textDecoration: 'none' }} to='/becomeafish'>{t("header.becomeAfish")}
                                 </Typography>
-                                <Typography color='secondary.light' variant='h5' component={Link} style={{ textDecoration: 'none' }} to='/register'>Sign up
+                                <Typography color='secondary.light' variant='h5' component={Link} style={{ textDecoration: 'none' }} to='/register'>{t("header.signUp")}
                                 </Typography>
-                                <Typography color='secondary.light' variant='h5' component={Link} style={{ textDecoration: 'none' }} to='/login'>Login
+                                <Typography color='secondary.light' variant='h5' component={Link} style={{ textDecoration: 'none' }} to='/login'>{t("header.login")}
                                 </Typography>
                             </HeaderStack>
                         </Stack>}

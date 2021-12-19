@@ -6,6 +6,7 @@ import useStreamConnection from '../../components/custom-hooks/useStreamConnecti
 import { Box } from "@mui/system";
 import Chip from '@mui/material/Chip';
 import { Icon } from '@iconify/react';
+import { useTranslation } from "react-i18next"
 
 
 
@@ -13,8 +14,10 @@ import { Icon } from '@iconify/react';
 
 export default function JoinFishbowlPage() {
 
+    const [t] = useTranslation("global")
+
     const { roomId } = useParams()
-    const { messages, fishbowlInfo, fishbowlers, yourID, users, streams, broadcastMessage, turnCameraOff } = useStreamConnection(roomId)
+    const { messages, fishbowlInfo, fishbowlers, yourID, users, streams, broadcastMessage } = useStreamConnection(roomId)
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -27,10 +30,6 @@ export default function JoinFishbowlPage() {
             e.target.value = '';
         }
     };
-
-    const turnOffCamera = ()=>{
-        turnCameraOff()
-    }
 
     return (
         <Stack>
@@ -45,7 +44,7 @@ export default function JoinFishbowlPage() {
                     </Stack>
                 </Box>
                 <Stack>
-                    <Typography variant='h3' sx={{ fontFamily: 'BrainFish' }}>active fishes</Typography>
+                    <Typography variant='h3' sx={{ fontFamily: 'BrainFish' }}>{t("joinFishbowlPage.activeFishes")}</Typography>
                     <Stack>
                         {users.map((e, i) => <Chip key={i} color='info' label={e} icon={<Icon icon="ion:fish-sharp" width="20" height="20" />} />)}
                     </Stack>
@@ -54,7 +53,6 @@ export default function JoinFishbowlPage() {
                     <Stack id="video-grid">
                         {streams.map((s, i) => <Video key={i} stream={s} />)}
                     </Stack>
-                    <button onClick={turnOffCamera}>turn off camera</button>
                 </Stack>
                 <MainContainer>
                     <ChatContainer>
@@ -83,7 +81,7 @@ export default function JoinFishbowlPage() {
                 </MainContainer>
                 <Form onSubmit={handleSubmit}>
                     <TextArea name="msg" placeholder="Say something..." />
-                    <SendButton onKeyPress={handleKeypress} type='submit'>Send</SendButton>
+                    <SendButton onKeyPress={handleKeypress} type='submit'>{t("buttons.send")}</SendButton>
                 </Form>
             </Page>
         </Stack>

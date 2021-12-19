@@ -2,6 +2,7 @@ import * as React from 'react';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from "react-i18next"
 
 export default function FishbowlNavCreateFishbowl() {
 
@@ -12,13 +13,13 @@ const history = useHistory()
     event.preventDefault();
     history.push(event.target.pathname)
   }
-
+  const [t] = useTranslation("global")
 
   return (
     <div role="presentation" onClick={handleClick}>
       <Breadcrumbs aria-label="breadcrumb">
         <Link underline="hover" color="inherit" href="/becomeafish" fontSize={'1.2em'}>
-          Dashboard
+        {t("breadCrumb.dashboard")}
         </Link>
         <Link
           underline="hover"
@@ -26,7 +27,7 @@ const history = useHistory()
           href = '/becomeafish/myfishbowls'
           fontSize={'1.2em'}
         >
-          My fishbowls
+         {t("breadCrumb.myFishbowls")}
         </Link>
         <Link
           underline="hover"
@@ -35,7 +36,7 @@ const history = useHistory()
           href = '/becomeafish/myfishbowls/createfishbowl'
           fontSize={'1.2em'}
         >
-          Create Fishbowl
+          {t("breadCrumb.createAfishbowl")}
         </Link>
       </Breadcrumbs>
     </div>

@@ -44,10 +44,11 @@ export default function useStreamConnection(roomId) {
 
 
 
-    const peers = {}
+
     useEffect(() => {
         let userID = '';
         let activeUsersArr = []
+        const peers = {}
 
         const connectRoom = async () => {
             const userdata = await getInfo();
@@ -55,8 +56,6 @@ export default function useStreamConnection(roomId) {
                 video: true,
                 audio: true,
             });
-            console.log('myStream')
-            console.log(stream)
             let myPeer;
 
             socketRef.current = io.connect('http://localhost:3001');
@@ -64,6 +63,7 @@ export default function useStreamConnection(roomId) {
             socketRef.current.emit('join-room', roomId, userdata.name)
 
             socketRef.current.on("userId", id => {
+
                 userID = id;
                 setYourID(id);
                 myPeer = new Peer(id);
@@ -104,12 +104,16 @@ export default function useStreamConnection(roomId) {
 
 
             //Streaming
+            // socketRef.current.on('room-not-full', () => {
+            //     console.log('room not full')
+
             addVideoStream(stream)
             socketRef.current.on('user-streaming', userID => {
                 console.log(stream)
                 console.log('user streaming ' + userID)
                 connectToNewUser(userID, stream);
             })
+            // })
 
             function connectToNewUser(userID, stream) {
                 const call = myPeer.call(userID, stream);
@@ -117,20 +121,25 @@ export default function useStreamConnection(roomId) {
                 let newUserStream;
                 call.on('stream', userVideoStream => {
                     newUserStream = userVideoStream;
+                    console.log('newUserStream')
+                    console.log(newUserStream)
                     if (!streamsArr.includes(newUserStream.id)) {
                         addVideoStream(newUserStream)
                     }
                 })
-
-                socketRef.current.on('close', newUserStream => {
+                socketRef.current.on('close', () => {
+                    // console.log(userID)
+                    // console.log(stream)
+                    // console.log(call)
                     // call.on('close', () => {
-                    const i = streams.findIndex(s => s === newUserStream);
-                    console.log('call on close')
-                    console.log(i)
-                    streams.splice(i, 1);
+                    // const i = streams.findIndex(s => s === newUserStream);
+                    // console.log('call on close')
+                    // console.log(i)
+                    // streams.splice(i, 1);
                     updateStream([...streams]);
+
+                    // })
                 })
-                // })
 
                 peers[userID] = call
             }
@@ -138,7 +147,7 @@ export default function useStreamConnection(roomId) {
         }
         connectRoom();
         return () => {
-            socketRef.current.emit('user-disconnect', roomId, userID);
+            socketRef.current.emit('user-disconnect', ({ roomId, userID }));
         }
 
     }, []);
@@ -167,12 +176,9 @@ export default function useStreamConnection(roomId) {
         console.log('printing streams')
         console.log(streams)
     }
-    async function turnCameraOff() {
-        
-    }
 
 
 
-    return { messages, fishbowlInfo, fishbowlers, yourID, users, streams, turnCameraOff, broadcastMessage }
+    return { messages, fishbowlInfo, fishbowlers, yourID, users, streams, broadcastMessage }
 }
 

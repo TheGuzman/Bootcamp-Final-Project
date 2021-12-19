@@ -6,6 +6,7 @@ import CircularColor from '../../components/circular-progress/circular-progress.
 import { Stack } from "@mui/material";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { useTranslation } from "react-i18next"
 
 
 function useQuery() {
@@ -16,6 +17,8 @@ function MailVerificationPage() {
   const query = useQuery(); // obtengo los query params
   const [isLoading, setLoading] = useState(true); // state variable para controlar si estoy llamando al API o no
   const [isEmailValid, setEmailValidity] = useState(false); // use state para controlar si el email es válido o no
+  const [t] = useTranslation("global")
+
 
   useEffect(() => {
     // solo la primera vez llamo a la validación del token, recogiendo el valor por parámetro
@@ -25,7 +28,7 @@ function MailVerificationPage() {
       fetch(`http://localhost:3001/auth/validate?token=${token}`) // validamos tipo GET pasando el token por query param
         .then((r) => {
           setLoading(false); // dejamos de cargar
-          if (!r.ok) throw new Error("No se ha validado correctamente"); // si no okey lanzamos error que captura el catch
+          if (!r.ok) throw new Error("Email was not validated"); // si no okey lanzamos error que captura el catch
           setEmailValidity(true); // si estamos aqui es que el API nos ha dicho que OK al token
         })
         .catch((err) => setEmailValidity(false)); // si capturamos el error ponemos a false el validity
@@ -39,18 +42,18 @@ function MailVerificationPage() {
     <React.Fragment>
       {isLoading ? (
         <Stack alignItems={'center'}>
-          <Typography variant='h4'>validating your Email</Typography>
+          <Typography variant='h4'>{t("emailVerificationPage.validatingMsg")}</Typography>
           <CircularColor />
         </Stack>
       ) : isEmailValid ? (
         <Stack alignItems={'center'}>
-          <Typography variant='h4'>Email successfully validated</Typography>
+          <Typography variant='h4'>{t("emailVerificationPage.success.emailValidatedMsg")}</Typography>
           <CheckCircleIcon sx={{ width: '3em', height: '3em', color: 'green' }}></CheckCircleIcon>
           <LoginPage></LoginPage>
         </Stack>
       ) : (
         <Stack alignItems={'center'}>
-          <Typography variant='h4'>Email coult not be validated</Typography>
+          <Typography variant='h4'>{t("emailVerificationPage.fail.emailNotValidatedMsg")}</Typography>
           <CancelIcon sx={{ width: '3em', height: '3em', color: 'red' }}></CancelIcon>
           <LoginPage></LoginPage>
         </Stack>

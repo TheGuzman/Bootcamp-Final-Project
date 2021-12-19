@@ -11,6 +11,7 @@ import CircularColor from "../../components/circular-progress/circular-progress"
 import FishbowlNav from "../../components/breadCrumb-nav/bread-crumb-myfishbowls";
 import { Box } from "@mui/material";
 import background from '../../assets/imgs/fishes.jpeg'
+import { useTranslation } from "react-i18next"
 
 export default function MyFishbowlsPage() {
 
@@ -18,6 +19,7 @@ export default function MyFishbowlsPage() {
     const [change, setChange] = useState(false)
     const [loading, setLoading] = useState(true)
 
+    const [t] = useTranslation("global")
 
     useEffect(() => {
         fetch("http://localhost:3001/user/becomeafish/myfishbowls/getuserfishbowls", {
@@ -64,7 +66,7 @@ export default function MyFishbowlsPage() {
     return (
         <Stack>
             <Stack direction='row' sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
-                <Typography sx={{ margin: '0em 1em' }} variant='h5'>My fishbowls</Typography>
+                <Typography sx={{ margin: '0em 1em' }} variant='h5'>{t("myFishbowlsPage.tittle")}</Typography>
                 <ProfileAvatar></ProfileAvatar>
             </Stack>
             <Stack alignItems={'center'} margin={'0.5em 0em'}>
@@ -74,7 +76,7 @@ export default function MyFishbowlsPage() {
             {loading !== true ?
                 <Stack>
                     <Stack direction='row' alignItems={'center'} justifyContent={'center'} sx={{ margin: '1em 0em' }} >
-                        <Typography sx={{ margin: '0em 1em' }} variant='h6'>Add a fishbowl</Typography>
+                        <Typography sx={{ margin: '0em 1em' }} variant='h6'>{t("myFishbowlsPage.addAfishbowl")}</Typography>
                         <Fab color="secondary" size="small" aria-label="add" component={Link} to='/becomeafish/myfishbowls/createfishbowl'>
                             <AddIcon />
                         </Fab>
@@ -88,7 +90,7 @@ export default function MyFishbowlsPage() {
                 </Stack>
                 :
                 <Stack alignItems={'center'}>
-                    <Typography sx={{ margin: '0em 1em' }} variant='h6'>Retrieving your fishbowls</Typography>
+                    <Typography sx={{ margin: '0em 1em' }} variant='h6'>{t("myFishbowlsPage.loadingMsg")}</Typography>
                     <CircularColor></CircularColor>
                 </Stack>
             }

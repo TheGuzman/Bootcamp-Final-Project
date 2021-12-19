@@ -4,7 +4,8 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import FishbowlNavAccountUpdateInfo from "../../components/breadCrumb-nav/bread-crumb-myaccount-updateInfo"
-import { useHistory } from "react-router-dom"
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import CircularColor from '../../components/circular-progress/circular-progress.jsx'
 
 export default function UpdateUserInfoPage() {
 
@@ -16,7 +17,7 @@ export default function UpdateUserInfoPage() {
     let [user, setUser] = useState('')
 
     const [t] = useTranslation("global")
-    const history = useHistory()
+    
 
 
     useEffect(() => {
@@ -103,16 +104,16 @@ export default function UpdateUserInfoPage() {
         <Box>
             {isSumbitted === false ?
                 <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', }} >
-                    <Typography sx={{ margin: '1em' }} variant='h5'>Update your info</Typography>
+                    <Typography sx={{ margin: '1em' }} variant='h5'>{t("updateUserInfoPage.tittle")}</Typography>
                     <Stack margin={'1em 0em'}>
                         <FishbowlNavAccountUpdateInfo ></FishbowlNavAccountUpdateInfo>
                     </Stack>
                     <Stack direction='column' gap={8} alignItems={'flex-end'} sx={{ '@media (min-width:1024px)': { flexDirection: 'row', gap: 16 }, }} >
                         <form onSubmit={handleUsernameChange} >
                             <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'center', backgroundColor: 'primary.light', padding: '10px', borderRadius: '10px' }}>
-                                <Typography variant='h6' sx={{ margin: '1.5em 1em 1em 1em' }} > Change your username</Typography>
+                                <Typography variant='h6' sx={{ margin: '1.5em 1em 1em 1em' }} > {t("updateUserInfoPage.changeUsername")}</Typography>
                                 <Stack direction='row'>
-                                    <Typography variant='subtitle' > Current username:</Typography>
+                                    <Typography variant='subtitle' > {t("updateUserInfoPage.currentUsername")}</Typography>
                                     <Typography variant='subtitle' sx={{ marginLeft: '0.3em', fontWeight: 'bold' }}>{user.name}</Typography>
                                 </Stack>
                                 <TextField sx={{ '@media (min-width:760px)': { width: '20em', gap: '1em', }, }}
@@ -124,13 +125,13 @@ export default function UpdateUserInfoPage() {
                                     label="New username"
                                     placeholder="Username"
                                 />
-                                <Button variant='contained' color='secondary' type='submit' sx={{ '@media (min-width:1024px)': { marginTop: '2.2em' }, }}>update username</Button>
+                                <Button variant='contained' color='secondary' type='submit' sx={{ '@media (min-width:1024px)': { marginTop: '2.2em' }, }}>{t("updateUserInfoPage.updateUsernameButton")}</Button>
                             </Box>
                         </form>
 
                         <form onSubmit={handlePasswordChange} >
                             <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', gap: '1em', backgroundColor: 'primary.light', padding: '10px', borderRadius: '10px' }} >
-                                <Typography sx={{ margin: '1.5em 1em 1em 1em' }} variant='h6'> Change your password</Typography>
+                                <Typography sx={{ margin: '1.5em 1em 1em 1em' }} variant='h6'> {t("updateUserInfoPage.changePassword")}</Typography>
                                 <TextField sx={{ '@media (min-width:760px)': { width: '20em', gap: '1em', }, }}
                                     required
                                     id="userPassword"
@@ -152,7 +153,7 @@ export default function UpdateUserInfoPage() {
                                     placeholder="Confirm Password"
                                 />
 
-                                <Button variant='contained' color='secondary' type='submit'>update password</Button>
+                                <Button variant='contained' color='secondary' type='submit'>{t("updateUserInfoPage.updatePasswordButton")}</Button>
 
                             </Box>
                         </form >
@@ -160,23 +161,26 @@ export default function UpdateUserInfoPage() {
                 </Box > :
                 error !== true ?
                     isLoading === true ?
-                        <Typography variant='h4'>{t("userAccountUpdatePage.updatePending")}</Typography>
+                        <Stack alignItems={'center'}>
+                            <Typography alignText='center' variant='h4'>{t("updateUserInfoPage.updatePending")}</Typography>
+                            <CircularColor></CircularColor>
+                        </Stack>
                         :
                         //UPDATE SUCCEEDED
                         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <Stack direction='column' sx={{ margin: '1em', alignItems: 'center' }}>
-                                <Typography color='success.main' variant='h5'>{t("userAccountUpdatePage.success.updateComplete")}</Typography>
+                                <Typography color='success.main' variant='h5'>{t("updateUserInfoPage.success.updateComplete")}</Typography>
                             </Stack>
-                            <Typography component={Link} to='/becomeafish/myaccount'>{t("userAccountUpdatePage.goBackLink")}</Typography>
+                            <Button variant='contained' component={Link} to='/becomeafish/myaccount'> <ArrowBackIosNewIcon />{t("updateUserInfoPage.goBackLink")}</Button>
                         </Box>
                     :
                     //UPDATE FAILED
                     <React.Fragment>
                         <Stack direction='column' sx={{ margin: '1em', alignItems: 'center' }}>
-                            <Typography color='error.main' variant='h5'>{t("userAccountUpdatePage.fail.updateError")}</Typography>
-                            <Typography color='error.main' variant='h5'>{t("userAccountUpdatePage.fail.tryAgain")}</Typography>
-                            <Typography component={Link} to='/becomeafish/myaccount'>{t("userAccountUpdatePage.goBackLink")}</Typography>
-                           
+                            <Typography color='error.main' variant='h5'>{t("updateUserInfoPage.fail.updateError")}</Typography>
+                            <Typography color='error.main' variant='h5'>{t("updateUserInfoPage.fail.tryAgain")}</Typography>
+                            <Button component={Link} variant='contained' to='/becomeafish/myaccount'>{t("updateUserInfoPage.goBackLink")}</Button>
+
                         </Stack>
                     </React.Fragment>}
         </Box>

@@ -8,6 +8,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { useState } from 'react';
 import { ThemeContext } from '../../theming/theme-context';
 import { useContext } from 'react';
+import { useTranslation } from "react-i18next"
 
 
 export default function ProfileAvatar() {
@@ -27,6 +28,8 @@ export default function ProfileAvatar() {
 
     const currentTheme = useContext(ThemeContext)
     const avatarBgColor = currentTheme[0]!==true?'#C0C0C0':'#696969'
+
+    const [t] = useTranslation("global")
 
     return (
         <Box>
@@ -50,10 +53,10 @@ export default function ProfileAvatar() {
                     'aria-labelledby': 'basic-button',
                 }}
             >
-                <MenuItem component={Link} to='/becomeafish'><Icon icon="lucide:layout-dashboard" width="30" height="30" sx={{ margin: '0em 1em' }} /> Dashboard</MenuItem>
-                <MenuItem component={Link} to='/becomeafish/myfishbowls'><Icon icon="mdi:fishbowl-outline" width="30" height="30" sx={{ margin: '0em 1em' }} /> My Fishbowls</MenuItem>
-                <MenuItem component={Link} to='/becomeafish/myaccount'><Icon icon="ic:sharp-account-circle" width="30" height="30" /> My account</MenuItem>
-                <MenuItem onClick={handleLogOut} component={Link} to='/login'><LogoutIcon /> Log out</MenuItem>
+                <MenuItem component={Link} to='/becomeafish'><Icon icon="lucide:layout-dashboard" width="30" height="30" sx={{ margin: '0em 1em' }} /> {t("profileAvatar.dashboard")}</MenuItem>
+                <MenuItem component={Link} to='/becomeafish/myfishbowls'><Icon icon="mdi:fishbowl-outline" width="30" height="30" sx={{ margin: '0em 1em' }} /> {t("profileAvatar.myFishbowls")}</MenuItem>
+                <MenuItem component={Link} to='/becomeafish/myaccount'><Icon icon="ic:sharp-account-circle" width="30" height="30" /> {t("profileAvatar.myAccount")}</MenuItem>
+                <MenuItem onClick={handleLogOut} component={Link} to='/login'><LogoutIcon /> {t("profileAvatar.logOut")}</MenuItem>
             </Menu>
         </Box>
     )
