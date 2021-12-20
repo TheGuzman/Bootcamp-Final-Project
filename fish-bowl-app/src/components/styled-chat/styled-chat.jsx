@@ -38,6 +38,7 @@ export const Form = styled('form')({
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '80%',
+    marginBottom:'3em',
 })
 
 export const TextArea = styled('input')(({ theme }) => ({

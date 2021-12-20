@@ -14,9 +14,6 @@ export default function useStreamConnection(roomId) {
     const [fishbowlInfo, setFishbowl] = useState({})
     const [streams, updateStream] = useState([]);
     const [yourID, setYourID] = useState('');
-
-    //not returned variables
-
     const [sender, setSender] = useState({})
 
     const socketRef = useRef();
@@ -109,16 +106,20 @@ export default function useStreamConnection(roomId) {
 
             addVideoStream(stream)
             socketRef.current.on('user-streaming', userID => {
-                console.log(stream)
-                console.log('user streaming ' + userID)
                 connectToNewUser(userID, stream);
             })
             // })
+
+            const streamArrinfo=[]
+            let count = 0;
 
             function connectToNewUser(userID, stream) {
                 const call = myPeer.call(userID, stream);
                 console.log('calling' + userID)
                 let newUserStream;
+                
+                streamArrinfo.push({userID, stream})
+                
                 call.on('stream', userVideoStream => {
                     newUserStream = userVideoStream;
                     console.log('newUserStream')
@@ -127,15 +128,29 @@ export default function useStreamConnection(roomId) {
                         addVideoStream(newUserStream)
                     }
                 })
-                socketRef.current.on('close', () => {
-                    // console.log(userID)
-                    // console.log(stream)
-                    // console.log(call)
-                    // call.on('close', () => {
-                    // const i = streams.findIndex(s => s === newUserStream);
+                socketRef.current.on('close', userID => {
+                    console.log('Firing on close!')
+                    console.log(userID)
+                    console.log(streamArrinfo)
+                    const find = streamArrinfo.find(u=>u.userID === userID)
+                    console.log(find)
+                    console.log('printing streams')
+                    console.log(streams)
+                    // if(count>1)
+                    // {
+                    //     return
+                    // }
+                    // else{
+                    //     count++
+                    const i = streams.findIndex(s => s.id === find.stream.id);
+                    console.log(i);
+                    streams.splice(i, 1);
+                    // }
+                    
+                    
                     // console.log('call on close')
-                    // console.log(i)
-                    // streams.splice(i, 1);
+                    
+                    
                     updateStream([...streams]);
 
                     // })

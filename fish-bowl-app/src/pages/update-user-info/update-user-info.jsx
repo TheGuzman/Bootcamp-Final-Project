@@ -83,7 +83,7 @@ export default function UpdateUserInfoPage() {
                     userPassword: userPassword,
                 }),
             };
-            fetch("http://localhost:3001/user//becomeafish/myaccount/updateuserpassword", options)
+            fetch("http://localhost:3001/user/becomeafish/myaccount/updateuserpassword", options)
                 .then(r => {
                     r.json(); console.log(r)
                     if (r.status === 409) {

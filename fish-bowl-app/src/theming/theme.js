@@ -57,7 +57,7 @@ export const lightTheme = createTheme({
     background: {
       paper: "#DCDCDC",
       default: "#DCDCDC",
-      special: "rgba(220, 220, 220, 0.80)"
+      special: "rgba(250, 200, 111, 1)"
     },
     // error: {
     //     main: '',

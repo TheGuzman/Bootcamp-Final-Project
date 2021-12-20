@@ -42,8 +42,7 @@ export default function BecomeaFishPage() {
 
 
     const onFilter = filter => {
-
-        const filtered = fishbowlsDDBB.filter(f => (f.description || f.name).toLowerCase().includes(filter))
+        const filtered = fishbowlsDDBB.filter(f =>  f.name.toLowerCase().includes(filter)|| f.description.toLowerCase().includes(filter))
         setAllFishbowls(filtered)
 
     }
