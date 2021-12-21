@@ -139,7 +139,7 @@ export default function LoginPage() {
             </form >
             {invalidLogin === true ? <Typography variant='h6' color='error'>{t("loginPage.invalidLogin")}</Typography> : ''}
 
-            <Button onClick={showForgotPassword} variant='contained' color='primary' sx={{margin:'3em 0em'}}>Forgot your password?</Button>
+            <Button onClick={showForgotPassword} variant='text' color='primary' sx={{margin:'3em 0em', fontWeight:'bold'}}>{t("loginPage.forgotPassword?")}</Button>
             {forgotPassword !== false
                 ?
                 <form onSubmit={handleSubmitNewPassword} >

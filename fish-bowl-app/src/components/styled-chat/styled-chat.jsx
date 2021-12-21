@@ -77,11 +77,12 @@ export const MyRow = styled('div')({
 
 export const MyMessage = styled('div')(({ theme }) => ({
     width: 'fit-content',
+    maxWidth:'40%',
     backgroundColor: theme.palette.primary.light,
     padding: '5px 15px',
     marginRight: '5px',
-    textAlign: 'center',
-    borderRadius: '4em',
+    textAlign: 'left',
+    borderRadius: '10px',
     fontFamily:'RobotoMono'
 }))
 
@@ -105,7 +106,8 @@ export const PartnerMessage = styled('div')(({ theme }) => ({
     border: '1px solid lightgray',
     padding: '5px 15px',
     marginLeft: '5px',
-    textAlign: 'center',
-    borderRadius: '4em',
+    textAlign: 'left',
+    borderRadius: '10px',
+    maxWidth:'50%',
     fontFamily:'RobotoMono'
 }))

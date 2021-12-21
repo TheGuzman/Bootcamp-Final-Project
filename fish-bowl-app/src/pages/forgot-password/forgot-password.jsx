@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Typography } from "@mui/material";
 import { useTranslation } from "react-i18next"
@@ -65,7 +65,7 @@ function ForgotPasswordPage() {
         <React.Fragment>
             <form onSubmit={handlePasswordChange} >
                 <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center', gap: '1em', padding: '10px', borderRadius: '10px' }} >
-                    <Typography sx={{ margin: '1.5em 1em 1em 1em' }} variant='h6'> {t("updateUserInfoPage.changePassword")}</Typography>
+                    <Typography sx={{ margin: '1.5em 1em 1em 1em' }} variant='h6'> {t("forgotPasswordPage.changePassword")}</Typography>
                     <TextField sx={{ '@media (min-width:760px)': { width: '20em', gap: '1em', }, }}
                         required
                         id="userPassword"
@@ -87,15 +87,15 @@ function ForgotPasswordPage() {
                         placeholder="Confirm Password"
                     />
 
-                    <Button variant='contained' color='secondary' type='submit'>{t("updateUserInfoPage.updatePasswordButton")}</Button>
+                    <Button variant='contained' color='secondary' type='submit'>{t("forgotPasswordPage.updatePasswordButton")}</Button>
 
                 </Box>
             </form >
             {isSumbitted !== false ?
                 loading !== true ?
                     error !== false ?
-                        <Typography sx={{ margin: '1.5em 1em 1em 1em' }} textAlign={'center'} color='error.main' variant='h6'> There was an error</Typography>
-                        : <Typography sx={{ margin: '1.5em 1em 1em 1em' }} textAlign={'center'} color='success.main' variant='h6'>Password successfully changed</Typography>
+                        <Typography sx={{ margin: '1.5em 1em 1em 1em' }} textAlign={'center'} color='error.main' variant='h6'> {t("forgotPasswordPage.fail.updateErrorMsg")}</Typography>
+                        : <Typography sx={{ margin: '1.5em 1em 1em 1em' }} textAlign={'center'} color='success.main' variant='h6'>{t("forgotPasswordPage.success.updateMsg")}</Typography>
                     : <Stack justifyContent={'center'} alignItems={'center'}>
                         <CircularColor></CircularColor>
                     </Stack>

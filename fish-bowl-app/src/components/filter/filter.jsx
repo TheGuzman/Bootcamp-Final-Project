@@ -4,6 +4,7 @@ import InputBase from '@mui/material/InputBase';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import { Icon } from '@iconify/react';
+import { useTranslation } from "react-i18next"
 
 export default function Filter(props) {
 
@@ -14,6 +15,7 @@ function handleChange(e){
     props.onFilter(filterInfo)
 }
 
+const [t] = useTranslation("global")
 
     return (
         <Paper component="form"
@@ -24,7 +26,7 @@ function handleChange(e){
             </IconButton>
             <InputBase
                 sx={{ ml: 1, flex: 1 }}
-                placeholder="Find a cool discussion"
+                placeholder= {t("filter.placeholder")}
                 inputProps={{ 'aria-label': 'Find a cool discussion' }}
                 name='input'
                 onChange={handleChange}

@@ -9,7 +9,133 @@
             "whatFishbowl":"Was ist ein Fishbowl?",
             "answerWhatFishbowl":"Ein sicherer, diskriminierungsfreier Raum für offene Diskussionen und die gemeinsame Entwicklung von Ideen",
             "whyCare": "Warum sollte mich das interessieren?",
-            "answerWhyCare":"Du wirst irgendwann sterben, deine Ideen vielleicht nicht"
+            "answerWhyCare":"Du wirst irgendwann sterben, deine Ideen vielleicht nicht",
+            "howWorks":"Was muss ich tun?",
+            "answerHowWorks":"Du kannst einem Raum beitreten und den Chat nutzen, um mit den anderen Teilnehmern zu kommunizieren, während du der laufenden Diskussion zuhörst. Wenn du dich aktiv beteiligen möchtest, musst du den Platz mit jemandem tauschen, der gerade eine Diskussion führt."
         }
+    },
+    "becomeaFishPage":{
+        "welcome": "Wilkommen",
+        "info":"Entdecke die beliebtesten Fishbowls"
+    },
+    "createFishbowlPage":{
+        "createAFishbowl": "Ein Fishbowl erstellen",
+        "addFishbowl":"Füge deine Fishbowl hinzu",
+        "fishbowlCreated":"Fishbowl erfolgreich erstellt",
+        "backToFishbowlsMsg":"Zurück zu meinen Fischbowls"
+    },
+    "registrationPage": {
+        "registrationMessage": "Bitte melde dich an",
+        "registrationPending": "Wir registrieren dein Konto...",
+        "success": {
+            "registrationComplete": "Die Registrierung ist abgeschlossen",
+            "checkYourEmail": "Bitte überprüfe deine Emails"
+        },
+        "fail": {
+            "registrationError": "Es ist ein Fehler aufgetreten",
+            "tryAgain": "Bitte noch einmal versuchen"
+        },
+        "goBackLink": "zurückgehen"
+    },
+    "deleteUserInfoPage": {
+        "areYouSuredeleteYourAccount":"Bist du sicher, dass du dein Konto lössen willst?",
+        "success": {
+            "accountDeletedSuccessMsg": "Konto erfolgreich gelöscht"
+        },
+        "fail": {
+            "accountDeletedErrorMsg": "Es ist ein Fehler aufgetreten"
+        },
+        "goBackLink": "zurück to Mein Konto"
+    },
+    "joinFishbowlPage": {
+        "activeFishes":"Aktive Fische",
+        "fishbowllName":"Das heutige Thema",
+        "fishbowlDescription":"Fishbowl Beschreibung",
+        "fishbowlCreator":"Der Vordenker dieser Debatte ist ",
+        "chatPlaceholder":"Sag etwas..."
+    },
+    "loginPage": {
+        "login":"einloggen",
+        "invalidLogin":"Ungültiger Benutzername oder Passwort",
+        "forgotPassword?":"Hast du dein Passwort vergessen?"
+    },
+    "emailVerificationPage": {
+        "validatingMsg":"Validierung deiner Email...",
+        "success": {
+            "emailValidatedMsg": "Email erfolgreiich validiert"
+        },
+        "fail": {
+            "emailNotValidatedMsg": "Email konnte nicht validiert werden"
+        }
+    },
+    "myAccountPage": {
+        "tittle":"Mein Konto",
+        "updateMyInfo":"Meine Infos aktualisieren",
+        "deleteMyAccount":"Mein Konto löschen"
+    },
+    "myFishbowlsPage": {
+        "tittle":"Meine Fishbowls",
+        "addAfishbowl":"Ein Fishbowl hinzufügen",
+        "loadingMsg":"Einholen der Fishbowls"
+    },"updateUserInfoPage": {
+        "tittle":"Aktualisiere deine Infos",
+        "changeUsername":"Ändere deinen Benutzernamen",
+        "currentUsername":"Aktueller Benutzername:",
+        "updateUsernameButton":"Benutzername aktualisieren",
+        "changePassword":"Ändere dein Passwort",
+        "updatePasswordButton":"Passwort aktualisieren",
+        "updateMessage": "Aktualisiere deine Infos",
+        "updatePending": "Anwendung von Änderungen...",
+        "success": {
+            "updateComplete": "Aktualisierung ist abgeschlossen"
+        },
+        "fail": {
+            "updateError": "Der angeforderte Benutzername existiert bereits oder ist ungültig",
+            "tryAgain": "Bitte versuche es noch einmal"
+        },
+        "goBackLink": "zurückgehen"
+    },
+    "forgotPasswordPage": {
+        "changePassword":"Ándere dein Passwort",
+        "updatePasswordButton":"Passwort aktualisieren",
+        "fail":{
+            "updateErrorMsg":"Es ist ein Fehler aufgetreten"
+        },
+        "success":{
+            "updateMsg":"Passwort erfolgreich geändert"
+        }
+    },"buttons": {
+        "submit": "senden",
+        "login": "einloggen",
+        "deleteAccount": "mein Konto löschen",
+        "knowMore": "Mehr wissen",
+        "knowLess": "Weniger wissen"
+    },
+    "header":{
+        "becomeAfish":"Ein Fisch werden",
+        "signUp":"Anmeldung",
+        "login": "Einloggen"
+    },
+    "footer":{
+        "allRights":"Alle Rechte sind vorbehalten",
+        "cookies":"Cookies-Politik",
+        "legal":"Impressum",
+        "privacyPolicy": "Datenschutzbestimmungen"
+    },
+    "profileAvatar":{
+        "dashboard":"Dashboard",
+        "myFishbowls":"Meine Fishbowls",
+        "myAccount":"Mein Konto",
+        "logOut": "Ausloggen"
+    },
+    "breadCrumb":{
+        "dashboard":"Dashboard",
+        "myFishbowls":"Meine Fishbowls",
+        "myAccount":"Mein Konto",
+        "updateInfo": "Meine Informationen aktualisieren"
+    },
+    "filter":{
+        "placeholder":"Finde eine coole Diskussion"
     }
+
 }

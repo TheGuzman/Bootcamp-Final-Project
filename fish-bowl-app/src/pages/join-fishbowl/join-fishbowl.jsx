@@ -85,7 +85,7 @@ export default function JoinFishbowlPage() {
                     </ChatContainer>
                 </MainContainer>
                 <Form onSubmit={handleSubmit}>
-                    <TextArea name="msg" placeholder="Say something..." />
+                    <TextArea name="msg" placeholder={t("joinFishbowlPage.chatPlaceholder")} />
                     <SendButton onKeyPress={handleKeypress} type='submit'>{t("buttons.submit")}</SendButton>
                 </Form>
             </Page>

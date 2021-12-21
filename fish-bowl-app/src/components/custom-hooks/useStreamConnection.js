@@ -70,8 +70,8 @@ export default function useStreamConnection(roomId) {
                 })
 
                 myPeer.on('call', call => {
-                    console.log('llamando a...')
-                    console.log(id)
+                    // console.log('llamando a...')
+                    // console.log(id)
                     console.log(call)
                     call.answer(stream)
                     call.on('stream', userVideoStream => {
@@ -80,6 +80,45 @@ export default function useStreamConnection(roomId) {
                         }
                     })
                 })
+            })
+            socketRef.current.on('close', userID => {
+                console.log('Firing on close!')
+                console.log(userID)
+                console.log(streamArrinfo)
+
+
+                const findStreamToDelete = streamArrinfo.find(u => u.userID === userID)
+                console.log('findStreamToDelete')
+                console.log(findStreamToDelete)
+
+                // const indexOfStreamDummyArray = streamArrinfo.findIndex(s=>s.userID === userID)
+                // streamArrinfo = streamArrinfo.splice(indexOfStreamDummyArray,1)
+                // console.log('indexOfStreamDummyArray')
+                // console.log(indexOfStreamDummyArray)
+
+
+                // console.log('printing streams')
+                // console.log(streams)
+
+                
+                const i = streams.findIndex(s => s.id === findStreamToDelete.stream.id);
+                // streams.splice(i,1)
+
+                // console.log(i);
+                if (i !== -1) {
+                    streams.splice(i, 1);
+                }
+                else {
+                    return
+                }
+
+                // }
+
+                // console.log('call on close')
+
+                updateStream([...streams]);
+
+                // })
             })
 
             socketRef.current.on("new-chat-user", allUsers => {
@@ -110,51 +149,24 @@ export default function useStreamConnection(roomId) {
             })
             // })
 
-            const streamArrinfo=[]
-            let count = 0;
+            let streamArrinfo = []
 
             function connectToNewUser(userID, stream) {
                 const call = myPeer.call(userID, stream);
-                console.log('calling' + userID)
+                // console.log('calling' + userID)
                 let newUserStream;
-                
-                streamArrinfo.push({userID, stream})
-                
+
+                streamArrinfo.push({ userID, stream })
+
                 call.on('stream', userVideoStream => {
                     newUserStream = userVideoStream;
-                    console.log('newUserStream')
-                    console.log(newUserStream)
+                    // console.log('newUserStream')
+                    // console.log(newUserStream)
                     if (!streamsArr.includes(newUserStream.id)) {
                         addVideoStream(newUserStream)
                     }
                 })
-                socketRef.current.on('close', userID => {
-                    console.log('Firing on close!')
-                    console.log(userID)
-                    console.log(streamArrinfo)
-                    const find = streamArrinfo.find(u=>u.userID === userID)
-                    console.log(find)
-                    console.log('printing streams')
-                    console.log(streams)
-                    // if(count>1)
-                    // {
-                    //     return
-                    // }
-                    // else{
-                    //     count++
-                    const i = streams.findIndex(s => s.id === find.stream.id);
-                    console.log(i);
-                    streams.splice(i, 1);
-                    // }
-                    
-                    
-                    // console.log('call on close')
-                    
-                    
-                    updateStream([...streams]);
-
-                    // })
-                })
+                
 
                 peers[userID] = call
             }
@@ -179,6 +191,7 @@ export default function useStreamConnection(roomId) {
         }
         socketRef.current.emit("send message", message, roomId);
     }
+
     let streamsArr = []
 
     function addVideoStream(stream) {
