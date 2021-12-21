@@ -20,6 +20,7 @@ import JoinFishbowlPage from './pages/join-fishbowl/join-fishbowl';
 import PrivacyPolicy from './pages/privacy-policy/privacy-policy';
 import CookiePolicy from './pages/cookie-policy/cookie-policy'
 import LegalNoticePage from './pages/legal-notice/legal-notice'
+import ForgotPasswordPage from './pages/forgot-password/forgot-password'
 
 function App() {
 
@@ -62,6 +63,9 @@ function App() {
             </Route>
             <Route exact path="/validate-mail">
               <MailVerificationPage></MailVerificationPage>
+            </Route>
+            <Route exact path="/forgot-password">
+              <ForgotPasswordPage></ForgotPasswordPage>
             </Route>
             <Route exact path="/register">
               <RegisterPage></RegisterPage>
