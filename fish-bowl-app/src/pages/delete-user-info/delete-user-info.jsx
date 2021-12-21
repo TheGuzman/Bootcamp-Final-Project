@@ -31,15 +31,15 @@ export default function DeleteUserInfoPage() {
 
                     sessionStorage.removeItem('sesion');
                     setResponse(true)
-                    setMessage(<Typography variant='subtitle' color='success.main'>{t("deleteUserInfoPage.success.accountDeletedSuccessMsg")}</Typography>)
+                    setMessage(<Typography textAlign={'center'} variant='h5' color='success.main'>{t("deleteUserInfoPage.success.accountDeletedSuccessMsg")}</Typography>)
                     setTimeout(() => {
-                        history.push('/becomeafish') 
+                        history.push('/login') 
                     }, 2500);
                 }
 
                 else {
                     setResponse(true)
-                    setMessage(<Typography variant='subtitle' color='error'>{t("deleteUserInfoPage.fail.accountDeletedErrorMsg")} </Typography>)
+                    setMessage(<Typography textAlign={'center'} variant='h5' color='error'>{t("deleteUserInfoPage.fail.accountDeletedErrorMsg")} </Typography>)
                 }
             })
 

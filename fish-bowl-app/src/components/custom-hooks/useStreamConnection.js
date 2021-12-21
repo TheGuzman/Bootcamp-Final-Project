@@ -81,45 +81,6 @@ export default function useStreamConnection(roomId) {
                     })
                 })
             })
-            socketRef.current.on('close', userID => {
-                console.log('Firing on close!')
-                console.log(userID)
-                console.log(streamArrinfo)
-
-
-                const findStreamToDelete = streamArrinfo.find(u => u.userID === userID)
-                console.log('findStreamToDelete')
-                console.log(findStreamToDelete)
-
-                // const indexOfStreamDummyArray = streamArrinfo.findIndex(s=>s.userID === userID)
-                // streamArrinfo = streamArrinfo.splice(indexOfStreamDummyArray,1)
-                // console.log('indexOfStreamDummyArray')
-                // console.log(indexOfStreamDummyArray)
-
-
-                // console.log('printing streams')
-                // console.log(streams)
-
-                
-                const i = streams.findIndex(s => s.id === findStreamToDelete.stream.id);
-                // streams.splice(i,1)
-
-                // console.log(i);
-                if (i !== -1) {
-                    streams.splice(i, 1);
-                }
-                else {
-                    return
-                }
-
-                // }
-
-                // console.log('call on close')
-
-                updateStream([...streams]);
-
-                // })
-            })
 
             socketRef.current.on("new-chat-user", allUsers => {
                 activeUsersArr = []
@@ -165,6 +126,45 @@ export default function useStreamConnection(roomId) {
                     if (!streamsArr.includes(newUserStream.id)) {
                         addVideoStream(newUserStream)
                     }
+                })
+                socketRef.current.on('close', userID => {
+                    console.log('Firing on close!')
+                    console.log(userID)
+                    console.log(streamArrinfo)
+    
+    
+                    const findStreamToDelete = streamArrinfo.find(u => u.userID === userID)
+                    console.log('findStreamToDelete')
+                    console.log(findStreamToDelete)
+    
+                    // const indexOfStreamDummyArray = streamArrinfo.findIndex(s=>s.userID === userID)
+                    // streamArrinfo = streamArrinfo.splice(indexOfStreamDummyArray,1)
+                    // console.log('indexOfStreamDummyArray')
+                    // console.log(indexOfStreamDummyArray)
+    
+    
+                    // console.log('printing streams')
+                    // console.log(streams)
+    
+                    
+                    const i = streams.findIndex(s => s.id === findStreamToDelete.stream.id);
+                    // streams.splice(i,1)
+    
+                    // console.log(i);
+                    if (i !== -1) {
+                        streams.splice(i, 1);
+                    }
+                    else {
+                        return
+                    }
+    
+                    // }
+    
+                    // console.log('call on close')
+    
+                    updateStream([...streams]);
+    
+                    // })
                 })
                 
 

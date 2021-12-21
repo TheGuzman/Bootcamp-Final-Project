@@ -63,7 +63,7 @@ export default function HomePage() {
                 </Stack>
             </Stack>
             <Stack alignItems={'center'} sx={{ margin: '1em 1em','@media (min-width:768px)':{margin:'3em 1em'} }}>
-                <Button variant='contained' onClick={handleShowMore} color='secondary' sx={{ width: '40%', color: 'primary.contrastText', '@media (min-width:768px)': { width:'15%'} }}>{showMore !== true ? `${t("buttons.knowMore")}` : `${t("buttons.knowLess")}}`}</Button>
+                <Button variant='contained' onClick={handleShowMore} color='secondary' sx={{ width: '40%', color: 'primary.contrastText', '@media (min-width:768px)': { width:'15%'} }}>{showMore !== true ? `${t("buttons.knowMore")}` : `${t("buttons.knowLess")}`}</Button>
             </Stack>
 
             <Stack style={{ backgroundImage: `url(${Fishes})`, backgroundSize: 'contain', height:'100%', minHeight: '40em' }} justifyContent={'space-between'}>
@@ -78,7 +78,7 @@ export default function HomePage() {
                             <Typography variant="caption">-George Bernard Shaw</Typography>
                         </Stack>
                         <Stack alignItems={'center'} sx={{ margin: '1em 1em' }}>
-                            <Button variant='contained' onClick={handleShowMore} color='secondary' sx={{ width: '40%', color: 'primary.contrastText','@media (min-width:768px)': { width:'15%'}  }}>{showMore !== true ? `${t("buttons.knowMore")}` : `${t("buttons.knowLess")}}`}</Button>
+                            <Button variant='contained' onClick={handleShowMore} color='secondary' sx={{ width: '40%', color: 'primary.contrastText','@media (min-width:768px)': { width:'15%'}  }}>{showMore !== true ? `${t("buttons.knowMore")}` : `${t("buttons.knowLess")}`}</Button>
                         </Stack>
                     </React.Fragment>
                     : ''}

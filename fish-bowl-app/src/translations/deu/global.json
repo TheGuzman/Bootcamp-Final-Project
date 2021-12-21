@@ -62,7 +62,7 @@
     "emailVerificationPage": {
         "validatingMsg":"Validierung deiner Email...",
         "success": {
-            "emailValidatedMsg": "Email erfolgreiich validiert"
+            "emailValidatedMsg": "Email erfolgreich validiert"
         },
         "fail": {
             "emailNotValidatedMsg": "Email konnte nicht validiert werden"
@@ -132,7 +132,8 @@
         "dashboard":"Dashboard",
         "myFishbowls":"Meine Fishbowls",
         "myAccount":"Mein Konto",
-        "updateInfo": "Meine Informationen aktualisieren"
+        "updateInfo": "Meine Informationen aktualisieren",
+        "createAfishbowl": "Ein Fishbowl erstellen"
     },
     "filter":{
         "placeholder":"Finde eine coole Diskussion"

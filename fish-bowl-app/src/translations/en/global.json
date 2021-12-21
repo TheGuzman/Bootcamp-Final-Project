@@ -135,7 +135,8 @@
         "dashboard":"Dashboard",
         "myFishbowls":"My Fishbowls",
         "myAccount":"My account",
-        "updateInfo": "Update my Info"
+        "updateInfo": "Update my Info",
+        "createAfishbowl": "Create a Fishbowl"
     },
     "filter":{
         "placeholder":"Find a cool discussion"
