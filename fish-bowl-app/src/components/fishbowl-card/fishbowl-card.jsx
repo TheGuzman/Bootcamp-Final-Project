@@ -38,7 +38,7 @@ export default function FishbowlCard(props) {
 
     return (
         <Box border={2} sx={{ borderColor: 'common.black', borderRadius: '10px',position:'relative',boxShadow: 4 }}>
-            <Card border={2} sx={{ maxWidth: 230, minWidth: 230, minHeight: 292, height: '100%', }}>
+            <Card border={2} sx={{ maxWidth: 250, minWidth: 230, minHeight: 292, height: '100%', }}>
                 {/* If the user prop exists then it means that the user can start and delete fishbowls */}
                 {props.deleteButton === true ?
                     <Stack direction='row' sx={{ alignItems: 'center', justifyContent: 'space-between', position: 'relative' }} >
@@ -65,9 +65,9 @@ export default function FishbowlCard(props) {
                         <Typography sx={{ margin: '0em 0.2em 0em 0em', fontSize: '0.9rem', }} color="text.secondary" gutterBottom>Theme: </Typography>
                         <Typography variant="subtitle2" >{props.info.theme}</Typography>
                     </Stack>
-                    <Stack sx={{ margin: '1em 0em', }}>
+                    <Stack sx={{ margin: '1em 0em' }}>
                         <Typography variant="subtitle2">Brief description</Typography>
-                        <Box border={2} sx={{ borderColor: 'primary.main', padding: '0.5em', borderRadius: '10px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+                        <Box border={2} sx={{ borderColor: 'primary.main', overflowY:'overlay', overflowStyle:'marquee,panner', height:'4em', padding: '0.5em', borderRadius: '10px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                             <Typography variant="subtitle2">{props.info.description}</Typography>
                         </Box>
                     </Stack>
