@@ -35,15 +35,15 @@ export default function JoinFishbowlPage() {
         <Stack>
             <Page>
                 <Stack sx={{width:'100%', margin:'2em'}} direction='row' flexWrap={'wrap'} justifyContent={'space-around'} rowGap={4}>
-                    <Stack>
+                    <Stack sx={{width:'30%'}}>
                         <Typography variant='h5' textAlign={'center'} sx={{ fontFamily: 'BrainFish' }}>{t("joinFishbowlPage.fishbowllName")}</Typography>
                         <Typography variant='h6' textAlign={'center'}>{fishbowlInfo?.name}</Typography>
                     </Stack>
-                    <Stack >
+                    <Stack sx={{width:'30%'}} >
                         <Typography variant='h5' textAlign={'center'} sx={{ fontFamily: 'BrainFish' }}>{t("joinFishbowlPage.fishbowlDescription")}</Typography>
                         <Typography variant='h6' textAlign={'center'}>{fishbowlInfo?.description}</Typography>
                     </Stack>
-                    <Stack>
+                    <Stack sx={{width:'30%'}}>
                         <Typography variant='h5' textAlign={'center'} sx={{ fontFamily: 'BrainFish' }}>{t("joinFishbowlPage.fishbowlCreator")}</Typography>
                         <Typography variant='h6' textAlign={'center'}>{fishbowlInfo?.creator}</Typography>
                     </Stack>
