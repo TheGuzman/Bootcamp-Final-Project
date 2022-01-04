@@ -40,11 +40,9 @@ export default function useStreamConnection(roomId) {
     }
 
 
-
-
     useEffect(() => {
         let userID = '';
-        let activeUsersArr = []
+        let activeUsersArr = [] //array where the names of the current users are
         const peers = {}
 
         const connectRoom = async () => {
@@ -53,6 +51,7 @@ export default function useStreamConnection(roomId) {
                 video: true,
                 audio: true,
             });
+            
             let myPeer;
 
             socketRef.current = io.connect('http://localhost:3001');
@@ -64,14 +63,15 @@ export default function useStreamConnection(roomId) {
                 userID = id;
                 setYourID(id);
                 myPeer = new Peer(id);
+                console.log('printing my peer')
+                console.log(myPeer._connections)
+
                 myPeer.on('open', id => {
                     socketRef.current.emit('join-streaming-room', id)
                     console.log('my peer open ' + myPeer.id)
                 })
 
                 myPeer.on('call', call => {
-                    // console.log('llamando a...')
-                    // console.log(id)
                     console.log(call)
                     call.answer(stream)
                     call.on('stream', userVideoStream => {
@@ -83,13 +83,13 @@ export default function useStreamConnection(roomId) {
             })
 
             socketRef.current.on("new-chat-user", allUsers => {
-                activeUsersArr = []
+                activeUsersArr = [] //set to empty until the backend returns the active users in the room
                 allUsers.forEach(u => u.users.forEach(n => activeUsersArr.push(n.name)))
                 setUsers(activeUsersArr)
             })
 
             socketRef.current.on("chat-user-left", allUsers => {
-                activeUsersArr = []
+                activeUsersArr = [] //set to empty until the backend returns the active users in the room
                 allUsers.forEach(u => u.users.forEach(n => activeUsersArr.push(n.name)))
                 setUsers(activeUsersArr)
             })
@@ -131,7 +131,7 @@ export default function useStreamConnection(roomId) {
                     console.log('Firing on close!')
                     console.log(userID)
                     console.log(streamArrinfo)
-    
+
     
                     const findStreamToDelete = streamArrinfo.find(u => u.userID === userID)
                     console.log('findStreamToDelete')

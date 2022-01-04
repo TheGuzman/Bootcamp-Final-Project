@@ -19,6 +19,9 @@ export default function JoinFishbowlPage() {
     const { roomId } = useParams()
     const { messages, fishbowlInfo, fishbowlers, yourID, users, streams, broadcastMessage } = useStreamConnection(roomId)
 
+    console.log('printing streams from jsx')
+    console.log(streams)
+
     const handleSubmit = e => {
         e.preventDefault();
         broadcastMessage(e.target.msg.value);
