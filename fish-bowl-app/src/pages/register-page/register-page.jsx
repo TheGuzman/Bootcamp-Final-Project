@@ -158,7 +158,7 @@ export default function RegisterPage() {
                 :
                 error !== true ?
                     isLoading === true ?
-                        <Typography variant='h4'>{t("registrationPage.registrationPending")}</Typography> :
+                        <Typography textAlign={'center'} variant='h4'>{t("registrationPage.registrationPending")}</Typography> :
                         <Box sx={{ display: 'flex', flexDirection:'column', alignItems:'center' }}>
                             <Stack direction='column' sx={{margin:'1em', alignItems: 'center'}}>
                                 <CheckCircleIcon sx={{ width: '3em', height: '3em', color: 'green' }}></CheckCircleIcon>

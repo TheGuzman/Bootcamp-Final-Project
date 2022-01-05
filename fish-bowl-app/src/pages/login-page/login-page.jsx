@@ -15,8 +15,9 @@ export default function LoginPage() {
     let userPassword = '';
     let userEmail = '';
     const [isuserEmailValid, setValidUserEmail] = useState(false)
-    const [invalidLogin, setInvalidLogin]= useState(false)
-    
+    const [invalidLogin, setInvalidLogin] = useState(false)
+    const [forgotPassword, setForgotPassword] = useState(false)
+
     const [t] = useTranslation("global")
     const history = useHistory()
 
@@ -25,13 +26,15 @@ export default function LoginPage() {
         return regex.test(email);
     }
 
-    useEffect(()=>{
+    useEffect(() => {
 
-        if(sessionStorage.getItem('sesion')!==null){
+        if (sessionStorage.getItem('sesion') !== null) {
             history.push('/becomeafish')
         }
 
-    },[history])
+    }, [history])
+
+
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -42,7 +45,7 @@ export default function LoginPage() {
             const options = {
                 method: "POST",
                 headers: {
-                    "Content-type": "application/json", 
+                    "Content-type": "application/json",
                 },
                 body: JSON.stringify({
                     userPassword: userPassword,
@@ -50,21 +53,21 @@ export default function LoginPage() {
                 }),
             };
             fetch("http://localhost:3001/auth/login", options)
-                .then(r =>r.json())                
+                .then(r => r.json())
                 .then(d => {
                     console.log(d)
-                    if(d.status===404){
+                    if (d.status === 404) {
                         setInvalidLogin(true)
                         console.log('invalid login')
                     }
-                    else{
+                    else {
                         sessionStorage.setItem('sesion', 'Bearer ' + d.access_token);
                         setTimeout(() => {
-                            history.push('/becomeafish') 
+                            history.push('/becomeafish')
                         }, 1000);
                     }
                     console.log(d);
-                    
+
                 });
             console.log('valid')
         }
@@ -73,8 +76,38 @@ export default function LoginPage() {
         else {
             setValidUserEmail(true)
         }
+    }
+
+    function showForgotPassword() {
+        setForgotPassword(true)
+    }
 
 
+    function handleSubmitNewPassword(e) {
+        e.preventDefault()
+        const  userEmail = e.target.email.value;
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSON.stringify({
+                userEmail: userEmail,
+            }),
+        };
+       
+        fetch("http://localhost:3001/auth/forgot-password", options)
+            .then(r => r.json())
+            .then(d => {
+                console.log(d)
+                if (d.status === 404) {
+                    console.log('invalid login')
+                }
+                else {
+                 
+                }
+                console.log(d);
+            })
     }
 
 
@@ -104,7 +137,24 @@ export default function LoginPage() {
                     <Button variant='contained' color='secondary' type='submit'>{t("buttons.login")}</Button>
                 </Box>
             </form >
-            {invalidLogin===true?<Typography variant='h6' color='error'>{t("loginPage.invalidLogin")}</Typography>:''}
+            {invalidLogin === true ? <Typography variant='h6' color='error'>{t("loginPage.invalidLogin")}</Typography> : ''}
+
+            <Button onClick={showForgotPassword} variant='text' color='primary' sx={{margin:'3em 0em', fontWeight:'bold'}}>{t("loginPage.forgotPassword?")}</Button>
+            {forgotPassword !== false
+                ?
+                <form onSubmit={handleSubmitNewPassword} >
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2em', alignItems: 'center' }}>
+                        <TextField sx={{ '@media (min-width:760px)': { width: '30em', gap: '1em', }, }}
+                            required
+                            name="email"
+                            id="userEmail"
+                            label="Email"
+                            placeholder="Email"
+                        />
+                        <Button variant='contained' color='secondary' type='submit'>{t("buttons.submit")}</Button>
+                    </Box>
+                </form > : ''}
+
         </Box>
     )
 }

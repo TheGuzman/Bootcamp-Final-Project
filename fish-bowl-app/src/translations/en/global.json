@@ -9,7 +9,9 @@
             "whatFishbowl":"What is a Fishbowl?",
             "answerWhatFishbowl":"A safe non-discriminatory space for open discussions and for constructing ideas together",
             "whyCare": "Why should I care?",
-            "answerWhyCare":"You will die eventually, your ideas might not"
+            "answerWhyCare":"You will die eventually, your ideas might not",
+            "howWorks":"What do I have to do?",
+            "answerHowWorks":"You can join a room and use the chat to communicate with the attendees, while you listen to the ongoin discussion. If you wish to actively participate then you have to swap seats with someone who is currently discussing"
         }
     },
     "becomeaFishPage":{
@@ -25,7 +27,7 @@
 
     "registrationPage": {
         "registrationMessage": "Please register yourself",
-        "registrationPending": "Registering...",
+        "registrationPending": "Registering your account...",
         "success": {
             "registrationComplete": "Registration is complete",
             "checkYourEmail": "Check your Email"
@@ -47,11 +49,16 @@
         "goBackLink": "Back to My Account"
     },
     "joinFishbowlPage": {
-        "activeFishes":"Active Fishes"
+        "activeFishes":"Active Fishes",
+        "fishbowllName":"Today's topic",
+        "fishbowlDescription":"Fishbowl description",
+        "fishbowlCreator":"The mastermind behind this debate is ",
+        "chatPlaceholder":"Say something..."
     },
     "loginPage": {
-        "login":"log in",
-        "invalidLogin":"invalid username or password"
+        "login":"Log in",
+        "invalidLogin":"invalid username or password",
+        "forgotPassword?":"Forgot your password?"
     },
     "emailVerificationPage": {
         "validatingMsg":"validating your Email...",
@@ -68,15 +75,14 @@
         "deleteMyAccount":"Delete my account"
     },
     "myFishbowlsPage": {
-        "tittle":"My fishbowls",
-        "addAfishbowl":"Add a fishbowl",
-        "loadingMsg":"Retrieving your fishbowls"
+        "tittle":"My Fishbowls",
+        "addAfishbowl":"Add a Fishbowl",
+        "loadingMsg":"Retrieving your Fishbowls"
     },
     "updateUserInfoPage": {
         "tittle":"Update your info",
         "changeUsername":"Change your username",
         "currentUsername":"Current username:",
-        "loadingMsg":"Retrieving your fishbowls",
         "updateUsernameButton":"update username",
         "changePassword":"Change your password",
         "updatePasswordButton":"update password",
@@ -86,15 +92,27 @@
             "updateComplete": "Update is complete"
         },
         "fail": {
-            "updateError": "User name requested already exists or is invalid",
+            "updateError": "Username requested already exists or is invalid",
             "tryAgain": "Please try again"
         },
         "goBackLink": "go back"
     },
+    "forgotPasswordPage": {
+        "changePassword":"Change your password",
+        "updatePasswordButton":"update password",
+        "fail":{
+            "updateErrorMsg":"There was an error"
+        },
+        "success":{
+            "updateMsg":"Password successfully changed"
+        }
+    },
     "buttons": {
         "submit": "send",
         "login": "log in",
-        "deleteAccount": "delete my account"
+        "deleteAccount": "delete my account",
+        "knowMore": "Know more",
+        "knowLess": "Know less"
     },
     "header":{
         "becomeAfish":"Become a fish",
@@ -118,7 +136,10 @@
         "myFishbowls":"My Fishbowls",
         "myAccount":"My account",
         "updateInfo": "Update my Info",
-        "createAfishbowl": "Update my Info"
+        "createAfishbowl": "Create a Fishbowl"
+    },
+    "filter":{
+        "placeholder":"Find a cool discussion"
     }
 
 }
