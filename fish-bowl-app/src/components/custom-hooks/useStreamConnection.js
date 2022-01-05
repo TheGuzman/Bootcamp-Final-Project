@@ -43,15 +43,18 @@ export default function useStreamConnection(roomId) {
     useEffect(() => {
         let userID = '';
         let activeUsersArr = [] //array where the names of the current users are
-        const peers = {}
+        // const peers = {}
+
 
         const connectRoom = async () => {
-            const userdata = await getInfo();
+            const userdata = await getInfo()
+
             const stream = await navigator.mediaDevices.getUserMedia({
                 video: true,
                 audio: true,
             });
-            
+
+
             let myPeer;
 
             socketRef.current = io.connect('http://localhost:3001');
@@ -63,8 +66,6 @@ export default function useStreamConnection(roomId) {
                 userID = id;
                 setYourID(id);
                 myPeer = new Peer(id);
-                console.log('printing my peer')
-                console.log(myPeer._connections)
 
                 myPeer.on('open', id => {
                     socketRef.current.emit('join-streaming-room', id)
@@ -73,7 +74,7 @@ export default function useStreamConnection(roomId) {
 
                 myPeer.on('call', call => {
                     console.log(call)
-                    call.answer(stream)
+                    call.answer(stream) //If user is listener then answer is empty
                     call.on('stream', userVideoStream => {
                         if (!streamsArr.includes(userVideoStream.id)) {
                             addVideoStream(userVideoStream)
@@ -100,14 +101,31 @@ export default function useStreamConnection(roomId) {
 
 
 
-            //Streaming
-            // socketRef.current.on('room-not-full', () => {
-            //     console.log('room not full')
+            //STREAMING
+
+            //ADD OWN VIDEO ONLY IF USER HAS SELECTED TO BE AN ACTIVE MEMBERS
+
 
             addVideoStream(stream)
-            socketRef.current.on('user-streaming', userID => {
-                connectToNewUser(userID, stream);
+
+
+            //Backend returns a list of streamers 
+            socketRef.current.on('user-streaming', fishbowlers => {
+
+                fishbowlers.forEach(user => connectToNewUser(user, stream))
+
+                console.log('fishbowlers')
+                console.log(fishbowlers)
             })
+
+
+            // socketRef.current.on('user-streaming', userID => {
+            //     connectToNewUser(userID, stream);
+            // })
+
+            //ADD LOGIC HERE OF USER LISTENER
+
+
             // })
 
             let streamArrinfo = []
@@ -132,24 +150,24 @@ export default function useStreamConnection(roomId) {
                     console.log(userID)
                     console.log(streamArrinfo)
 
-    
+
                     const findStreamToDelete = streamArrinfo.find(u => u.userID === userID)
                     console.log('findStreamToDelete')
                     console.log(findStreamToDelete)
-    
+
                     // const indexOfStreamDummyArray = streamArrinfo.findIndex(s=>s.userID === userID)
                     // streamArrinfo = streamArrinfo.splice(indexOfStreamDummyArray,1)
                     // console.log('indexOfStreamDummyArray')
                     // console.log(indexOfStreamDummyArray)
-    
-    
+
+
                     // console.log('printing streams')
                     // console.log(streams)
-    
-                    
+
+
                     const i = streams.findIndex(s => s.id === findStreamToDelete.stream.id);
                     // streams.splice(i,1)
-    
+
                     // console.log(i);
                     if (i !== -1) {
                         streams.splice(i, 1);
@@ -157,18 +175,18 @@ export default function useStreamConnection(roomId) {
                     else {
                         return
                     }
-    
+
                     // }
-    
+
                     // console.log('call on close')
-    
+
                     updateStream([...streams]);
-    
+
                     // })
                 })
-                
 
-                peers[userID] = call
+
+                // peers[userID] = call
             }
 
         }
