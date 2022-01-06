@@ -17,6 +17,7 @@ export default function MyAccountPage() {
         display: "flex",
         justifyContent: 'center',
         alignItems: 'center',
+        textAlign:'center',
         textDecoration: 'none',
         color: theme.palette.text.primary,
         [theme.breakpoints.up('sm')]: {
@@ -57,6 +58,10 @@ export default function MyAccountPage() {
             <MyAccountBox component={Link} to='/becomeafish/myaccount/updateuserinfo'>
                 <Icon icon="ph:user-list-bold" width="30" height="30" color='#303030'/>
                 <ButtonText variant='h6'>{t("myAccountPage.updateMyInfo")}</ButtonText>
+            </MyAccountBox>
+            <MyAccountBox component={Link} to='/becomeafish/myaccount/logininformation'>
+                <Icon  icon="fe:login" width="30" height="30" color='#303030' />
+                <ButtonText variant='h6'>{t("myAccountPage.loginInformation")}</ButtonText>
             </MyAccountBox>
             <MyAccountBox component={Link} to='/becomeafish/myaccount/deleteuseraccount'>
                 <Icon icon="ph:user-minus-bold" width="30" height="30" color='#303030' />

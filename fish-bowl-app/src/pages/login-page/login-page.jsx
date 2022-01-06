@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'
-import { Typography } from "@mui/material";
+import { Checkbox, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next"
 import { useHistory } from 'react-router'
 import { useEffect } from 'react';
@@ -17,6 +17,7 @@ export default function LoginPage() {
     const [isuserEmailValid, setValidUserEmail] = useState(false)
     const [invalidLogin, setInvalidLogin] = useState(false)
     const [forgotPassword, setForgotPassword] = useState(false)
+    const [isRememberMeSelected, setRememberMe] = useState(false)
 
     const [t] = useTranslation("global")
     const history = useHistory()
@@ -40,6 +41,8 @@ export default function LoginPage() {
         e.preventDefault()
         userPassword = e.target.userPassword.value;
         userEmail = e.target.email.value.toLowerCase();
+        
+        
 
         if (isEmail(userEmail)) {
             const options = {
@@ -61,7 +64,14 @@ export default function LoginPage() {
                         console.log('invalid login')
                     }
                     else {
-                        sessionStorage.setItem('sesion', 'Bearer ' + d.access_token);
+                        if(isRememberMeSelected===true){
+                            localStorage.setItem('sesion', 'Bearer ' + d.access_token)
+                            sessionStorage.setItem('sesion', 'Bearer ' + d.access_token);
+                        }
+                        else{
+                            sessionStorage.setItem('sesion', 'Bearer ' + d.access_token);
+                        }
+                        
                         setTimeout(() => {
                             history.push('/becomeafish')
                         }, 1000);
@@ -71,6 +81,7 @@ export default function LoginPage() {
                 });
             console.log('valid')
         }
+
 
 
         else {
@@ -85,7 +96,7 @@ export default function LoginPage() {
 
     function handleSubmitNewPassword(e) {
         e.preventDefault()
-        const  userEmail = e.target.email.value;
+        const userEmail = e.target.email.value;
         const options = {
             method: "POST",
             headers: {
@@ -95,7 +106,7 @@ export default function LoginPage() {
                 userEmail: userEmail,
             }),
         };
-       
+
         fetch("http://localhost:3001/auth/forgot-password", options)
             .then(r => r.json())
             .then(d => {
@@ -104,10 +115,14 @@ export default function LoginPage() {
                     console.log('invalid login')
                 }
                 else {
-                 
+
                 }
                 console.log(d);
             })
+    }
+
+    function handleRememberMe(){
+        setRememberMe(!isRememberMeSelected)
     }
 
 
@@ -139,7 +154,7 @@ export default function LoginPage() {
             </form >
             {invalidLogin === true ? <Typography variant='h6' color='error'>{t("loginPage.invalidLogin")}</Typography> : ''}
 
-            <Button onClick={showForgotPassword} variant='text' color='primary' sx={{margin:'3em 0em', fontWeight:'bold'}}>{t("loginPage.forgotPassword?")}</Button>
+            <Button onClick={showForgotPassword} variant='text' color='primary' sx={{ margin: '3em 0em', fontWeight: 'bold' }}>{t("loginPage.forgotPassword?")}</Button>
             {forgotPassword !== false
                 ?
                 <form onSubmit={handleSubmitNewPassword} >
@@ -154,6 +169,8 @@ export default function LoginPage() {
                         <Button variant='contained' color='secondary' type='submit'>{t("buttons.submit")}</Button>
                     </Box>
                 </form > : ''}
+            <label for="rememberMe">
+                <input id="rememberMe" type='checkbox' onChange={handleRememberMe}/> Remember Me on this device</label>
 
         </Box>
     )

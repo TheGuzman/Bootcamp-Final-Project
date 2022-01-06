@@ -18,6 +18,17 @@ export default function BecomeaFishPage() {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+
+        // let token;
+        // const tokenInLocalStorage = localStorage.getItem('sesion')
+
+        // if(tokenInLocalStorage!==null){
+        //     token = tokenInLocalStorage
+        // }
+        // else{
+        //     token = sessionStorage.getItem('sesion')
+        // }
+
         fetch("http://localhost:3001/user", {
             method: 'GET',
             headers: {
