@@ -59,30 +59,6 @@ export const lightTheme = createTheme({
       default: "#DCDCDC",
       special: "rgba(250, 200, 111, 1)"
     },
-    // error: {
-    //     main: '',
-    //     light: '',
-    //     dark: '',
-    //     contrastText:'',
-    // },
-    // warning: {
-    //     main: '',
-    //     light: '',
-    //     dark: '',
-    //     contrastText:'',
-    // },
-    // info: {
-    //     main: '',
-    //     light: '',
-    //     dark: '',
-    //     contrastText:'',
-    // },
-    // sucess: {
-    //     main: '',
-    //     light: '',
-    //     dark: '',
-    //     contrastText:'',
-    // }
     grey: {
       50: "#fafafa",
       100: "#f5f5f5",

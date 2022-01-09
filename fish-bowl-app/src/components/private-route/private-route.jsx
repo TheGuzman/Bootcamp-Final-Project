@@ -16,10 +16,17 @@ export default function PrivateRoute({ children, ...rest }) {
     useEffect(() => {
 
         const checkAuth = async () => {
+
             if (sessionStorage.getItem('sesion') !== null) {
                 setAuth(await getAuth())
             }
-            else{
+
+            else if (localStorage.getItem('sesion') !== null) {
+                const token = localStorage.getItem('sesion')
+                sessionStorage.setItem('sesion', token)
+                setAuth(await getAuth())
+            }
+            else {
                 history.push('/login')
             }
         }

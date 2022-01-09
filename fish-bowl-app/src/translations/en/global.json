@@ -72,6 +72,7 @@
     "myAccountPage": {
         "tittle":"My account",
         "updateMyInfo":"Update my info",
+        "loginInformation":"Update my login settings",
         "deleteMyAccount":"Delete my account"
     },
     "myFishbowlsPage": {
@@ -136,6 +137,7 @@
         "myFishbowls":"My Fishbowls",
         "myAccount":"My account",
         "updateInfo": "Update my Info",
+        "updateLoginInfo": "My Login information",
         "createAfishbowl": "Create a Fishbowl"
     },
     "filter":{

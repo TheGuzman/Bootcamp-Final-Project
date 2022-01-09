@@ -17,7 +17,7 @@ export default function UpdateUserInfoPage() {
     let [user, setUser] = useState('')
 
     const [t] = useTranslation("global")
-    
+
 
 
     useEffect(() => {
@@ -154,9 +154,9 @@ export default function UpdateUserInfoPage() {
                                 />
 
                                 <Button variant='contained' color='secondary' type='submit'>{t("updateUserInfoPage.updatePasswordButton")}</Button>
-
                             </Box>
                         </form >
+
                     </Stack>
                 </Box > :
                 error !== true ?
