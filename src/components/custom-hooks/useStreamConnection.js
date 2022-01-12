@@ -55,7 +55,7 @@ export default function useStreamConnection(roomId) {
 
             let myPeer;
 
-            socketRef.current = io.connect(url);
+            socketRef.current = io.connect(`${url}`);
 
             socketRef.current.emit('join-room', roomId, userdata.name)
 
