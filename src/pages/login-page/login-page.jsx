@@ -61,7 +61,7 @@ export default function LoginPage() {
                     userEmail: userEmail,
                 }),
             };
-            fetch(`${url}/auth/login`, options)
+            fetch(`https://fishbowl-backend-app.herokuapp.com/auth/login`, options)
                 .then(r => r.json())
                 .then(d => {
                     console.log(d)
