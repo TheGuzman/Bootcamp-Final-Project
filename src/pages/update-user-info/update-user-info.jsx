@@ -51,7 +51,7 @@ export default function UpdateUserInfoPage() {
                     userName: userName,
                 }),
             };
-            fetch(`${url}/becomeafish/myaccount/updateusername`, options)
+            fetch(`${url}/user/becomeafish/myaccount/updateusername`, options)
                 .then(r => {
                     r.json(); console.log(r)
                     if (r.status === 409) {
