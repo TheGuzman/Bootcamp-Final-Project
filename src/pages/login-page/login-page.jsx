@@ -63,7 +63,7 @@ export default function LoginPage() {
                     userEmail: userEmail,
                 }),
             };
-            fetch(`/auth/login`, options)
+            fetch(`${url}/auth/login`, options)
                 .then(r => r.json())
                 .then(d => {
                     console.log(d)

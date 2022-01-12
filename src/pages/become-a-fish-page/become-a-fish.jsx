@@ -7,7 +7,6 @@ import Filter from '../../components/filter/filter.jsx';
 import CircularColor from '../../components/circular-progress/circular-progress.jsx'
 import Fishes from '../../assets/imgs/Fische.freigestellt.png'
 import { useTranslation } from "react-i18next"
-import dotenv from 'dotenv';
 
 
 
@@ -15,8 +14,7 @@ import dotenv from 'dotenv';
 
 export default function BecomeaFishPage() {
 
-    dotenv.config();
-    const url = process.env.URL
+    const url = process.env.REACT_APP_URL
 
     const [t] = useTranslation("global")
 
