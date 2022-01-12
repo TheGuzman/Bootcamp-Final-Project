@@ -2,16 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import io from 'socket.io-client'
 import Peer from 'peerjs';
 
-import dotenv from 'dotenv';
-dotenv.config();
-
-const url = process.env.URL
-
-
-
 export default function useStreamConnection(roomId) {
 
-
+    const url = process.env.REACT_APP_URL
     // Returned variables 
     const [messages, setMessages] = useState([])
     const [fishbowlers, setFishbowlers] = useState([])

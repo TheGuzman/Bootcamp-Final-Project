@@ -12,14 +12,11 @@ import FishbowlNav from "../../components/breadCrumb-nav/bread-crumb-myfishbowls
 import { Box } from "@mui/material";
 import background from '../../assets/imgs/fishes.jpeg'
 import { useTranslation } from "react-i18next"
-import dotenv from 'dotenv';
-
 
 
 export default function MyFishbowlsPage() {
-
-    dotenv.config();
-    const url = process.env.URL
+    
+    const url = process.env.REACT_APP_URL
 
     const [allFishbowls, setAllFishbowls] = useState([])
     const [change, setChange] = useState(false)

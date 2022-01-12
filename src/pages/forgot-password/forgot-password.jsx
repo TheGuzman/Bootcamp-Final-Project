@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next"
 import { Button, Box, TextField } from "@mui/material"
 import { Stack } from "@mui/material";
 import CircularColor from "../../components/circular-progress/circular-progress";
-import dotenv from 'dotenv';
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -13,9 +12,7 @@ function useQuery() {
 
 function ForgotPasswordPage() {
 
-    dotenv.config();
-
-    const url = process.env.URL
+    const url = process.env.REACT_APP_URL
 
     const query = useQuery();
     const [t] = useTranslation("global")

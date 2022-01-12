@@ -6,13 +6,11 @@ import { useTranslation } from "react-i18next"
 import FishbowlNavAccountUpdateInfo from "../../components/breadCrumb-nav/bread-crumb-myaccount-updateInfo"
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import CircularColor from '../../components/circular-progress/circular-progress.jsx'
-import dotenv from 'dotenv';
 
 
 export default function UpdateUserInfoPage() {
 
-    dotenv.config();
-    const url = process.env.URL
+    const url = process.env.REACT_APP_URL
 
     const [userinValid, setinValidUser] = useState(false)
     const [passwordMatch, setMatchPassword] = useState(false)

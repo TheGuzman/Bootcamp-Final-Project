@@ -7,15 +7,12 @@ import { styled } from "@mui/system"
 import { useHistory } from 'react-router'
 import { useTranslation } from "react-i18next"
 
-import dotenv from 'dotenv';
 
 
 
 export default function DeleteUserInfoPage() {
 
-    dotenv.config();
-
-    const url = process.env.URL
+    const url = process.env.REACT_APP_URL
 
 
     const [message, setMessage] = useState()

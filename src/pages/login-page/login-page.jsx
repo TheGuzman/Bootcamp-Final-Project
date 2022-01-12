@@ -14,8 +14,6 @@ export default function LoginPage() {
 
     const url = process.env.REACT_APP_URL
 
-    console.log(url)
-
     let userPassword = '';
     let userEmail = '';
     const [isuserEmailValid, setValidUserEmail] = useState(false)

@@ -7,7 +7,7 @@ import { Stack } from "@mui/material";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useTranslation } from "react-i18next"
-import dotenv from 'dotenv';
+
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -15,10 +15,7 @@ function useQuery() {
 
 function MailVerificationPage() {
 
-  dotenv.config();
-  const url = process.env.URL
-
-
+  const url = process.env.REACT_APP_URL
   const query = useQuery();
   const [isLoading, setLoading] = useState(true);
   const [isEmailValid, setEmailValidity] = useState(false);

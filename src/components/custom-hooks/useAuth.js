@@ -1,8 +1,5 @@
-import dotenv from 'dotenv';
-dotenv.config();
 
-const url = process.env.URL
-
+const url = process.env.REACT_APP_URL
 
 export default async function getAuth() {
     // let token;
