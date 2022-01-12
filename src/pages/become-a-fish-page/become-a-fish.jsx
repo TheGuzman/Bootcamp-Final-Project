@@ -7,8 +7,16 @@ import Filter from '../../components/filter/filter.jsx';
 import CircularColor from '../../components/circular-progress/circular-progress.jsx'
 import Fishes from '../../assets/imgs/Fische.freigestellt.png'
 import { useTranslation } from "react-i18next"
+import dotenv from 'dotenv';
+
+
+
+
 
 export default function BecomeaFishPage() {
+
+    dotenv.config();
+    const url = process.env.URL
 
     const [t] = useTranslation("global")
 
@@ -29,7 +37,7 @@ export default function BecomeaFishPage() {
         //     token = sessionStorage.getItem('sesion')
         // }
 
-        fetch("http://localhost:3001/user", {
+        fetch(`${url}/user`, {
             method: 'GET',
             headers: {
                 "Authorization": sessionStorage.getItem('sesion')
@@ -38,7 +46,7 @@ export default function BecomeaFishPage() {
             .then(r => r.json())
             .then(d => {
                 console.log(d.name); setUserName(d.name)
-                fetch("http://localhost:3001/user/becomeafish/getallfishbowls", {
+                fetch(`${url}/user/becomeafish/getallfishbowls`, {
                     method: 'GET',
                     headers: {
                         "Authorization": sessionStorage.getItem('sesion')

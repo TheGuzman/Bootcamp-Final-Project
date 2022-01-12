@@ -9,10 +9,14 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import Stack from '@mui/material/Stack'
 import { useTranslation } from "react-i18next"
 import { Link } from 'react-router-dom';
-
+import dotenv from 'dotenv';
 
 
 export default function RegisterPage() {
+
+
+    dotenv.config();
+    const url = process.env.URL
 
     let userName = '';
     let userPassword = '';
@@ -56,7 +60,7 @@ export default function RegisterPage() {
                     userEmail: userEmail,
                 }),
             };
-            fetch("http://localhost:3001/auth/register", options)
+            fetch(`${url}}/auth/register`, options)
                 .then(r => {
                     r.json(); console.log(r)
                     if (r.status === 409) {

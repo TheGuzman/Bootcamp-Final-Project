@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom"; 
+import { useLocation } from "react-router-dom";
 import LoginPage from '../login-page/login-page.jsx'
 import { Typography } from "@mui/material";
 import CircularColor from '../../components/circular-progress/circular-progress.jsx'
@@ -7,31 +7,36 @@ import { Stack } from "@mui/material";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useTranslation } from "react-i18next"
-
+import dotenv from 'dotenv';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
 function MailVerificationPage() {
-  const query = useQuery(); 
-  const [isLoading, setLoading] = useState(true); 
-  const [isEmailValid, setEmailValidity] = useState(false); 
+
+  dotenv.config();
+  const url = process.env.URL
+
+
+  const query = useQuery();
+  const [isLoading, setLoading] = useState(true);
+  const [isEmailValid, setEmailValidity] = useState(false);
   const [t] = useTranslation("global")
 
 
   useEffect(() => {
-    const token = query.get("token"); 
+    const token = query.get("token");
     if (token) {
-      fetch(`http://localhost:3001/auth/validate?token=${token}`) 
+      fetch(`${url}/auth/validate?token=${token}`)
         .then((r) => {
-          setLoading(false); 
-          if (!r.ok) throw new Error("Email was not validated"); 
+          setLoading(false);
+          if (!r.ok) throw new Error("Email was not validated");
           setEmailValidity(true);
         })
-        .catch((err) => setEmailValidity(false)); 
+        .catch((err) => setEmailValidity(false));
     } else {
-      setLoading(false); 
+      setLoading(false);
       setEmailValidity(false);
     }
   }, []);

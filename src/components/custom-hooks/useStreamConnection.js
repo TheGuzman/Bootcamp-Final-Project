@@ -2,6 +2,11 @@ import { useState, useEffect, useRef } from "react";
 import io from 'socket.io-client'
 import Peer from 'peerjs';
 
+import dotenv from 'dotenv';
+dotenv.config();
+
+const url = process.env.URL
+
 
 
 export default function useStreamConnection(roomId) {
@@ -27,12 +32,12 @@ export default function useStreamConnection(roomId) {
     }
 
     async function getInfo() {
-        const fishbowls = await fetch(`http://localhost:3001/user/becomeafish/joinfishbowl/getfishbowl/${roomId}`, options)
+        const fishbowls = await fetch(`${url}/user/becomeafish/joinfishbowl/getfishbowl/${roomId}`, options)
         const fishbowldata = await fishbowls.json();
         setFishbowl(fishbowldata);
         console.log(fishbowldata)
 
-        const user = await fetch("http://localhost:3001/user", options);
+        const user = await fetch(`${url}/user`, options);
         const userdata = await user.json();
         setSender(userdata)
         console.log(userdata)
@@ -57,7 +62,7 @@ export default function useStreamConnection(roomId) {
 
             let myPeer;
 
-            socketRef.current = io.connect('http://localhost:3001');
+            socketRef.current = io.connect(url);
 
             socketRef.current.emit('join-room', roomId, userdata.name)
 

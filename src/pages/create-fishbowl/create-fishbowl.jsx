@@ -14,13 +14,15 @@ import { styled } from '@mui/material/styles';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Link } from "react-router-dom";
 import FishbowlNavCreateFishbowl from "../../components/breadCrumb-nav/bread-crumb-myfishbowls-createfishbowl";
-
-
-
+import dotenv from 'dotenv';
 
 
 
 export default function CreateFishbowlPage() {
+
+    dotenv.config();
+
+    const url = process.env.URL
 
     const [value, setValue] = useState(new Date());
     const [isSumbitted, setSubmited] = useState(false)
@@ -48,7 +50,7 @@ export default function CreateFishbowlPage() {
                 
             }),
         };
-        fetch("http://localhost:3001/user/becomeafish/myfishbowls/createfishbowl", options)
+        fetch(`${url}/user/becomeafish/myfishbowls/createfishbowl`, options)
             .then(r => {
                 r.json()
                 if (r.ok) setSubmited(true)

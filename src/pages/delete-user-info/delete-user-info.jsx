@@ -7,7 +7,16 @@ import { styled } from "@mui/system"
 import { useHistory } from 'react-router'
 import { useTranslation } from "react-i18next"
 
+import dotenv from 'dotenv';
+
+
+
 export default function DeleteUserInfoPage() {
+
+    dotenv.config();
+
+    const url = process.env.URL
+
 
     const [message, setMessage] = useState()
     const [response, setResponse] = useState(false)
@@ -18,7 +27,7 @@ export default function DeleteUserInfoPage() {
     function handleDeleteAccount() {
         
 
-        fetch(`http://localhost:3001/user/becomeafish/myaccount/deleteuseraccount`, {
+        fetch(`${url}/user/becomeafish/myaccount/deleteuseraccount`, {
             method: 'DELETE',
             headers: {
                 "Authorization": sessionStorage.getItem('sesion')

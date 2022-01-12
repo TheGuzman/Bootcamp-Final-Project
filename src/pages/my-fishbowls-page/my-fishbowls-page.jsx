@@ -12,8 +12,14 @@ import FishbowlNav from "../../components/breadCrumb-nav/bread-crumb-myfishbowls
 import { Box } from "@mui/material";
 import background from '../../assets/imgs/fishes.jpeg'
 import { useTranslation } from "react-i18next"
+import dotenv from 'dotenv';
+
+
 
 export default function MyFishbowlsPage() {
+
+    dotenv.config();
+    const url = process.env.URL
 
     const [allFishbowls, setAllFishbowls] = useState([])
     const [change, setChange] = useState(false)
@@ -22,7 +28,7 @@ export default function MyFishbowlsPage() {
     const [t] = useTranslation("global")
 
     useEffect(() => {
-        fetch("http://localhost:3001/user/becomeafish/myfishbowls/getuserfishbowls", {
+        fetch(`${url}/user/becomeafish/myfishbowls/getuserfishbowls`, {
             method: 'GET',
             headers: {
                 "Authorization": sessionStorage.getItem('sesion')
@@ -39,7 +45,7 @@ export default function MyFishbowlsPage() {
 
         setLoading(true)
 
-        fetch(`http://localhost:3001/user/becomeafish/deleteafishbowl/${fishbowlId}`, {
+        fetch(`${url}/user/becomeafish/deleteafishbowl/${fishbowlId}`, {
             method: 'DELETE',
             headers: {
                 "Authorization": sessionStorage.getItem('sesion')
@@ -51,7 +57,7 @@ export default function MyFishbowlsPage() {
 
     const onStartFishbowl = fishbowlId => { //custom hook for starting the fishbowl
 
-        fetch(`http://localhost:3001/user/becomeafish/startafishbowl/${fishbowlId}`, {
+        fetch(`${url}/user/becomeafish/startafishbowl/${fishbowlId}`, {
             method: 'PATCH',
             headers: {
                 "Authorization": sessionStorage.getItem('sesion')

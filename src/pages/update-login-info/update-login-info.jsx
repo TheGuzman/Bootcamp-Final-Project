@@ -5,8 +5,6 @@ import { Box } from "@mui/material"
 import { Stack } from "@mui/material"
 import FishbowlNavUpdateLoginInfo from "../../components/breadCrumb-nav/bread-crumb-mylogininfo"
 
-
-
 export default function UpdateLoginPage() {
 
     const [userIsRemembered, setRememeber] = useState(false)

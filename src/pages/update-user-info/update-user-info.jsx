@@ -6,8 +6,13 @@ import { useTranslation } from "react-i18next"
 import FishbowlNavAccountUpdateInfo from "../../components/breadCrumb-nav/bread-crumb-myaccount-updateInfo"
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import CircularColor from '../../components/circular-progress/circular-progress.jsx'
+import dotenv from 'dotenv';
+
 
 export default function UpdateUserInfoPage() {
+
+    dotenv.config();
+    const url = process.env.URL
 
     const [userinValid, setinValidUser] = useState(false)
     const [passwordMatch, setMatchPassword] = useState(false)
@@ -21,7 +26,7 @@ export default function UpdateUserInfoPage() {
 
 
     useEffect(() => {
-        fetch("http://localhost:3001/user", {
+        fetch(`${url}/user`, {
             method: 'GET',
             headers: {
                 "Authorization": sessionStorage.getItem('sesion')
@@ -48,7 +53,7 @@ export default function UpdateUserInfoPage() {
                     userName: userName,
                 }),
             };
-            fetch("http://localhost:3001/user//becomeafish/myaccount/updateusername", options)
+            fetch(`${url}/becomeafish/myaccount/updateusername`, options)
                 .then(r => {
                     r.json(); console.log(r)
                     if (r.status === 409) {
@@ -83,7 +88,7 @@ export default function UpdateUserInfoPage() {
                     userPassword: userPassword,
                 }),
             };
-            fetch("http://localhost:3001/user/becomeafish/myaccount/updateuserpassword", options)
+            fetch(`${url}/user/becomeafish/myaccount/updateuserpassword`, options)
                 .then(r => {
                     r.json(); console.log(r)
                     if (r.status === 409) {

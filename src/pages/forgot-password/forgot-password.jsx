@@ -5,13 +5,18 @@ import { useTranslation } from "react-i18next"
 import { Button, Box, TextField } from "@mui/material"
 import { Stack } from "@mui/material";
 import CircularColor from "../../components/circular-progress/circular-progress";
-
+import dotenv from 'dotenv';
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
 
 function ForgotPasswordPage() {
+
+    dotenv.config();
+
+    const url = process.env.URL
+
     const query = useQuery();
     const [t] = useTranslation("global")
 
@@ -40,7 +45,7 @@ function ForgotPasswordPage() {
                     token: passToken,
                 }),
             };
-            fetch("http://localhost:3001/auth/validate-new-password", options)
+            fetch(`${url}/auth/validate-new-password`, options)
                 .then(r => {
                     r.json(); console.log(r)
                     if (r.status === 404) {
