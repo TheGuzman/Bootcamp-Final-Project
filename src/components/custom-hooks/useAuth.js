@@ -1,3 +1,8 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
+const url = proces.env.URL
+
 
 export default async function getAuth() {
     // let token;
@@ -10,7 +15,7 @@ export default async function getAuth() {
     //     token = sessionStorage.getItem('sesion')
     // }
 
-    const r = await fetch('http://localhost:3001/user/', {
+    const r = await fetch(`${url}"/user/`, {
         headers: {
             "Authorization": sessionStorage.getItem('sesion')
         }
