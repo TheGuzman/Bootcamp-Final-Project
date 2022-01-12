@@ -15,8 +15,9 @@ export default function LoginPage() {
 
 
     dotenv.config();
-    const url = process.env.URL
-
+    const url = process.env.REACT_APP_URL
+     
+    console.log(url)
 
     let userPassword = '';
     let userEmail = '';
