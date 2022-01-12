@@ -56,7 +56,7 @@ export default function RegisterPage() {
                     userEmail: userEmail,
                 }),
             };
-            fetch(`${url}}/auth/register`, options)
+            fetch(`${url}/auth/register`, options)
                 .then(r => {
                     r.json(); console.log(r)
                     if (r.status === 409) {
