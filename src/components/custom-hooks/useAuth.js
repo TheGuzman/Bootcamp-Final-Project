@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-const url = proces.env.URL
+const url = process.env.URL
 
 
 export default async function getAuth() {
