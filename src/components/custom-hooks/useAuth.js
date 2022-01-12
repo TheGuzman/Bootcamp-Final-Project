@@ -12,7 +12,7 @@ export default async function getAuth() {
     //     token = sessionStorage.getItem('sesion')
     // }
 
-    const r = await fetch(`${url}"/user/`, {
+    const r = await fetch(`${url}/user/`, {
         headers: {
             "Authorization": sessionStorage.getItem('sesion')
         }
