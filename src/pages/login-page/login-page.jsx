@@ -7,15 +7,15 @@ import { Checkbox, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next"
 import { useHistory } from 'react-router'
 import { useEffect } from 'react';
-// import dotenv from 'dotenv';
+import dotenv from 'dotenv';
 
 
 
 export default function LoginPage() {
 
 
-    // dotenv.config();
-    // const url = process.env.URL
+    dotenv.config();
+    const url = process.env.URL
 
      
     console.log(url)
