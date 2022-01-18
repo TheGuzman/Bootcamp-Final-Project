@@ -41,7 +41,7 @@ export default function useStreamConnection(roomId) {
     useEffect(() => {
         let userID = '';
         let activeUsersArr = [] //array where the names of the current users are
-        // const peers = {}
+        const peers = {}
 
 
         const connectRoom = async () => {
@@ -184,7 +184,7 @@ export default function useStreamConnection(roomId) {
                 })
 
 
-                // peers[userID] = call
+                peers[userID] = call
             }
 
         }
